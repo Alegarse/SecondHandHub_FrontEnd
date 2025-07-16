@@ -12,3 +12,7 @@ export const doLoginFetch = async (dataLogin) => {
   console.log(response)
   return response;
 };
+
+export const doRegisterFetch = async (dataRegister) => {
+    
+}
