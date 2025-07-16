@@ -5,6 +5,10 @@ import { doLoginFetch } from "../../core/services/userFetch";
 const LoginComponent = () => {
   const [dataLogin, setDataLogin] = useState({});
 
+  const errorMessage = useSelector(
+    (state) => state.homePageComponentReducer.errorMessage
+  );
+
   const inputLoginHandler = (propName, propValue) => {
     setDataLogin({
       ...dataLogin,
@@ -38,7 +42,7 @@ const LoginComponent = () => {
         </div>
         <button onClick={doLogin}>Entrar</button>
       </div>
-      <div className="error_message"></div>
+      <div className="error_message">{errorMessage}</div>
     </>
   );
 };
