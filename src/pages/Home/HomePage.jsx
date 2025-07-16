@@ -4,6 +4,7 @@ import "../../css/HomePage.css";
 import LoginComponent from "../../components/LoginComponent/LoginComponent";
 import RegisterComponent from "../../components/RegisterComponent/RegisterComponent";
 import { changeHomeViewAction } from "../../components/HomePageComponent/HomePageComponentActions";
+import logo from '../../assets/logo.png'
 
 const HomePage = () => {
 
@@ -24,7 +25,7 @@ const HomePage = () => {
   return (
     <div className="home-container">
       <div className="info-home-container">
-        <div className="logo">♻️ Logo SecondHand Hub</div>
+        <img className="logo-home" src={logo} alt="" />
         <h3>Tu espacio para comprar y vender con confianza</h3>
         <p>
           🛍️ Compra y vende productos de segunda mano con facilidad.

@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import { doRegisterFetch } from '../../core/services/userFetch';
 import { validateFields } from '../../utils/utils';
+import { changeHomeViewAction } from '../HomePageComponent/HomePageComponentActions';
+import { useDispatch } from 'react-redux';
 
 const RegisterComponent = () => {
   const [dataRegister, setDataRegister] = useState({});
+
+  const dispatch = useDispatch();
   
     const inputRegisterHandler = (propName, propValue) => {
       setDataRegister({
@@ -13,10 +17,18 @@ const RegisterComponent = () => {
     };
   
     const doRegister = async () => {
-      if (validateFields(dataRegister)) {
+      if (validateFields(dataRegister, true)) {
         await doRegisterFetch(dataRegister);
       }
     };
+
+    const goBack = () => {
+        dispatch(
+          changeHomeViewAction({
+            viewTypeHome: undefined,
+          })
+        );
+      };
   
     return (
       <>
@@ -26,6 +38,21 @@ const RegisterComponent = () => {
           <h5>¿Aún no tienes cuenta?</h5>
           <h5>¡Rellena los campos y entra a la revolución de SecondHand Hub!</h5>
           <div className="input-container">
+            <div className="input-container">
+            <span>Email: </span>
+            <input
+              type="text"
+              onChange={(e) => inputRegisterHandler("email", e.target.value)}
+            />
+          </div>
+          <div className="input-container">
+            <span>Contraseña: </span>
+            <input
+              type="password"
+              onChange={(e) => inputRegisterHandler("password", e.target.value)}
+            />
+          </div>
+          <br />
             <span>Nombre: </span>
             <input
               type="text"
@@ -53,21 +80,8 @@ const RegisterComponent = () => {
               onChange={(e) => inputRegisterHandler("location", e.target.value)}
             />
           </div>
-          <div className="input-container">
-            <span>Email: </span>
-            <input
-              type="text"
-              onChange={(e) => inputRegisterHandler("email", e.target.value)}
-            />
-          </div>
-          <div className="input-container">
-            <span>Contraseña: </span>
-            <input
-              type="password"
-              onChange={(e) => inputRegisterHandler("password", e.target.value)}
-            />
-          </div>
           <button onClick={doRegister}>Registrarse</button>
+          <button onClick={goBack}>Volver</button>
         </div>
         <div className="error_message"></div>
       </>

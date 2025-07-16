@@ -1,6 +1,8 @@
 .home-container {
+  min-height: 50vh;
   display: grid;
   grid-template-columns: 2fr 1fr;
+  align-items: center;
   padding: 10px;
   border: 1px solid grey;
   border-radius: 15px;
@@ -35,4 +37,8 @@
     color: red;
     font-style: italic;
     font-size: small;
+}
+
+.logo-home {
+  border-radius: 15px;
 }

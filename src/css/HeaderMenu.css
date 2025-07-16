@@ -1,0 +1,50 @@
+.dashboard-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.menu-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px 10px 0px 0px;
+
+  & img {
+    max-height: 60px;
+    border-radius: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  & .buttons-menu-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+  }
+
+  & .btn-upload {
+    background-color: rgb(101, 25, 201);
+
+    &:hover {
+      background-color: rgb(126, 68, 202);
+    }
+  }
+
+  & .btn-profile {
+    background-color: rgb(250, 165, 7);
+
+    &:hover {
+      background-color: rgb(248, 187, 73);
+    }
+  }
+
+  & .btn-chat {
+    background-color: rgb(2, 172, 2);
+
+    &:hover {
+      background-color: rgb(19, 218, 19);
+    }
+  }
+}

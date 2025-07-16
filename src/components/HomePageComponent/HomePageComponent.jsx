@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import HomePage from '../../pages/Home/HomePage'
-import DashboardPage from '../../pages/Dashboard/dashboardPage'
+import DashboardPage from '../../pages/Dashboard/DashBoardPage'
 
 const HomePageComponent = () => {
 
