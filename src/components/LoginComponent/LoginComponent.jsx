@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { validateFields } from "../../utils/utils";
 import { doLoginFetch } from "../../core/services/userFetch";
+import { useSelector } from "react-redux";
 
 const LoginComponent = () => {
   const [dataLogin, setDataLogin] = useState({});
