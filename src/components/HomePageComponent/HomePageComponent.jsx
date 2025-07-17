@@ -43,9 +43,9 @@ const HomePageComponent = () => {
   }, [navigate]);
 
   return (
-    <div className="principal-container">
+    <>
       {userLoggedState === false ? <HomePage /> : <DashboardPage />}
-    </div>
+    </>
   );
 };
 
