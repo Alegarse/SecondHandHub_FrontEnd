@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { validateFields } from '../../utils/utils';
-import { doLoginFetch } from '../../core/services/userFetch';
+import { delay, showToast, validateFields } from '../../utils/utils';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { dataUserLoggedAction } from './LoginComponentActions';
 import { changeHomeViewAction } from '../HomePageComponent/HomePageComponentActions';
+import { doLoginFetch } from '../../core/services/api';
+import { dataUserLoggedAction } from '../DashboardComponent/DashboardComponentActions';
 
 const LoginComponent = () => {
   const [dataLogin, setDataLogin] = useState({});
@@ -29,16 +29,19 @@ const LoginComponent = () => {
   const doLogin = async () => {
     if (validateFields(dataLogin)) {
       const responseLogin = await doLoginFetch(dataLogin);
-      console.log(responseLogin);
       if (responseLogin.status === 'Success') {
         localStorage.setItem('access_token', responseLogin.token);
         localStorage.setItem('refresh_token', responseLogin.token_refresh);
         dispatch(
           dataUserLoggedAction({
-            dataUserLogged: responseLogin.data,
+            userDataLogged: responseLogin.data,
           })
         );
+        showToast("Usuario logeado correctamente")
+        await delay(2500)
         navigate('/dashboard');
+      } else {
+        showToast(responseLogin.message, 'error')
       }
     }
   };
@@ -64,7 +67,7 @@ const LoginComponent = () => {
         <button onClick={doLogin}>Entrar</button>
         <button onClick={goBack}>Volver</button>
       </div>
-      <div className="error_message"></div>
+      <div className="toast-message" id="toastMessage"></div>
     </>
   );
 };

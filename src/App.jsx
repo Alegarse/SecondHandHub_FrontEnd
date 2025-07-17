@@ -3,8 +3,8 @@ import './css/App.css'
 import store from './core/redux/store/store'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePageComponent from './components/HomePageComponent/HomePageComponent'
-import DashboardPage from './pages/Dashboard/dashboardPage';
 import NotFoundPage from './pages/NotFound/NotFoundPage';
+import DashboardPage from './pages/Dashboard/DashBoardPage';
 
 function App() {
 

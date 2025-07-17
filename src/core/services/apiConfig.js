@@ -1,10 +1,11 @@
 const BASE_API_URL = 'http://localhost:3000/api';
 
-const globals = {
+const apiConfig = {
   //AUTH URL ENDPOINTS
   URL_LOGIN: `${BASE_API_URL}/auth/login`,
   URL_REGISTER: `${BASE_API_URL}/auth/signup`,
   URL_REF_TOKEN: `${BASE_API_URL}/auth/refresh_token`,
+  URL_VER_TOKEN: `${BASE_API_URL}/auth/verify_token`,
   //USER URL ENDPOINTS
   URL_GET_USR_PROFILEF: `${BASE_API_URL}/user/profile`,
   URL_UPL_USR_PHOTO: `${BASE_API_URL}/user/profile/img`,
@@ -18,4 +19,4 @@ const globals = {
   URL_DELETE_PRODUCT: `${BASE_API_URL}/product/delete/`,
 };
 
-export default globals;
+export default apiConfig;

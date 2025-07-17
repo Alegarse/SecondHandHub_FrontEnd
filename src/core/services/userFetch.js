@@ -1,29 +1,13 @@
-import { errorsData } from '../../utils/errors';
-import globals from './globals';
+import { callApi } from "./api";
+import apiConfig from "./apiConfig";
 
-export const doLoginFetch = async (dataLogin) => {
+export async function getUserProfile() {
   try {
-    const response = await fetch(globals.URL_LOGIN, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dataLogin),
-    });
-    const responseData = await response.json();
-    if (!response.ok) {
-      const error = new Error();
-      error.status = 'ERR_LOGIN';
-      error.message = errorsData[responseData.status];
-      throw error;
-    }
-    return responseData;
-  } catch (error) {
-    if (error.status === 'ERR_LOGIN') {
-      console.error(error.message);
-    }
-    return null;
-  }
-};
+    const user = await callApi("GET", apiConfig.URL_GET_USR_PROFILEF);
 
-export const doRegisterFetch = async (dataRegister) => {};
+    return user.data
+
+  } catch (error) {
+    throw error;
+  }
+}
