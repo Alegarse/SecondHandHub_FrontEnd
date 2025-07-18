@@ -99,8 +99,8 @@ const MenuComponent = () => {
         </div>
         <div>
           <button
-            className="btn-profile"
-            title="Pulse para ver su perfil de usuario"
+            className="btn-logout"
+            title="Pulse para cerras su sesión"
             onClick={logoutUser}
           >
             <img src={logout} />
