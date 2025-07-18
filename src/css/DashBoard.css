@@ -1,15 +1,42 @@
-
-.dashboard-container { 
+.dashboard-container {
   min-height: 100vh;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
 .dashboard-list-products-container {
-    background-color: #f8ac1a;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+  background-color: #f8ac1a;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  flex-wrap: wrap;
+  gap: 15px;
+  position: relative;
+}
 
+.load-more-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  transform: translateY(100%); /* coloca el botón justo debajo */
+  padding-bottom: 1rem;
+  z-index: 100;
+
+  & button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    background-color: #5e410d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: #8d6314;
+    }
+  }
 }
