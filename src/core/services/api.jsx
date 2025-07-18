@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { errorsData } from "../../utils/errors";
 import apiConfig from "./apiConfig";
 
+
+
 // All endpoints call
 export async function callApi(method, url, data = null, upload = false) {
   try {
@@ -12,7 +14,6 @@ export async function callApi(method, url, data = null, upload = false) {
         await refreshToken();
         return await makeAuthorizedRequest(method, url, data, upload);
       } catch (refreshError) {
-        const navigate = useNavigate();
         navigate("/");
       }
     }
@@ -66,7 +67,6 @@ async function refreshToken() {
     }
   } catch (error) {
     if (error.status === 401) {
-      const navigate = useNavigate();
       navigate("/");
     }
   }
