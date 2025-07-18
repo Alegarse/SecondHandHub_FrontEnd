@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import HomePage from '../../pages/Home/HomePage';
 import DashboardPage from '../../pages/Dashboard/DashBoardPage';
 import { checkUserToken } from '../../core/services/api';
-import { useNavigate } from 'react-router-dom';
+
 import { changeUserLoggedStateActions } from './HomePageComponentActions';
 
 const HomePageComponent = () => {
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 

@@ -1,0 +1,33 @@
+.body-404-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.page-404-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-inline-start: 100px;
+  margin-inline-end: 100px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.658);
+  max-width: 1280px;
+  color: #242424;
+}
+
+.info-404-container {
+  max-width: 80%;
+}
+
+.title-error-404 {
+    color: brown;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.btn-to-home {
+    background-color: red;
+}
