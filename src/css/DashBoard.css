@@ -1,0 +1,15 @@
+
+.dashboard-container { 
+  min-height: 100vh;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.dashboard-list-products-container {
+    background-color: #f8ac1a;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+
+}
