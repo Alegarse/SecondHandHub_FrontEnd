@@ -13,6 +13,7 @@ body {
   padding: 0;
   min-height: 100vh;
   box-sizing: border-box;
+  background-image: src('');
 }
 
 button {
@@ -32,4 +33,18 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/src/assets/background.png');
+  background-size: cover;
+  background-repeat: round;
+  background-position: center;
+  opacity: 0.2;
+  z-index: -1;
 }
