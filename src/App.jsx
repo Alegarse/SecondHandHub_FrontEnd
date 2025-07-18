@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import './css/App.css';
 import store from './core/redux/store/store';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import HomePageComponent from './components/HomePageComponent/HomePageComponent';
 import NotFoundPage from './pages/NotFound/NotFoundPage';
 import DashboardPage from './pages/Dashboard/DashBoardPage';
@@ -15,7 +15,8 @@ function App() {
         <BackgroundComponent />
         <Routes>
           <Route path="/" element={<HomePageComponent />} />
-          <Route path="/*" element={<NotFoundPage />} />
+          <Route path="/404-Notfound" element={<NotFoundPage />} />
+          <Route path="/*" element={<Navigate to="/404-Notfound" replace/>} />
           <Route
             path="/dashboard"
             element={
