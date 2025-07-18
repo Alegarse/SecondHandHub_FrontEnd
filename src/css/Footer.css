@@ -1,0 +1,55 @@
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
+  align-items: center;
+  background-color: #242424;
+  height: 100px;
+
+  & .info-author {
+    display: flex;
+    gap: 15px;
+
+    & .info-author-text {
+        display: flex;
+        flex-direction: column;
+        font-size: small;
+        font-style: italic;
+
+        & .author-data {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+  }
+
+  & button {
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+  }
+
+  img {
+    max-height: 25px;
+    border-radius: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+    .logo-author {
+    width: 25px;
+  }
+
+  .logo-menu {
+    max-height: 50px;
+    border-radius: 10px;
+  }
+}
+
+.footer-contact-btns {
+    display: flex;
+}

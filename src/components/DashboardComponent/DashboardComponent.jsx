@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProductsAction } from './DashboardComponentActions';
 import { getAllProducts } from '../../core/services/productFetch';
 import ProductComponent from '../ProductComponent/ProductComponent';
 import './../../css/DashBoard.css';
 
+const PRODUCTS_LOAD = 15;
+
 const DashboardComponent = () => {
   const dispatch = useDispatch();
+  const [visibleCount, setVisibleCount] = useState(PRODUCTS_LOAD);
 
   const availableProductsList = useSelector(
     (state) => state.dashboardComponentReducer.productsList
@@ -25,6 +28,14 @@ const DashboardComponent = () => {
     }
   };
 
+  const loadMore = () => {
+    setVisibleCount((prevCount) => prevCount + PRODUCTS_LOAD);
+  };
+
+  const visibleProducts = availableProductsList?.slice(0, visibleCount) || [];
+
+  const hasMoreToShow = availableProductsList?.length > visibleCount;
+
   useEffect(() => {
     loadAvailableProducts();
   });
@@ -32,8 +43,8 @@ const DashboardComponent = () => {
   return (
     <>
       <div className="dashboard-list-products-container">
-        {availableProductsList && availableProductsList.length > 0 ? (
-          availableProductsList.map((product) => (
+        {visibleProducts.length > 0 ? (
+          visibleProducts.map((product) => (
             <ProductComponent
               key={product._id}
               productInfo={product}
@@ -47,7 +58,13 @@ const DashboardComponent = () => {
         ) : (
           <div>No hay productos</div>
         )}
+        {hasMoreToShow && (
+          <div className="load-more-wrapper">
+            <button onClick={loadMore}>Cargar más resultados</button>
+          </div>
+        )}
       </div>
+
       <div className="toast-message" id="toastMessage"></div>
     </>
   );
