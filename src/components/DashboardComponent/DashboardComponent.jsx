@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProductsAction } from './DashboardComponentActions';
 import { getAllProducts } from '../../core/services/productFetch';
+import ProductComponent from '../ProductComponent/ProductComponent';
+import './../../css/DashBoard.css'
 
 const DashboardComponent = () => {
-  
   const dispatch = useDispatch();
 
   const availableProductsList = useSelector(
@@ -25,20 +26,18 @@ const DashboardComponent = () => {
   };
 
   useEffect(() => {
-    loadAvailableProducts();
+    loadAvailableProducts(); 
   }, []);
 
   return (
     <>
-      <div>
+      <div className='dashboard-list-products-container'>
         {availableProductsList && availableProductsList.length > 0 ? (
-          availableProductsList.map((p, idx) => (
-            <div key={idx}>
-              <div>{JSON.stringify(p)}</div>
-            </div>
+          availableProductsList.map((product) => (
+            <ProductComponent key={product._id} productInfo={product}/>
           ))
         ) : (
-          <div>No porductos</div>
+          <div>No hay productos</div>
         )}
       </div>
       <div className="toast-message" id="toastMessage"></div>

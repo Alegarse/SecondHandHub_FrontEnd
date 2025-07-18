@@ -27,10 +27,3 @@
   background-color: #f44336;
 }
 
-.dashboard-container { 
-  min-height: 100vh;
-  margin: 0 auto; /* Centrado horizontal */
-  background-color: #5e5a5a; /* Opcional: color de fondo */
-  box-sizing: border-box;
-}
-
