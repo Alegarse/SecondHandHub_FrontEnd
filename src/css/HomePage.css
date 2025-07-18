@@ -25,10 +25,9 @@
 
 .info-home-container {
   padding-inline-start: 100px;
-  
 }
 
-.info-logreg-background{
+.info-logreg-background {
   background-image: url('/src/assets/back_logreg.webp');
   background-position: center;
   background-size: cover;
@@ -70,11 +69,59 @@
 }
 
 .error_message {
-    color: red;
-    font-style: italic;
-    font-size: small;
+  color: red;
+  font-style: italic;
+  font-size: small;
 }
 
 .logo-home {
   border-radius: 15px;
+}
+
+/* Responsive styles */
+@media (max-width: 1080px) {
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info-home-container {
+    padding-inline: 20px;
+    max-width: 100%;
+  }
+
+  .info-home-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .info-home-container p {
+    font-size: 1rem;
+  }
+
+  .info-links-buttons-container {
+    width: 50vw;
+    height: 30vh;
+    padding: 10% 30%;
+  }
+
+  .btn-to-login,
+  .btn-to-register {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  .logo-home {
+    max-width: 200px;
+  }
+
+  .info-links-buttons-container p {
+    margin: 10px 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
