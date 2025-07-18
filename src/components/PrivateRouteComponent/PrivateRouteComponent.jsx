@@ -6,7 +6,7 @@ const PrivateRouteComponent = ({ children }) => {
   const isAuthenticated = useSelector(
     (state) => state.dashboardComponentReducer.isAuthenticated
   );
-  const token = localStorage.getItem('access_token')
+  const token = localStorage.getItem('access_token');
 
   return isAuthenticated && token ? children : <Navigate to="/" replace />;
 };

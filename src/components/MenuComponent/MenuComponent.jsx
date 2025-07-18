@@ -8,7 +8,10 @@ import profile from '../../assets/profile.png';
 import messages from '../../assets/messages.png';
 import logout from '../../assets/logout.png';
 import { useNavigate } from 'react-router-dom';
-import { changeHomeViewAction } from '../HomePageComponent/HomePageComponentActions';
+import {
+  changeHomeViewAction,
+  changeUserLoggedStateActions,
+} from '../HomePageComponent/HomePageComponentActions';
 import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
 import { delay, showToast } from '../../utils/utils';
 
@@ -25,6 +28,11 @@ const MenuComponent = () => {
     dispatch(
       isAuthenticatedAction({
         isAuthenticated: false,
+      })
+    );
+    dispatch(
+      changeUserLoggedStateActions({
+        isLogged: false,
       })
     );
     dispatch(

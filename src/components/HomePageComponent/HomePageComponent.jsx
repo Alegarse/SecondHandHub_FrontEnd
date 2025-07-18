@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HomePage from '../../pages/Home/HomePage';
 import DashboardPage from '../../pages/Dashboard/DashBoardPage';
@@ -7,17 +7,21 @@ import { useNavigate } from 'react-router-dom';
 import { changeUserLoggedStateActions } from './HomePageComponentActions';
 
 const HomePageComponent = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
   const userLoggedState = useSelector(
     (state) => state.homePageComponentReducer.isLogged
   );
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem('access_token');
-      if (!token) return;
+      if (!token) {
+        setLoading(false);
+        return;
+      }
       try {
         const res = await checkUserToken();
         if (res.status === 'Success') {
@@ -26,9 +30,7 @@ const HomePageComponent = () => {
               isLogged: true,
             })
           );
-          navigate('/dashboard');
         } else {
-          console.error('Invalid or expired token');
           dispatch(
             changeUserLoggedStateActions({
               isLogged: false,
@@ -39,12 +41,15 @@ const HomePageComponent = () => {
       } catch (error) {
         console.error('Failed to verify access token', error);
         localStorage.clear();
+      } finally {
+        setLoading(false);
       }
     };
     verifyToken();
-  });
+  }, []);
 
-  return <>{userLoggedState === false ? <HomePage /> : <DashboardPage />}</>;
+  if (loading) return <div>Loading ...</div>;
+  return <>{!userLoggedState ? <HomePage /> : <DashboardPage />}</>;
 };
 
 export default HomePageComponent;

@@ -112,6 +112,5 @@ export const buildLocationObject = async () => {
 };
 
 export const getValidImg = (image) => {
-  console.log(image)
   return image && image.trim() !== undefined ? image : img_no_available;
 };

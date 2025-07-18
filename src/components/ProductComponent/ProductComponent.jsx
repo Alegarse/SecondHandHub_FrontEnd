@@ -2,9 +2,9 @@ import React from 'react';
 import './../../css/ProductCard.css';
 import { getValidImg } from '../../utils/utils';
 
-const ProductComponent = ({ productInfo }) => {
+const ProductComponent = ({ productInfo, onClick }) => {
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={onClick}>
       <img
         className="product-image"
         src={getValidImg(productInfo.images?.[0])}

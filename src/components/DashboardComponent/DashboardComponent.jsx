@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadProductsAction } from './DashboardComponentActions';
 import { getAllProducts } from '../../core/services/productFetch';
 import ProductComponent from '../ProductComponent/ProductComponent';
-import './../../css/DashBoard.css'
+import './../../css/DashBoard.css';
 
 const DashboardComponent = () => {
   const dispatch = useDispatch();
@@ -26,15 +26,23 @@ const DashboardComponent = () => {
   };
 
   useEffect(() => {
-    loadAvailableProducts(); 
-  }, []);
+    loadAvailableProducts();
+  });
 
   return (
     <>
-      <div className='dashboard-list-products-container'>
+      <div className="dashboard-list-products-container">
         {availableProductsList && availableProductsList.length > 0 ? (
           availableProductsList.map((product) => (
-            <ProductComponent key={product._id} productInfo={product}/>
+            <ProductComponent
+              key={product._id}
+              productInfo={product}
+              onClick={() =>
+                alert(
+                  `Clickado: ${product._id}, ${product.title} a ${product.price}€`
+                )
+              }
+            />
           ))
         ) : (
           <div>No hay productos</div>
