@@ -7,6 +7,9 @@ import NotFoundPage from './pages/NotFound/NotFoundPage';
 import DashboardPage from './pages/Dashboard/DashBoardPage';
 import BackgroundComponent from './components/BackgroundComponent/BackgroundComponent';
 import PrivateRouteComponent from './components/PrivateRouteComponent/PrivateRouteComponent';
+import ProfilePage from './pages/Profile/ProfilePage';
+import UploadPage from './pages/Upload/UploadPage';
+import MessagesPage from './pages/Messages/MessagesPage';
 
 function App() {
   return (
@@ -18,10 +21,34 @@ function App() {
           <Route path="/404-Notfound" element={<NotFoundPage />} />
           <Route path="/*" element={<Navigate to="/404-Notfound" replace/>} />
           <Route
-            path="/dashboard"
+            path="/dashboard/products"
             element={
               <PrivateRouteComponent>
                 <DashboardPage />
+              </PrivateRouteComponent>
+            }
+          />
+          <Route
+            path="/dashboard/profile"
+            element={
+              <PrivateRouteComponent>
+                <ProfilePage />
+              </PrivateRouteComponent>
+            }
+          />
+          <Route
+            path="/dashboard/messages"
+            element={
+              <PrivateRouteComponent>
+                <MessagesPage />
+              </PrivateRouteComponent>
+            }
+          />
+          <Route
+            path="/dashboard/upload"
+            element={
+              <PrivateRouteComponent>
+                <UploadPage />
               </PrivateRouteComponent>
             }
           />

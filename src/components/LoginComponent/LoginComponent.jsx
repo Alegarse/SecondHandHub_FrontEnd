@@ -4,10 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { changeHomeViewAction } from '../HomePageComponent/HomePageComponentActions';
 import { doLoginFetch } from '../../core/services/api';
-import {
-  dataUserLoggedAction,
-  isAuthenticatedAction,
-} from '../DashboardComponent/DashboardComponentActions';
+import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
 
 const LoginComponent = () => {
   const [dataLogin, setDataLogin] = useState({});
@@ -42,7 +39,7 @@ const LoginComponent = () => {
         );
         showToast('Usuario logeado correctamente');
         await delay(2500);
-        navigate('/dashboard');
+        navigate('/dashboard/products');
       } else {
         showToast(responseLogin.message, 'error');
       }

@@ -1,17 +1,16 @@
-import React from 'react';
-import DashboardComponent from '../../components/DashboardComponent/DashboardComponent';
+import React from 'react'
+import MessagesComponent from '../../components/MessagesComponent/MessagesComponent'
 import MenuComponent from '../../components/MenuComponent/MenuComponent';
 import FooterComponent from '../../components/FooterComponent/FooterComponent';
 
-const DashboardPage = () => {
-    
+const MessagesPage = () => {
   return (
     <div className='dashboard-container'>
       <MenuComponent />
-      <DashboardComponent />
+      <MessagesComponent />
       <FooterComponent/>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardPage;
+export default MessagesPage

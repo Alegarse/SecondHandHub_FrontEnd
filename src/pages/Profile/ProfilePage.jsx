@@ -1,17 +1,16 @@
-import React from 'react';
-import DashboardComponent from '../../components/DashboardComponent/DashboardComponent';
+import React from 'react'
+import ProfileComponent from '../../components/ProfileComponent/ProfileComponent'
 import MenuComponent from '../../components/MenuComponent/MenuComponent';
 import FooterComponent from '../../components/FooterComponent/FooterComponent';
 
-const DashboardPage = () => {
-    
+const ProfilePage = () => {
   return (
     <div className='dashboard-container'>
       <MenuComponent />
-      <DashboardComponent />
+      <ProfileComponent />
       <FooterComponent/>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardPage;
+export default ProfilePage

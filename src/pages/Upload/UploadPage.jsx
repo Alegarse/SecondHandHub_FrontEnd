@@ -1,17 +1,16 @@
-import React from 'react';
-import DashboardComponent from '../../components/DashboardComponent/DashboardComponent';
+import React from 'react'
+import UploadProductComponent from '../../components/UploadProductComponent/UploadProductComponent'
 import MenuComponent from '../../components/MenuComponent/MenuComponent';
 import FooterComponent from '../../components/FooterComponent/FooterComponent';
 
-const DashboardPage = () => {
-    
+const UploadPage = () => {
   return (
     <div className='dashboard-container'>
       <MenuComponent />
-      <DashboardComponent />
+      <UploadProductComponent />
       <FooterComponent/>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardPage;
+export default UploadPage
