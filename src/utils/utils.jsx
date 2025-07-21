@@ -1,4 +1,5 @@
-import img_no_available from './../assets/no_available_img.png'
+import React from 'react';
+import img_no_available from './../assets/no_available_img.png';
 
 const utilsData = {
   regex_mail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -114,3 +115,43 @@ export const buildLocationObject = async () => {
 export const getValidImg = (image) => {
   return image && image.trim() !== undefined ? image : img_no_available;
 };
+
+export function getFormattedDate(date, includeTime = false) {
+  const constDate = new Date(date);
+  if(isNaN(constDate.getTime())) return ''
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  let options = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour12: false,
+    timeZone: timeZone,
+  };
+  if (includeTime) {
+    const options2 = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    options = { ...options2, ...options };
+  }
+  return constDate.toLocaleString('es-ES', options).replace(',', '');
+}
+
+export function generateMapIframe(location) {
+  const [lng, lat] = location.coordinates;
+  const zoom = 13;
+  const approxLat = parseFloat(lat.toFixed(3));
+  const approxLng = parseFloat(lng.toFixed(3));
+
+  // Usamos la URL pública de Google Maps para insertar un iframe sin API Key
+  const mapUrl = `https://maps.google.com/maps?q=${approxLat},${approxLng}&z=${zoom}&output=embed`;
+
+  return (
+    <iframe
+      src={mapUrl}
+      width="100%"
+      height="250"
+      style={{ border: 0, borderRadius: '15px' }}
+      loading="lazy"
+      allowFullScreen
+      referrerPolicy="no-referrer-when-downgrade"
+    ></iframe>
+  );
+}

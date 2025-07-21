@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HomePage from '../../pages/Home/HomePage';
-import DashboardPage from '../../pages/Dashboard/DashBoardPage';
 import { checkUserToken } from '../../core/services/api';
 
 import { changeUserLoggedStateActions } from './HomePageComponentActions';
@@ -11,9 +10,6 @@ const HomePageComponent = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  const userLoggedState = useSelector(
-    (state) => state.homePageComponentReducer.isLogged
-  );
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -49,7 +45,7 @@ const HomePageComponent = () => {
   }, []);
 
   if (loading) return <div>Loading ...</div>;
-  return <>{!userLoggedState ? <HomePage /> : <DashboardPage />}</>;
+  return <HomePage />;
 };
 
 export default HomePageComponent;

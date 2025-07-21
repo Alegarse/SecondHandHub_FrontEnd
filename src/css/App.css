@@ -27,3 +27,7 @@
   background-color: #f44336;
 }
 
+button {
+  outline: none;
+  box-shadow: none;
+}

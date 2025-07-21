@@ -3,13 +3,13 @@ import './../../css/404Page.css';
 import img404 from './../../assets/error-404.png';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { delay, showToast } from '../../utils/utils';
 import { isAuthenticatedAction } from '../../components/DashboardComponent/DashboardComponentActions';
 import {
   changeHomeViewAction,
   changeUserLoggedStateActions,
 } from '../../components/HomePageComponent/HomePageComponentActions';
 import { changeMenuOptionActions } from '../../components/MenuComponent/MenuComponentActions';
+import { delay, showToast } from '../../utils/utils';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();

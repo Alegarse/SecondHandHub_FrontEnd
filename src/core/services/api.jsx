@@ -1,8 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { errorsData } from "../../utils/errors";
-import apiConfig from "./apiConfig";
-
-
+import { errorsData } from '../../utils/errors';
+import apiConfig from './apiConfig';
 
 // All endpoints call
 export async function callApi(method, url, data = null, upload = false) {
@@ -14,7 +11,7 @@ export async function callApi(method, url, data = null, upload = false) {
         await refreshToken();
         return await makeAuthorizedRequest(method, url, data, upload);
       } catch (refreshError) {
-        navigate("/");
+        console.error(refreshError.message);
       }
     }
     throw error;
@@ -23,15 +20,15 @@ export async function callApi(method, url, data = null, upload = false) {
 
 // Verify Authorized petition
 async function makeAuthorizedRequest(method, url, data = null, upload) {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem('access_token');
   if (!token) {
-    throw new Error("Token no existe");
+    throw new Error('Token no existe');
   }
   let headers = {};
   if (!upload) {
-    headers = { "Content-Type": "application/json", "auth-token": token };
+    headers = { 'Content-Type': 'application/json', 'auth-token': token };
   } else {
-    headers = { "auth-token": token };
+    headers = { 'auth-token': token };
   }
 
   const response = await fetch(url, {
@@ -41,8 +38,8 @@ async function makeAuthorizedRequest(method, url, data = null, upload) {
   });
 
   if (!response.ok) {
-    console.log("Error en la petición");
-    const error = new Error("Error en la petición");
+    console.log('Error en la petición');
+    const error = new Error('Error en la petición');
     error.status = response.status;
     throw error;
   }
@@ -52,22 +49,22 @@ async function makeAuthorizedRequest(method, url, data = null, upload) {
 // Get Token refresh
 async function refreshToken() {
   try {
-    const refresh = localStorage.getItem("refresh_token");
-    if (!refresh) throw new Error("Token de resfresco no existe");
+    const refresh = localStorage.getItem('refresh_token');
+    if (!refresh) throw new Error('Token de resfresco no existe');
     const urlRefreshToken = apiConfig.URL_REF_TOKEN;
     const renoveTokens = await fetch(urlRefreshToken, {
-      method: "GET",
-      headers: { "Content-Type": "application/json", "auth-token": refresh },
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', 'auth-token': refresh },
     });
     const dataTokens = await renoveTokens.json();
     if (dataTokens) {
       // SAVE DATA TO LOCAL STORAGE
-      localStorage.setItem("access_token", dataTokens.token);
-      localStorage.setItem("refresh_token", dataTokens.token_refresh);
+      localStorage.setItem('access_token', dataTokens.token);
+      localStorage.setItem('refresh_token', dataTokens.token_refresh);
     }
   } catch (error) {
     if (error.status === 401) {
-      navigate("/");
+      console.error(error.message);
     }
   }
 }
@@ -75,9 +72,9 @@ async function refreshToken() {
 export const doLoginFetch = async (dataLogin) => {
   try {
     const response = await fetch(apiConfig.URL_LOGIN, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(dataLogin),
     });
@@ -98,9 +95,9 @@ export const doLoginFetch = async (dataLogin) => {
 export const doRegisterFetch = async (dataRegister) => {
   try {
     const response = await fetch(apiConfig.URL_REGISTER, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(dataRegister),
     });
@@ -119,6 +116,6 @@ export const doRegisterFetch = async (dataRegister) => {
 };
 
 export const checkUserToken = async () => {
-  const response = await callApi("GET", apiConfig.URL_VER_TOKEN);
+  const response = await callApi('GET', apiConfig.URL_VER_TOKEN);
   return response;
 };

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { changeMenuOptionActions } from './MenuComponentActions';
 import logo from '../../assets/logo.png';
 import '../../css/HeaderMenu.css';
 import upload from '../../assets/upload.png';
@@ -44,11 +43,19 @@ const MenuComponent = () => {
   };
 
   const handlerMenuOption = (option) => {
-    dispatch(
-      changeMenuOptionActions({
-        menuOption: option,
-      })
-    );
+    switch (option) {
+      case 0:
+        navigate('/dashboard/upload');
+        break;
+      case 1:
+        navigate('/dashboard/messages');
+        break;
+      case 2:
+        navigate('/dashboard/profile');
+        break;
+      default:
+        navigate('/dashboard/products');
+    }
     setIsMenuOpen(false);
   };
 
@@ -81,7 +88,7 @@ const MenuComponent = () => {
           <button
             className="btn-chat"
             title="Pulse para visualizar los mensajes"
-            onClick={() => handlerMenuOption(2)}
+            onClick={() => handlerMenuOption(1)}
           >
             <img src={messages} />
           </button>
@@ -91,7 +98,7 @@ const MenuComponent = () => {
             className="btn-profile"
             title="Pulse para ver su perfil de usuario"
             onClick={() => {
-              handlerMenuOption(1);
+              handlerMenuOption(2);
             }}
           >
             <img src={profile} />

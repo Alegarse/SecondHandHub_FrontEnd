@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { delay, showToast, validateFields } from '../../utils/utils';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { changeHomeViewAction } from '../HomePageComponent/HomePageComponentActions';
 import { doLoginFetch } from '../../core/services/api';
-import {
-  dataUserLoggedAction,
-  isAuthenticatedAction,
-} from '../DashboardComponent/DashboardComponentActions';
+import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
+import './../../css/Login.css';
+import { delay, showToast, validateFields } from '../../utils/utils';
 
 const LoginComponent = () => {
   const [dataLogin, setDataLogin] = useState({});
@@ -42,7 +40,7 @@ const LoginComponent = () => {
         );
         showToast('Usuario logeado correctamente');
         await delay(2500);
-        navigate('/dashboard');
+        navigate('/dashboard/products');
       } else {
         showToast(responseLogin.message, 'error');
       }
@@ -50,28 +48,32 @@ const LoginComponent = () => {
   };
 
   return (
-    <>
-      <div className="form-user-login">
-        <h3>Acceder a tu cuenta</h3>
-        <div className="input-container">
-          <span>Email: </span>
+    <div className="login-principal-container">
+      <div className="login-container">
+        <h3 className="title-login">Acceder a tu cuenta</h3>
+        <div className="form-login" id="form-login">
+          <label>Email: </label>
           <input
             type="text"
             onChange={(e) => inputLoginHandler('email', e.target.value)}
           />
-        </div>
-        <div className="input-container">
-          <span>Contraseña: </span>
+          <label>Contraseña: </label>
           <input
             type="password"
             onChange={(e) => inputLoginHandler('password', e.target.value)}
           />
+          <div className="buttons-login-container">
+            <button className="btn-do-login" onClick={doLogin}>
+              Entrar
+            </button>
+            <button className="btn-back" onClick={goBack}>
+              Volver
+            </button>
+          </div>
         </div>
-        <button onClick={doLogin}>Entrar</button>
-        <button onClick={goBack}>Volver</button>
       </div>
       <div className="toast-message" id="toastMessage"></div>
-    </>
+    </div>
   );
 };
 

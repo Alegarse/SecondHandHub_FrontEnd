@@ -11,9 +11,8 @@ const DashboardComponent = () => {
   const dispatch = useDispatch();
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_LOAD);
 
-  const availableProductsList = useSelector(
-    (state) => state.dashboardComponentReducer.productsList
-  );
+  const availableProductsList =
+    useSelector((state) => state.dashboardComponentReducer.productsList);
 
   const loadAvailableProducts = async () => {
     try {
@@ -56,7 +55,9 @@ const DashboardComponent = () => {
             />
           ))
         ) : (
-          <div>No hay productos</div>
+          <div className="products-list-empty">
+            No hay productos disponibles
+          </div>
         )}
         {hasMoreToShow && (
           <div className="load-more-wrapper">
