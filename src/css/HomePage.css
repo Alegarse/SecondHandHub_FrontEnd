@@ -15,6 +15,7 @@
   border: 1px solid grey;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.658);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
   max-width: 1280px;
   color: #242424;
 
@@ -59,11 +60,16 @@
 
     & .btn-to-login {
       background-color: green;
-      z-index: 1;
+      &:hover {
+            background-color: rgb(128, 190, 34);
+        }
     }
 
     & .btn-to-register {
       background-color: orange;
+      &:hover {
+            background-color: rgb(245, 184, 72);
+        }
     }
   }
 }

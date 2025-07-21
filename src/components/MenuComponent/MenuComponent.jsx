@@ -43,8 +43,19 @@ const MenuComponent = () => {
   };
 
   const handlerMenuOption = (option) => {
-    console.log("A Perfil")
-    navigate('/dashboard/profile')
+    switch (option) {
+      case 0:
+        navigate('/dashboard/upload');
+        break;
+      case 1:
+        navigate('/dashboard/messages');
+        break;
+      case 2:
+        navigate('/dashboard/profile');
+        break;
+      default:
+        navigate('/dashboard/products');
+    }
     setIsMenuOpen(false);
   };
 
