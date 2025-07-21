@@ -9,7 +9,7 @@ const validateEmail = (email) => {
   return utilsData.regex_mail.test(email);
 };
 
-export const validateFields = (data, inReg = false) => {
+export const validateFields = (data, inReg = false, inProfile = false) => {
   let isError = false;
   let countErrors = 0;
   let errorMessage = '';
@@ -18,12 +18,14 @@ export const validateFields = (data, inReg = false) => {
     countErrors++;
     isError = true;
   }
-  if (!data.password || data.password === '') {
-    errorMessage === ''
-      ? (errorMessage += 'Contraseña')
-      : (errorMessage += ', contraseña');
-    countErrors++;
-    isError = true;
+  if (!inProfile) {
+    if (!data.password || data.password === '') {
+      errorMessage === ''
+        ? (errorMessage += 'Contraseña')
+        : (errorMessage += ', contraseña');
+      countErrors++;
+      isError = true;
+    }
   }
   if (inReg) {
     if (!data.firstName || data.firstName === '') {
@@ -116,9 +118,21 @@ export const getValidImg = (image) => {
   return image && image.trim() !== undefined ? image : img_no_available;
 };
 
-export function getFormattedDate(date, includeTime = false) {
+export function getFormattedDate(
+  date,
+  includeTime = false,
+  isInputValue = false
+) {
   const constDate = new Date(date);
-  if(isNaN(constDate.getTime())) return ''
+  if (isNaN(constDate.getTime())) return '';
+
+  if (isInputValue) {
+    const year = constDate.getFullYear();
+    const month = (constDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = constDate.getDate().toString().padStart(2, '0');
+    console.log(`${year}-${month}-${day}`);
+    return `${year}-${month}-${day}`;
+  }
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   let options = {
     day: '2-digit',

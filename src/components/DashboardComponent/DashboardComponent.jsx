@@ -11,8 +11,9 @@ const DashboardComponent = () => {
   const dispatch = useDispatch();
   const [visibleCount, setVisibleCount] = useState(PRODUCTS_LOAD);
 
-  const availableProductsList =
-    useSelector((state) => state.dashboardComponentReducer.productsList);
+  const availableProductsList = useSelector(
+    (state) => state.dashboardComponentReducer.productsList
+  );
 
   const loadAvailableProducts = async () => {
     try {
@@ -25,6 +26,14 @@ const DashboardComponent = () => {
     } catch (error) {
       console.error('Error loading products:', error);
     }
+  };
+
+  const selectProductHandler = (profileId) => {
+    dispatch(
+      selectIdProfileAction({
+        profileId: profileId,
+      })
+    );
   };
 
   const loadMore = () => {
@@ -47,11 +56,7 @@ const DashboardComponent = () => {
             <ProductComponent
               key={product._id}
               productInfo={product}
-              onClick={() =>
-                alert(
-                  `Clickado: ${product._id}, ${product.title} a ${product.price}€`
-                )
-              }
+              onClick={() => selectProductHandler(product._id)}
             />
           ))
         ) : (

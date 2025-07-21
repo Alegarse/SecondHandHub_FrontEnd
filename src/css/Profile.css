@@ -33,10 +33,15 @@
     width: 9.375rem;
     min-height: 10.625rem;
     margin: auto;
+
+    &:hover {
+      cursor: pointer
+    }
   }
 
   & .hidden-fileInput {
     display: none;
+    cursor: default;
   }
 
   & .user-lastaccess-label {
@@ -51,10 +56,6 @@
     height: 0.625rem;
     color: #0f4317;
   }
-}
-
-.photo-profile:hover {
-  cursor: default;
 }
 
 .info-container {
@@ -128,6 +129,17 @@
   font-weight: 700;
   text-align: start;
   pointer-events: none;
+  text-align: end;
+}
+
+.hidden-textInput[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.hidden-textInput[type='date'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .textInput {
@@ -138,6 +150,7 @@
   font-weight: 500;
   text-align: start;
   border-radius: 5px;
+  text-align: end;
 }
 
 .change-password-user {
@@ -151,10 +164,12 @@
   display: flex;
   justify-content: end;
   margin-bottom: 5px;
+  gap: 15px;
 }
 
 .btn-change-password-user,
-.btn-back-to-info-user {
+.btn-back-to-info-user,
+.btn-save-changes {
   background-color: transparent;
   margin: 0;
   padding: 0;
@@ -162,7 +177,11 @@
   box-shadow: none;
 
   & img {
-    width: 45px;
+    width: 30px;
     aspect-ratio: 1;
   }
+}
+
+.red-span {
+  color: red;
 }
