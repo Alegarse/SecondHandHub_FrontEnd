@@ -118,6 +118,7 @@ export const getValidImg = (image) => {
 
 export function getFormattedDate(date, includeTime = false) {
   const constDate = new Date(date);
+  if(isNaN(constDate.getTime())) return ''
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   let options = {
     day: '2-digit',

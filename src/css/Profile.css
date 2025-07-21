@@ -23,6 +23,7 @@
 .photo-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   font-size: 0.8125rem;
   font-style: italic;
   width: 10.625rem;
@@ -60,11 +61,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
+  gap: 15px;
 }
 
 .data-user-container {
   display: flex;
+  justify-content: space-between;
   color: #242424;
 
   & .user-name-label,
@@ -72,11 +74,12 @@
   .user-address-label,
   .user-phone-label,
   .user-birthdate-label,
-  .user-email-label {
+  .user-email-label,
+  .user-password-label {
     font-weight: 500;
     margin-inline-end: 0.625rem;
-    margin-left: 1.25rem;
 
+    font-style: italic;
   }
 
   & .name-user_,
@@ -113,5 +116,53 @@
 
   & h2 {
     font-style: italic;
+  }
+}
+
+.hidden-textInput {
+  background-color: transparent;
+  height: fit-content;
+  border: none;
+  font-size: 1.125rem;
+  color: #242424;
+  font-weight: 700;
+  text-align: start;
+  pointer-events: none;
+}
+
+.textInput {
+  height: fit-content;
+  font-size: 1.125rem;
+  background-color: transparent;
+  color: #242424;
+  font-weight: 500;
+  text-align: start;
+  border-radius: 5px;
+}
+
+.change-password-user {
+  background-color: #242424cc;
+  &:hover {
+    background-color: #575656cc;
+  }
+}
+
+.profile-options-container {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 5px;
+}
+
+.btn-change-password-user,
+.btn-back-to-info-user {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
+
+  & img {
+    width: 45px;
+    aspect-ratio: 1;
   }
 }
