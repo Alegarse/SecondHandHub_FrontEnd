@@ -6,7 +6,7 @@ import {
 } from './ProfileComponentActions';
 
 const initialState = {
-  dataProfile: {},
+  dataProfile: null,
   editMode: false,
   profileId: undefined,
   profileImg: '',

@@ -27,6 +27,7 @@ const MenuComponent = () => {
     dispatch(
       isAuthenticatedAction({
         isAuthenticated: false,
+        isSessionChecked: true,
       })
     );
     dispatch(

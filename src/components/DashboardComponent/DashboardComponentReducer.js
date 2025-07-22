@@ -7,6 +7,7 @@ import {
 const initialState = {
   userDataLogged: undefined,
   isAuthenticated: false,
+  isSessionChecked: false,
   productsList: undefined,
 };
 
@@ -23,6 +24,7 @@ const dashboardComponentReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: payload.isAuthenticated,
+        isSessionChecked: payload.isSessionChecked
       };
     case LOAD_PRODUCTS:
       return {

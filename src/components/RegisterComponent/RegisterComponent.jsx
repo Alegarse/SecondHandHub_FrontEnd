@@ -12,6 +12,7 @@ import {
 
 const RegisterComponent = () => {
   const [dataRegister, setDataRegister] = useState({});
+  const [isRegistering, setIsRegistering] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -24,19 +25,28 @@ const RegisterComponent = () => {
 
   const doRegister = async () => {
     if (validateFields(dataRegister, true)) {
-      const location = await buildLocationObject();
-      dataRegister['location'] = location;
-      const responseRegister = await doRegisterFetch(dataRegister);
-      if (responseRegister.status === 'Success') {
-        showToast(responseRegister.message);
-        await delay(2000);
-        dispatch(
-          changeHomeViewAction({
-            viewTypeHome: 'LOG',
-          })
-        );
-      } else {
-        showToast(responseRegister.message, 'error');
+      setIsRegistering(true);
+
+      try {
+        const location = await buildLocationObject();
+        dataRegister['location'] = location;
+        const responseRegister = await doRegisterFetch(dataRegister);
+        if (responseRegister.status === 'Success') {
+          showToast(responseRegister.message);
+          await delay(2000);
+          dispatch(
+            changeHomeViewAction({
+              viewTypeHome: 'LOG',
+            })
+          );
+        } else {
+          showToast(responseRegister.message, 'error');
+        }
+      } catch (error) {
+        console.error(error)
+        showToast("Error al registrarse. Intentelo de nuevo.", 'error')
+      } finally {
+        setIsRegistering(false)
       }
     }
   };
@@ -80,10 +90,10 @@ const RegisterComponent = () => {
             onChange={(e) => inputRegisterHandler('password', e.target.value)}
           />
           <div className="buttons-register-container">
-            <button className="btn-do-register" onClick={doRegister}>
+            <button className="btn-do-register" onClick={doRegister} disabled={isRegistering}>
               Registrarse
             </button>
-            <button className="btn-back" onClick={goBack}>
+            <button className="btn-back" onClick={goBack} disabled={isRegistering}>
               Volver
             </button>
           </div>

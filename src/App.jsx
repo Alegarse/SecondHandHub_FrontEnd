@@ -10,11 +10,15 @@ import PrivateRouteComponent from './components/PrivateRouteComponent/PrivateRou
 import ProfilePage from './pages/Profile/ProfilePage';
 import UploadPage from './pages/Upload/UploadPage';
 import MessagesPage from './pages/Messages/MessagesPage';
+import SessionInitiate from './components/SessionInitiate/SessionInitiate';
 
 function App() {
+
+
   return (
     <Provider store={store}>
       <Router>
+        <SessionInitiate/>
         <BackgroundComponent />
         <Routes>
           <Route path="/" element={<HomePageComponent />} />

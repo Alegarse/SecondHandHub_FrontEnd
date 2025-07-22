@@ -108,6 +108,7 @@ const ProfileComponent = () => {
             dispatch(
               isAuthenticatedAction({
                 isAuthenticated: false,
+                isSessionChecked: true,
               })
             );
             dispatch(
@@ -132,10 +133,15 @@ const ProfileComponent = () => {
 
   useEffect(() => {
     loadProfile();
+    dispatch(
+      editProfileAction({
+        editMode: false,
+      })
+    );
   }, []);
   return (
     <>
-      {!dataProfile ? (
+      {!dataProfile || !dataProfile.firstName ? (
         <div className="principal-profile-container">Cargando perfil...</div>
       ) : (
         <>

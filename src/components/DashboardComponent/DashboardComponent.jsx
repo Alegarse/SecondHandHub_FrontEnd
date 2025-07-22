@@ -28,12 +28,7 @@ const DashboardComponent = () => {
     }
   };
 
-  const selectProductHandler = (profileId) => {
-    dispatch(
-      selectIdProfileAction({
-        profileId: profileId,
-      })
-    );
+  const selectProductHandler = (productId) => {
   };
 
   const loadMore = () => {

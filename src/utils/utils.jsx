@@ -130,7 +130,6 @@ export function getFormattedDate(
     const year = constDate.getFullYear();
     const month = (constDate.getMonth() + 1).toString().padStart(2, '0');
     const day = constDate.getDate().toString().padStart(2, '0');
-    console.log(`${year}-${month}-${day}`);
     return `${year}-${month}-${day}`;
   }
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;

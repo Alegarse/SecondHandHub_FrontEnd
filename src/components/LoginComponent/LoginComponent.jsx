@@ -33,9 +33,11 @@ const LoginComponent = () => {
       if (responseLogin.status === 'Success') {
         localStorage.setItem('access_token', responseLogin.token);
         localStorage.setItem('refresh_token', responseLogin.token_refresh);
+        localStorage.setItem('user_data', JSON.stringify(responseLogin.data));
         dispatch(
           isAuthenticatedAction({
             isAuthenticated: true,
+            isSessionChecked: true,
           })
         );
         showToast('Usuario logeado correctamente');
