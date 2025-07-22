@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../assets/logo.png';
 import '../../css/HeaderMenu.css';
+import to_dashboard from '../../assets/to_dashboard.png';
 import upload from '../../assets/upload.png';
 import profile from '../../assets/profile.png';
 import messages from '../../assets/messages.png';
@@ -13,17 +14,34 @@ import {
 } from '../HomePageComponent/HomePageComponentActions';
 import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
 import { delay, showToast } from '../../utils/utils';
+import { checkIntoDashboardAction } from './MenuComponentActions';
 
 const MenuComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const MENU_VIEW = {
+    DASHBOARD: 0,
+    UPLOAD: 1,
+    MESSAGES: 2,
+    PROFILE: 3,
+  };
+
+  const intoDashboard = useSelector(
+    (state) => state.menuComponentReducer.intoDashboard
+  );
+
   const logoutUser = async () => {
     localStorage.clear();
     showToast('Usuario deslogeado correctamente');
     await delay(2500);
-    handlerMenuOption(undefined);
+    handlerMenuOption(MENU_VIEW.DASHBOARD);
+    dispatch(
+      checkIntoDashboardAction({
+        intoDashboard: MENU_VIEW.DASHBOARD,
+      })
+    );
     dispatch(
       isAuthenticatedAction({
         isAuthenticated: false,
@@ -44,18 +62,33 @@ const MenuComponent = () => {
   };
 
   const handlerMenuOption = (option) => {
-    switch (option) {
-      case 0:
-        navigate('/dashboard/upload');
-        break;
-      case 1:
-        navigate('/dashboard/messages');
-        break;
-      case 2:
-        navigate('/dashboard/profile');
-        break;
-      default:
-        navigate('/dashboard/products');
+    if (intoDashboard === option) {
+      navigate('/dashboard/products');
+      dispatch(
+        checkIntoDashboardAction({
+          intoDashboard: MENU_VIEW.DASHBOARD,
+        })
+      );
+    } else {
+      switch (option) {
+        case MENU_VIEW.UPLOAD:
+          navigate('/dashboard/upload');
+          break;
+        case MENU_VIEW.MESSAGES:
+          navigate('/dashboard/messages');
+          break;
+        case MENU_VIEW.PROFILE:
+          navigate('/dashboard/profile');
+          break;
+        default:
+          navigate('/dashboard/products');
+          break;
+      }
+      dispatch(
+        checkIntoDashboardAction({
+          intoDashboard: option,
+        })
+      );
     }
     setIsMenuOpen(false);
   };
@@ -67,7 +100,7 @@ const MenuComponent = () => {
         src={logo}
         alt="Logo de la empresa"
         title="SecondHand Hub. Donde todo tiene un nuevo hogar"
-        onClick={() => handlerMenuOption(undefined)}
+        onClick={() => handlerMenuOption(MENU_VIEW.DASHBOARD)}
       />
       <button
         className="btn-burguer-menu"
@@ -79,36 +112,48 @@ const MenuComponent = () => {
         <div>
           <button
             className="btn-upload"
-            title="Pulse para agregar un nuevo producto"
-            onClick={() => handlerMenuOption(0)}
+            title={
+              intoDashboard === MENU_VIEW.UPLOAD
+                ? 'Pulse para volver al listado'
+                : 'Pulse para agregar un nuevo producto'
+            }
+            onClick={() => handlerMenuOption(MENU_VIEW.UPLOAD)}
           >
-            <img src={upload} />
+            <img src={intoDashboard === MENU_VIEW.UPLOAD ? to_dashboard : upload} />
           </button>
         </div>
         <div>
           <button
             className="btn-chat"
-            title="Pulse para visualizar los mensajes"
-            onClick={() => handlerMenuOption(1)}
+            title={
+              intoDashboard === MENU_VIEW.MESSAGES
+                ? 'Pulse para volver al listado'
+                : 'Pulse para visualizar los mensajes'
+            }
+            onClick={() => handlerMenuOption(MENU_VIEW.MESSAGES)}
           >
-            <img src={messages} />
+            <img src={intoDashboard === MENU_VIEW.MESSAGES ? to_dashboard : messages} />
           </button>
         </div>
         <div>
           <button
             className="btn-profile"
-            title="Pulse para ver su perfil de usuario"
+            title={
+              intoDashboard === MENU_VIEW.PROFILE
+                ? 'Pulse para volver al listado'
+                : 'Pulse para ver su perfil de usuario'
+            }
             onClick={() => {
-              handlerMenuOption(2);
+              handlerMenuOption(MENU_VIEW.PROFILE);
             }}
           >
-            <img src={profile} />
+            <img src={intoDashboard === MENU_VIEW.PROFILE ? to_dashboard : profile} />
           </button>
         </div>
         <div>
           <button
             className="btn-logout"
-            title="Pulse para cerras su sesión"
+            title="Pulse para cerrar su sesión"
             onClick={logoutUser}
           >
             <img src={logout} />

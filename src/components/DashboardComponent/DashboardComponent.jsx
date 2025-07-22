@@ -5,7 +5,7 @@ import { getAllProducts } from '../../core/services/productFetch';
 import ProductComponent from '../ProductComponent/ProductComponent';
 import './../../css/DashBoard.css';
 
-const PRODUCTS_LOAD = 15;
+const PRODUCTS_LOAD = 20;
 
 const DashboardComponent = () => {
   const dispatch = useDispatch();
