@@ -21,8 +21,8 @@
 }
 
 .photo-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 6fr 3fr 2fr;
   justify-content: center;
   font-size: 0.8125rem;
   font-style: italic;
@@ -43,9 +43,15 @@
     display: none;
     cursor: default;
   }
+}
+
+.lastaccess-container {
+  display: flex;
+  flex-direction: column;
 
   & .user-lastaccess-label {
     font-weight: 500;
+    text-align: start;
     height: 0.625rem;
     color: #0f4317;
   }
@@ -54,8 +60,7 @@
     margin-top: -0.3125rem;
     text-align: end;
     height: 0.625rem;
-    color: #0f4317;
-  }
+    color: #0f4317; }
 }
 
 .info-container {
@@ -179,6 +184,14 @@
   & img {
     width: 30px;
     aspect-ratio: 1;
+  }
+}
+
+.delete-account-user {
+  background-color: red;
+
+  &:hover {
+    background-color: rgb(160, 49, 49);
   }
 }
 

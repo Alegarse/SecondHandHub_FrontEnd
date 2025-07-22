@@ -7,6 +7,7 @@ import {
 } from './ProfileComponentActions';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  deleteUserProfile,
   getUserProfile,
   updateUserProfile,
 } from '../../core/services/userFetch';
@@ -20,14 +21,30 @@ import {
 import edit from './../../assets/edit.png';
 import back from './../../assets/back.png';
 import save from './../../assets/save.png';
+import ModalComponent from '../ModalComponent/ModalComponent';
+import { changeMenuOptionActions } from '../MenuComponent/MenuComponentActions';
+import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
+import { changeHomeViewAction, changeUserLoggedStateActions } from '../HomePageComponent/HomePageComponentActions';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileComponent = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [newUser, setNewUser] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
 
   const { dataProfile, editMode } = useSelector(
     (state) => state.profileComponentReducer
   );
+
+  const handleModalConfirm = () => {
+    setModalOpen(false);
+    deleteAccount()
+  };
+
+  const handleModalCancel = () => {
+    setModalOpen(false);
+  };
 
   const userHandler = (propName, propValue) => {
     setNewUser({
@@ -72,12 +89,44 @@ const ProfileComponent = () => {
         })
       );
     } catch (error) {
-      console.error('Error loading products:', error);
+      console.error('Error loading profile data:', error);
     }
   };
 
-  const saveImageProfile = async () => {
-    const [ imgBase64, setImgBase64] = useState('')
+  const deleteAccount = async () => {
+    try {
+      const responseDeleteUser = await deleteUserProfile();
+      if (responseDeleteUser.status === 'Success') {
+        localStorage.clear();
+            showToast('Usuario eliminado correctamente');
+            await delay(2500);
+            dispatch(
+              changeMenuOptionActions({
+                menuOption: undefined,
+              })
+            )
+            dispatch(
+              isAuthenticatedAction({
+                isAuthenticated: false,
+              })
+            );
+            dispatch(
+              changeUserLoggedStateActions({
+                isLogged: false,
+              })
+            );
+            dispatch(
+              changeHomeViewAction({
+                viewTypeHome: undefined,
+              })
+            );
+            navigate('/');
+      } else {
+        showToast(responseDeleteUser.message, 'error');
+      }
+    } catch (error) {
+      console.error('Error deleting account:', error);
+    }
 
   }
 
@@ -93,7 +142,10 @@ const ProfileComponent = () => {
           <div className="principal-profile-container">
             <div className="profile-container">
               <div className="photo-container">
-                <img className="photo-profile" src={dataProfile.profilePictureUrl || empty_photo}/>
+                <img
+                  className="photo-profile"
+                  src={dataProfile.profilePictureUrl || empty_photo}
+                />
                 {editMode && (
                   <input
                     type="file"
@@ -102,10 +154,22 @@ const ProfileComponent = () => {
                     accept=".png"
                   />
                 )}
-                <p className="user-lastaccess-label">Ultimo acceso:</p>
-                <p className="user-lastaccess">
-                  {getFormattedDate(dataProfile.lastAccess, true)}
-                </p>
+                <div className="lastaccess-container">
+                  <p className="user-lastaccess-label">Ultimo acceso:</p>
+                  <p className="user-lastaccess">
+                    {getFormattedDate(dataProfile.lastAccess, true)}
+                  </p>
+                </div>
+                {editMode && (
+                  <div className="data-user-btn-container">
+                    <button
+                      className="delete-account-user"
+                      onClick={() => setModalOpen(true)}
+                    >
+                      Eliminar cuenta
+                    </button>
+                  </div>
+                )}
               </div>
               <div className="info-container">
                 <div className="data-user-container">
@@ -181,13 +245,6 @@ const ProfileComponent = () => {
                     onChange={(e) => userHandler('email', e.target.value)}
                   />
                 </div>
-                {editMode && (
-                  <div className="data-user-btn-container">
-                    <button className="change-password-user">
-                      Cambiar contraseña
-                    </button>
-                  </div>
-                )}
               </div>
               <div className="tools-container">
                 <div className="profile-options-container">
@@ -245,6 +302,12 @@ const ProfileComponent = () => {
               <h2>No dispone de ningún producto marcado como favorito</h2>
             </div>
           </div>
+          <ModalComponent
+                isOpen={modalOpen}
+                onConfirm={handleModalConfirm}
+                onCancel={handleModalCancel}
+                message={'¿Está seguro de que desea eliminar la cuenta?'}
+              />
           <div className="toast-message" id="toastMessage"></div>
         </>
       )}
