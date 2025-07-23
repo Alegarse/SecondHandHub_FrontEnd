@@ -16,3 +16,8 @@ export const deleteUserProfile = async () => {
   return userDeleted;
 }
 
+export const uploadImgProfile = async (imageData) => {
+  const responseUpload = await callApi('POST', apiConfig.URL_UPL_USR_PHOTO, imageData, true);
+  return responseUpload;
+}
+

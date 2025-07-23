@@ -37,16 +37,16 @@
       cursor: pointer
     }
   }
+}
 
-  & .hidden-fileInput {
-    display: none;
-    cursor: default;
-  }
+.photo-and-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .lastaccess-container {
-  display: flex;
-  flex-direction: column;
+  height: fit-content;
 
   & .user-lastaccess-label {
     font-weight: 500;
@@ -194,4 +194,11 @@
 
 .red-span {
   color: red;
+}
+
+.data-user-btn-container {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: fit-content;
 }

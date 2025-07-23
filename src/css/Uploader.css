@@ -1,0 +1,53 @@
+.image-uploader-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.uploaded-image {
+  position: relative;
+}
+
+.uploaded-image img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+}
+
+.remove-btn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.upload-slot {
+  width: 100px;
+  height: 100px;
+  background-color: #6a6161;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 2px dashed #ccc;
+}
+
+.upload-slot span {
+  font-size: 2rem;
+  color: #888;
+}
+
+.hidden-input {
+  display: none;
+}
