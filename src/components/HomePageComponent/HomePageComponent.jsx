@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import HomePage from '../../pages/Home/HomePage';
 import { checkUserToken } from '../../core/services/api';
 

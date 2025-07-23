@@ -3,7 +3,6 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   flex-wrap: wrap;
   margin: 0;
   gap: 15px;
@@ -21,8 +20,8 @@
 }
 
 .photo-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 6fr 3fr 2fr;
   justify-content: center;
   font-size: 0.8125rem;
   font-style: italic;
@@ -33,14 +32,45 @@
     width: 9.375rem;
     min-height: 10.625rem;
     margin: auto;
-  }
 
-  & .hidden-fileInput {
-    display: none;
+    &:hover {
+      cursor: pointer
+    }
   }
+}
+
+.photo-and-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #242424;
+}
+
+.button-close {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+  width: 100%;
+
+  & img {
+    width: 25px;
+    margin-top: 10px;
+  }
+}
+
+.lastaccess-container {
+  height: fit-content;
 
   & .user-lastaccess-label {
     font-weight: 500;
+    text-align: start;
     height: 0.625rem;
     color: #0f4317;
   }
@@ -49,12 +79,7 @@
     margin-top: -0.3125rem;
     text-align: end;
     height: 0.625rem;
-    color: #0f4317;
-  }
-}
-
-.photo-profile:hover {
-  cursor: default;
+    color: #0f4317; }
 }
 
 .info-container {
@@ -101,8 +126,6 @@
 
 .favourites-container {
   display: flex;
-  flex-grow: 1;
-  overflow-y: auto;
   justify-content: center;
   align-items: center;
   padding: 0.625rem;
@@ -128,6 +151,17 @@
   font-weight: 700;
   text-align: start;
   pointer-events: none;
+  text-align: end;
+}
+
+.hidden-textInput[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.hidden-textInput[type='date'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .textInput {
@@ -138,6 +172,7 @@
   font-weight: 500;
   text-align: start;
   border-radius: 5px;
+  text-align: end;
 }
 
 .change-password-user {
@@ -151,10 +186,12 @@
   display: flex;
   justify-content: end;
   margin-bottom: 5px;
+  gap: 15px;
 }
 
 .btn-change-password-user,
-.btn-back-to-info-user {
+.btn-back-to-info-user,
+.btn-save-changes {
   background-color: transparent;
   margin: 0;
   padding: 0;
@@ -162,7 +199,24 @@
   box-shadow: none;
 
   & img {
-    width: 45px;
+    width: 30px;
     aspect-ratio: 1;
   }
+}
+
+.delete-account-user {
+  background-color: transparent;
+  border: none;
+  color:red
+}
+
+.red-span {
+  color: red;
+}
+
+.data-user-btn-container {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: fit-content;
 }

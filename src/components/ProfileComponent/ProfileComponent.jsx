@@ -1,23 +1,55 @@
-import React, { useEffect, useState } from "react";
-import empty_photo from "/src/assets/empty-photo-profile.png";
-import "./../../css/Profile.css";
+import React, { useEffect, useState } from 'react';
+import empty_photo from '/src/assets/empty-photo-profile.png';
+import './../../css/Profile.css';
 import {
   editProfileAction,
   loadProfileAction,
-} from "./ProfileComponentActions";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile } from "../../core/services/userFetch";
-import { generateMapIframe, getFormattedDate } from "../../utils/utils";
-import edit from "./../../assets/edit.png";
-import back from "./../../assets/back.png";
+} from './ProfileComponentActions';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  deleteUserProfile,
+  getUserProfile,
+  updateUserProfile,
+} from '../../core/services/userFetch';
+import {
+  delay,
+  generateMapIframe,
+  getFormattedDate,
+  showToast,
+  validateFields,
+} from '../../utils/utils';
+import edit from './../../assets/edit.png';
+import back from './../../assets/back.png';
+import save from './../../assets/save.png';
+import ModalComponent from '../ModalComponent/ModalComponent';
+import { changeMenuOptionActions } from '../MenuComponent/MenuComponentActions';
+import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
+import {
+  changeHomeViewAction,
+  changeUserLoggedStateActions,
+} from '../HomePageComponent/HomePageComponentActions';
+import { useNavigate } from 'react-router-dom';
+import ImageUploader from '../ImageUploader/ImageUploaderComponent';
 
 const ProfileComponent = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [newUser, setNewUser] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
+  const [showUploader, setShowUploader] = useState(false);
 
   const { dataProfile, editMode } = useSelector(
     (state) => state.profileComponentReducer
   );
+
+  const handleModalConfirm = () => {
+    setModalOpen(false);
+    deleteAccount();
+  };
+
+  const handleModalCancel = () => {
+    setModalOpen(false);
+  };
 
   const userHandler = (propName, propValue) => {
     setNewUser({
@@ -32,6 +64,25 @@ const ProfileComponent = () => {
         editMode: !editMode,
       })
     );
+    setNewUser({ ...dataProfile });
+  };
+
+  const saveChanges = async () => {
+    if (validateFields(newUser, false, true)) {
+      const responseUpdate = await updateUserProfile(newUser);
+      if (responseUpdate.status === 'Success') {
+        showToast(responseUpdate.message);
+        dispatch(
+          loadProfileAction({
+            dataProfile: { ...newUser },
+          })
+        );
+        await delay(2000);
+        setEditMode();
+      } else {
+        showToast(responseUpdate.message, 'error');
+      }
+    }
   };
 
   const loadProfile = async () => {
@@ -43,111 +94,201 @@ const ProfileComponent = () => {
         })
       );
     } catch (error) {
-      console.error("Error loading products:", error);
+      console.error('Error loading profile data:', error);
     }
+  };
+
+  const deleteAccount = async () => {
+    try {
+      const responseDeleteUser = await deleteUserProfile();
+      if (responseDeleteUser.status === 'Success') {
+        localStorage.clear();
+        showToast('Usuario eliminado correctamente\nCerrando sesión...');
+        await delay(2500);
+        dispatch(
+          changeMenuOptionActions({
+            menuOption: undefined,
+          })
+        );
+        dispatch(
+          isAuthenticatedAction({
+            isAuthenticated: false,
+            isSessionChecked: true,
+          })
+        );
+        dispatch(
+          changeUserLoggedStateActions({
+            isLogged: false,
+          })
+        );
+        dispatch(
+          changeHomeViewAction({
+            viewTypeHome: undefined,
+          })
+        );
+        navigate('/');
+      } else {
+        showToast(responseDeleteUser.message, 'error');
+      }
+    } catch (error) {
+      console.error('Error deleting account:', error);
+    }
+  };
+
+  const uploadImage = async (imageUrls) => {
+    const imageUrl = imageUrls[0];
+
+    userHandler('profilePictureUrl', imageUrl);
+
+    dispatch(
+      loadProfileAction({
+        dataProfile: { 
+          ...dataProfile, 
+          profilePictureUrl: imageUrl,
+        },
+      })
+    );
+    setShowUploader(!showUploader)
   };
 
   useEffect(() => {
     loadProfile();
+    dispatch(
+      editProfileAction({
+        editMode: false,
+      })
+    );
   }, []);
   return (
     <>
-      {!dataProfile ? (
+      {!dataProfile || !dataProfile.firstName ? (
         <div className="principal-profile-container">Cargando perfil...</div>
       ) : (
         <>
           <div className="principal-profile-container">
             <div className="profile-container">
               <div className="photo-container">
-                <img className="photo-profile" src={empty_photo} />
-                {editMode && (
-                  <input
-                    type="file"
-                    id="photo-fileInput"
-                    className="hidden-fileInput"
-                    accept=".png,.jpg,.jpeg"
-                  />
-                )}
+                <div className="photo-and-upload-container">
+                  {!showUploader && (
+                    <img
+                      className="photo-profile"
+                      src={dataProfile.profilePictureUrl || empty_photo}
+                      alt="Fotgrafia de perfil"
+                      title="Haga click para editar la imagen de perfil"
+                      onClick={() => {
+                        if (editMode) setShowUploader(!showUploader);
+                      }}
+                    />
+                  )}
 
-                <p className="user-lastaccess-label">Ultimo acceso:</p>
-                <p className="user-lastaccess">
-                  {getFormattedDate(dataProfile.lastAccess, true)}
-                </p>
+                  {editMode && showUploader && (
+                    <div className="upload-image-container">
+                      <h3>Haga click para agregar una imagen</h3>
+                      <ImageUploader
+                        onChange={(imageUrl) => uploadImage(imageUrl)}
+                        singleImage={true}
+                      />
+                      <div className="button-close">
+                        <img
+                          src={back}
+                          title="Cancelar subida de imagen"
+                          onClick={() => setShowUploader(!showUploader)}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="lastaccess-container">
+                  <p className="user-lastaccess-label">Ultimo acceso:</p>
+                  <p className="user-lastaccess">
+                    {getFormattedDate(dataProfile.lastAccess, true)}
+                  </p>
+                </div>
+                {editMode && (
+                  <div className="data-user-btn-container">
+                    <button
+                      className="delete-account-user"
+                      onClick={() => setModalOpen(true)}
+                    >
+                      Eliminar cuenta
+                    </button>
+                  </div>
+                )}
               </div>
               <div className="info-container">
                 <div className="data-user-container">
-                  <label className="user-name-label">Nombre:</label>
+                  <label className="user-name-label">
+                    Nombre:<span className="red-span">*</span>
+                  </label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
                     value={
                       editMode
-                        ? newUser?.firstName || ""
+                        ? newUser?.firstName || ''
                         : dataProfile.firstName
                     }
-                    onChange={(e) => userHandler("firstName", e.target.value)}
+                    onChange={(e) => userHandler('firstName', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
-                  <label className="user-lastname-label">Apellidos:</label>
+                  <label className="user-lastname-label">
+                    Apellidos:<span className="red-span">*</span>
+                  </label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
                     value={
-                      editMode ? newUser?.lastName || "" : dataProfile.lastName
+                      editMode ? newUser?.lastName || '' : dataProfile.lastName
                     }
-                    onChange={(e) => userHandler("lastName", e.target.value)}
+                    onChange={(e) => userHandler('lastName', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
                   <span className="user-birthdate-label">
-                    Fecha de nacimiento:
+                    Fecha de nacimiento:<span className="red-span">*</span>
                   </span>
                   <input
-                    type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
+                    type="date"
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
                     value={
                       editMode
-                        ? getFormattedDate(newUser?.birthDate, false) || ""
-                        : getFormattedDate(dataProfile.birthDate, false)
+                        ? getFormattedDate(newUser?.birthDate, false, true) ||
+                          ''
+                        : getFormattedDate(dataProfile.birthDate, false, true)
                     }
-                    onChange={(e) => userHandler("birthDate", e.target.value)}
+                    onChange={(e) => userHandler('birthDate', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
                   <label className="user-phone-label">Teléfono:</label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
-                    value={editMode ? newUser?.phone || "" : dataProfile.phone}
-                    onChange={(e) => userHandler("phone", e.target.value)}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
+                    value={editMode ? newUser?.phone || '' : dataProfile.phone}
+                    onChange={(e) => userHandler('phone', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
                   <label className="user-email-label">Dni:</label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
-                    value={editMode ? newUser?.dni || "" : dataProfile.dni}
-                    onChange={(e) => userHandler("dni", e.target.value)}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
+                    value={editMode ? newUser?.dni || '' : dataProfile.dni}
+                    onChange={(e) => userHandler('dni', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
-                  <label className="user-email-label">Email:</label>
+                  <label className="user-email-label">
+                    Email:<span className="red-span">*</span>
+                  </label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
-                    value={editMode ? newUser?.email || "" : dataProfile.email}
-                    onChange={(e) => userHandler("email", e.target.value)}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
+                    value={editMode ? newUser?.email || '' : dataProfile.email}
+                    onChange={(e) => userHandler('email', e.target.value)}
                   />
                 </div>
-                {editMode && (
-                  <div className="data-user-btn-container">
-                    <button className="change-password-user">
-                      Cambiar contraseña
-                    </button>
-                  </div>
-                )}
               </div>
               <div className="tools-container">
                 <div className="profile-options-container">
@@ -163,16 +304,28 @@ const ProfileComponent = () => {
                       />
                     </button>
                   ) : (
-                    <button
-                      className="btn-back-to-info-user"
-                      onClick={setEditMode}
-                    >
-                      <img
-                        src={back}
-                        alt="Boton para volver a info de usuario"
-                        title="Pulse para salir del modo de edición del usuario"
-                      />
-                    </button>
+                    <>
+                      <button
+                        className="btn-save-changes"
+                        onClick={saveChanges}
+                      >
+                        <img
+                          src={save}
+                          alt="Guardar cambios del usuario"
+                          title="Pulse para guardar los cambios realizados"
+                        />
+                      </button>
+                      <button
+                        className="btn-back-to-info-user"
+                        onClick={setEditMode}
+                      >
+                        <img
+                          src={back}
+                          alt="Boton para volver a info de usuario"
+                          title="Pulse para salir del modo de edición del usuario"
+                        />
+                      </button>
+                    </>
                   )}
                 </div>
                 <div className="map-container">
@@ -193,6 +346,12 @@ const ProfileComponent = () => {
               <h2>No dispone de ningún producto marcado como favorito</h2>
             </div>
           </div>
+          <ModalComponent
+            isOpen={modalOpen}
+            onConfirm={handleModalConfirm}
+            onCancel={handleModalCancel}
+            message={'¿Está seguro de que desea eliminar la cuenta?'}
+          />
           <div className="toast-message" id="toastMessage"></div>
         </>
       )}

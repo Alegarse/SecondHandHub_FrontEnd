@@ -27,6 +27,7 @@ const NotFoundPage = () => {
     dispatch(
       isAuthenticatedAction({
         isAuthenticated: false,
+        isSessionChecked: true,
       })
     );
     dispatch(
