@@ -45,6 +45,26 @@
   align-items: center;
 }
 
+.upload-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #242424;
+}
+
+.button-close {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+  width: 100%;
+
+  & img {
+    width: 25px;
+    margin-top: 10px;
+  }
+}
+
 .lastaccess-container {
   height: fit-content;
 
@@ -185,11 +205,9 @@
 }
 
 .delete-account-user {
-  background-color: red;
-
-  &:hover {
-    background-color: rgb(160, 49, 49);
-  }
+  background-color: transparent;
+  border: none;
+  color:red
 }
 
 .red-span {

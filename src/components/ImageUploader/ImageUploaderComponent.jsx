@@ -48,9 +48,7 @@ const ImageUploader = ({
       formData.append("image", file);
 
       try {
-        const response = await uploadImgProfile(formData)
-
-        const result = await response.json();
+        const result = await uploadImgProfile(formData)
 
         if (result.status === "Success") {
           uploadedImages.push(result.imageUrl);

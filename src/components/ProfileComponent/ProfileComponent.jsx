@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from "react";
-import empty_photo from "/src/assets/empty-photo-profile.png";
-import "./../../css/Profile.css";
+import React, { useEffect, useState } from 'react';
+import empty_photo from '/src/assets/empty-photo-profile.png';
+import './../../css/Profile.css';
 import {
   editProfileAction,
   loadProfileAction,
-} from "./ProfileComponentActions";
-import { useDispatch, useSelector } from "react-redux";
+} from './ProfileComponentActions';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteUserProfile,
   getUserProfile,
   updateUserProfile,
-} from "../../core/services/userFetch";
+} from '../../core/services/userFetch';
 import {
   delay,
   generateMapIframe,
   getFormattedDate,
   showToast,
   validateFields,
-} from "../../utils/utils";
-import edit from "./../../assets/edit.png";
-import back from "./../../assets/back.png";
-import save from "./../../assets/save.png";
-import ModalComponent from "../ModalComponent/ModalComponent";
-import { changeMenuOptionActions } from "../MenuComponent/MenuComponentActions";
-import { isAuthenticatedAction } from "../DashboardComponent/DashboardComponentActions";
+} from '../../utils/utils';
+import edit from './../../assets/edit.png';
+import back from './../../assets/back.png';
+import save from './../../assets/save.png';
+import ModalComponent from '../ModalComponent/ModalComponent';
+import { changeMenuOptionActions } from '../MenuComponent/MenuComponentActions';
+import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
 import {
   changeHomeViewAction,
   changeUserLoggedStateActions,
-} from "../HomePageComponent/HomePageComponentActions";
-import { useNavigate } from "react-router-dom";
-import ImageUploader from "../ImageUploader/ImageUploaderComponent";
+} from '../HomePageComponent/HomePageComponentActions';
+import { useNavigate } from 'react-router-dom';
+import ImageUploader from '../ImageUploader/ImageUploaderComponent';
 
 const ProfileComponent = () => {
   const dispatch = useDispatch();
@@ -70,7 +70,7 @@ const ProfileComponent = () => {
   const saveChanges = async () => {
     if (validateFields(newUser, false, true)) {
       const responseUpdate = await updateUserProfile(newUser);
-      if (responseUpdate.status === "Success") {
+      if (responseUpdate.status === 'Success') {
         showToast(responseUpdate.message);
         dispatch(
           loadProfileAction({
@@ -80,7 +80,7 @@ const ProfileComponent = () => {
         await delay(2000);
         setEditMode();
       } else {
-        showToast(responseUpdate.message, "error");
+        showToast(responseUpdate.message, 'error');
       }
     }
   };
@@ -94,16 +94,16 @@ const ProfileComponent = () => {
         })
       );
     } catch (error) {
-      console.error("Error loading profile data:", error);
+      console.error('Error loading profile data:', error);
     }
   };
 
   const deleteAccount = async () => {
     try {
       const responseDeleteUser = await deleteUserProfile();
-      if (responseDeleteUser.status === "Success") {
+      if (responseDeleteUser.status === 'Success') {
         localStorage.clear();
-        showToast("Usuario eliminado correctamente\nCerrando sesión...");
+        showToast('Usuario eliminado correctamente\nCerrando sesión...');
         await delay(2500);
         dispatch(
           changeMenuOptionActions({
@@ -126,13 +126,29 @@ const ProfileComponent = () => {
             viewTypeHome: undefined,
           })
         );
-        navigate("/");
+        navigate('/');
       } else {
-        showToast(responseDeleteUser.message, "error");
+        showToast(responseDeleteUser.message, 'error');
       }
     } catch (error) {
-      console.error("Error deleting account:", error);
+      console.error('Error deleting account:', error);
     }
+  };
+
+  const uploadImage = async (imageUrls) => {
+    const imageUrl = imageUrls[0];
+
+    userHandler('profilePictureUrl', imageUrl);
+
+    dispatch(
+      loadProfileAction({
+        dataProfile: { 
+          ...dataProfile, 
+          profilePictureUrl: imageUrl,
+        },
+      })
+    );
+    setShowUploader(!showUploader)
   };
 
   useEffect(() => {
@@ -153,21 +169,33 @@ const ProfileComponent = () => {
             <div className="profile-container">
               <div className="photo-container">
                 <div className="photo-and-upload-container">
-                  <img
-                    className="photo-profile"
-                    src={dataProfile.profilePictureUrl || empty_photo}
-                    alt="FOotgrafia de perfil"
-                    title="Haga click para editar la imagen de perfil"
-                    onClick={() => {
-                      if (editMode) setShowUploader(!showUploader);
-                    }}
-                  />
-                  {editMode && showUploader && (
-                    <ImageUploader
-                      onImageUpload={(imageUrl) =>
-                        userHandler("profilePictureUrl", imageUrl)
-                      }
+                  {!showUploader && (
+                    <img
+                      className="photo-profile"
+                      src={dataProfile.profilePictureUrl || empty_photo}
+                      alt="Fotgrafia de perfil"
+                      title="Haga click para editar la imagen de perfil"
+                      onClick={() => {
+                        if (editMode) setShowUploader(!showUploader);
+                      }}
                     />
+                  )}
+
+                  {editMode && showUploader && (
+                    <div className="upload-image-container">
+                      <h3>Haga click para agregar una imagen</h3>
+                      <ImageUploader
+                        onChange={(imageUrl) => uploadImage(imageUrl)}
+                        singleImage={true}
+                      />
+                      <div className="button-close">
+                        <img
+                          src={back}
+                          title="Cancelar subida de imagen"
+                          onClick={() => setShowUploader(!showUploader)}
+                        />
+                      </div>
+                    </div>
                   )}
                 </div>
                 <div className="lastaccess-container">
@@ -194,13 +222,13 @@ const ProfileComponent = () => {
                   </label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
                     value={
                       editMode
-                        ? newUser?.firstName || ""
+                        ? newUser?.firstName || ''
                         : dataProfile.firstName
                     }
-                    onChange={(e) => userHandler("firstName", e.target.value)}
+                    onChange={(e) => userHandler('firstName', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -209,11 +237,11 @@ const ProfileComponent = () => {
                   </label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
                     value={
-                      editMode ? newUser?.lastName || "" : dataProfile.lastName
+                      editMode ? newUser?.lastName || '' : dataProfile.lastName
                     }
-                    onChange={(e) => userHandler("lastName", e.target.value)}
+                    onChange={(e) => userHandler('lastName', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -222,32 +250,32 @@ const ProfileComponent = () => {
                   </span>
                   <input
                     type="date"
-                    className={editMode ? "textInput" : "hidden-textInput"}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
                     value={
                       editMode
                         ? getFormattedDate(newUser?.birthDate, false, true) ||
-                          ""
+                          ''
                         : getFormattedDate(dataProfile.birthDate, false, true)
                     }
-                    onChange={(e) => userHandler("birthDate", e.target.value)}
+                    onChange={(e) => userHandler('birthDate', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
                   <label className="user-phone-label">Teléfono:</label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
-                    value={editMode ? newUser?.phone || "" : dataProfile.phone}
-                    onChange={(e) => userHandler("phone", e.target.value)}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
+                    value={editMode ? newUser?.phone || '' : dataProfile.phone}
+                    onChange={(e) => userHandler('phone', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
                   <label className="user-email-label">Dni:</label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
-                    value={editMode ? newUser?.dni || "" : dataProfile.dni}
-                    onChange={(e) => userHandler("dni", e.target.value)}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
+                    value={editMode ? newUser?.dni || '' : dataProfile.dni}
+                    onChange={(e) => userHandler('dni', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -256,9 +284,9 @@ const ProfileComponent = () => {
                   </label>
                   <input
                     type="text"
-                    className={editMode ? "textInput" : "hidden-textInput"}
-                    value={editMode ? newUser?.email || "" : dataProfile.email}
-                    onChange={(e) => userHandler("email", e.target.value)}
+                    className={editMode ? 'textInput' : 'hidden-textInput'}
+                    value={editMode ? newUser?.email || '' : dataProfile.email}
+                    onChange={(e) => userHandler('email', e.target.value)}
                   />
                 </div>
               </div>
@@ -322,7 +350,7 @@ const ProfileComponent = () => {
             isOpen={modalOpen}
             onConfirm={handleModalConfirm}
             onCancel={handleModalCancel}
-            message={"¿Está seguro de que desea eliminar la cuenta?"}
+            message={'¿Está seguro de que desea eliminar la cuenta?'}
           />
           <div className="toast-message" id="toastMessage"></div>
         </>
