@@ -3,9 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { changeHomeViewAction } from '../HomePageComponent/HomePageComponentActions';
 import { doLoginFetch } from '../../core/services/api';
-import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
+import {
+  dataUserLoggedAction,
+  isAuthenticatedAction,
+} from '../DashboardComponent/DashboardComponentActions';
 import './../../css/Login.css';
 import { delay, showToast, validateFields } from '../../utils/utils';
+import { loadProfileAction } from '../ProfileComponent/ProfileComponentActions';
 
 const LoginComponent = () => {
   const [dataLogin, setDataLogin] = useState({});
@@ -38,6 +42,11 @@ const LoginComponent = () => {
           isAuthenticatedAction({
             isAuthenticated: true,
             isSessionChecked: true,
+          })
+        );
+        dispatch(
+          loadProfileAction({
+            dataProfile: responseLogin.data,
           })
         );
         showToast('Usuario logeado correctamente');

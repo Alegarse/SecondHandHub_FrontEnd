@@ -5,10 +5,10 @@ import {
 } from './DashboardComponentActions';
 
 const initialState = {
-  userDataLogged: undefined,
+  userDataLogged: null,
   isAuthenticated: false,
   isSessionChecked: false,
-  productsList: undefined,
+  productsList: null,
 };
 
 const dashboardComponentReducer = (state = initialState, action) => {
