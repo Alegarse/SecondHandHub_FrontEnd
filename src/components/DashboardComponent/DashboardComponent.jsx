@@ -4,6 +4,13 @@ import { loadProductsAction } from './DashboardComponentActions';
 import { getAllProducts } from '../../core/services/productFetch';
 import ProductComponent from '../ProductComponent/ProductComponent';
 import './../../css/DashBoard.css';
+import {
+  addToFavorite,
+  getUserProfile,
+  removeFromFavorite,
+} from '../../core/services/userFetch';
+import { showToast } from '../../utils/utils';
+import { loadProfileAction } from '../ProfileComponent/ProfileComponentActions';
 
 const PRODUCTS_LOAD = 20;
 
@@ -14,6 +21,32 @@ const DashboardComponent = () => {
   const availableProductsList = useSelector(
     (state) => state.dashboardComponentReducer.productsList
   );
+
+  const userData = useSelector(
+    (state) => state.profileComponentReducer.dataProfile
+  );
+
+  const isProductFavorite = (productId) => {
+    return userData?.favorites?.includes(productId);
+  };
+
+  const handleToggleFavorite = async (productId) => {
+    try {
+      const alreadyFavorite = isProductFavorite(productId);
+
+      if (alreadyFavorite) {
+        await removeFromFavorite(productId);
+      } else {
+        await addToFavorite(productId);
+      }
+
+      const updatedProfile = await getUserProfile();
+      dispatch(loadProfileAction({ dataProfile: updatedProfile }));
+    } catch (error) {
+      console.error(error.message);
+      showToast('Error al cambiar el estado del favorito', 'error');
+    }
+  };
 
   const loadAvailableProducts = async () => {
     try {
@@ -28,9 +61,6 @@ const DashboardComponent = () => {
     }
   };
 
-  const selectProductHandler = (productId) => {
-  };
-
   const loadMore = () => {
     setVisibleCount((prevCount) => prevCount + PRODUCTS_LOAD);
   };
@@ -40,8 +70,18 @@ const DashboardComponent = () => {
   const hasMoreToShow = availableProductsList?.length > visibleCount;
 
   useEffect(() => {
-    loadAvailableProducts();
-  });
+    const loadInitialData = async () => {
+      try {
+        loadAvailableProducts();
+        const profile = await getUserProfile();
+        dispatch(loadProfileAction({ dataProfile: profile }));
+      } catch (error) {
+        showToast('Error al inicilizar el componente', 'error');
+        console.log(error.message);
+      }
+    };
+    loadInitialData();
+  }, []);
 
   return (
     <>
@@ -51,7 +91,8 @@ const DashboardComponent = () => {
             <ProductComponent
               key={product._id}
               productInfo={product}
-              onClick={() => selectProductHandler(product._id)}
+              isFavorite={isProductFavorite(product._id)}
+              onToggleFavorite={handleToggleFavorite}
             />
           ))
         ) : (

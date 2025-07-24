@@ -1,15 +1,11 @@
 .product-card {
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: 0.2s ease;
   text-align: center;
   height: fit-content;
-}
-
-.product-card:hover {
-  transform: scale(0.95);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+  max-width: 170px;
 }
 
 .product-image {
@@ -44,6 +40,16 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.product-price-fav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.favourite-select,
+.owner-product-select {
+  width: 20px;
 }
 
 @media (max-width: 768px) {
