@@ -1,44 +1,44 @@
-import React, { useEffect, useState } from "react";
-import empty_photo from "/src/assets/empty-photo-profile.png";
-import "./../../css/Profile.css";
+import React, { useEffect, useState } from 'react';
+import empty_photo from '/src/assets/empty-photo-profile.png';
+import './../../css/Profile.css';
 import {
   editProfileAction,
   loadFavoritesProductsUserAction,
   loadProductsUserAction,
   loadProfileAction,
-} from "./ProfileComponentActions";
-import { useDispatch, useSelector } from "react-redux";
+} from './ProfileComponentActions';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addToFavorite,
   deleteUserProfile,
   getUserProfile,
   removeFromFavorite,
   updateUserProfile,
-} from "../../core/services/userFetch";
+} from '../../core/services/userFetch';
 import {
   delay,
   generateMapIframe,
   getFormattedDate,
   showToast,
   validateFields,
-} from "../../utils/utils";
-import edit from "./../../assets/edit.png";
-import back from "./../../assets/back.png";
-import save from "./../../assets/save.png";
-import ModalComponent from "../ModalComponent/ModalComponent";
+} from '../../utils/utils';
+import edit from './../../assets/edit.png';
+import back from './../../assets/back.png';
+import save from './../../assets/save.png';
+import ModalComponent from '../ModalComponent/ModalComponent';
 import {
   changeMenuOptionActions,
   checkIntoDashboardAction,
-} from "../MenuComponent/MenuComponentActions";
-import { isAuthenticatedAction } from "../DashboardComponent/DashboardComponentActions";
+} from '../MenuComponent/MenuComponentActions';
+import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
 import {
   changeHomeViewAction,
   changeUserLoggedStateActions,
-} from "../HomePageComponent/HomePageComponentActions";
-import { useNavigate } from "react-router-dom";
-import ImageUploader from "../ImageUploader/ImageUploaderComponent";
-import { getAllProducts } from "../../core/services/productFetch";
-import ProductComponent from "../ProductComponent/ProductComponent";
+} from '../HomePageComponent/HomePageComponentActions';
+import { useNavigate } from 'react-router-dom';
+import ImageUploader from '../ImageUploader/ImageUploaderComponent';
+import { getAllProducts } from '../../core/services/productFetch';
+import ProductComponentCard from '../ProductComponentCard/ProductComponentCard';
 
 const ProfileComponent = () => {
   const dispatch = useDispatch();
@@ -74,7 +74,7 @@ const ProfileComponent = () => {
       await loadProductsUser();
     } catch (error) {
       console.error(error.message);
-      showToast("Error al cambiar el estado del favorito", "error");
+      showToast('Error al cambiar el estado del favorito', 'error');
     }
   };
 
@@ -99,7 +99,7 @@ const ProfileComponent = () => {
         })
       );
     } catch (error) {
-      console.error("Error loading products user data:", error);
+      console.error('Error loading products user data:', error);
     }
   };
 
@@ -132,7 +132,7 @@ const ProfileComponent = () => {
   const saveChanges = async () => {
     if (validateFields(newUser, false, true)) {
       const responseUpdate = await updateUserProfile(newUser);
-      if (responseUpdate.status === "Success") {
+      if (responseUpdate.status === 'Success') {
         showToast(responseUpdate.message);
         dispatch(
           loadProfileAction({
@@ -141,7 +141,7 @@ const ProfileComponent = () => {
         );
         closeEditMode();
       } else {
-        showToast(responseUpdate.message, "error");
+        showToast(responseUpdate.message, 'error');
       }
     }
   };
@@ -156,16 +156,16 @@ const ProfileComponent = () => {
       );
       return dataProfileFetch;
     } catch (error) {
-      console.error("Error loading profile data:", error);
+      console.error('Error loading profile data:', error);
     }
   };
 
   const deleteAccount = async () => {
     try {
       const responseDeleteUser = await deleteUserProfile();
-      if (responseDeleteUser.status === "Success") {
+      if (responseDeleteUser.status === 'Success') {
         localStorage.clear();
-        showToast("Usuario eliminado correctamente\nCerrando sesión...");
+        showToast('Usuario eliminado correctamente\nCerrando sesión...');
         await delay(2500);
         dispatch(
           changeMenuOptionActions({
@@ -188,19 +188,19 @@ const ProfileComponent = () => {
             viewTypeHome: undefined,
           })
         );
-        navigate("/");
+        navigate('/');
       } else {
-        showToast(responseDeleteUser.message, "error");
+        showToast(responseDeleteUser.message, 'error');
       }
     } catch (error) {
-      console.error("Error deleting account:", error);
+      console.error('Error deleting account:', error);
     }
   };
 
   const uploadImage = async (imageUrls) => {
     const imageUrl = imageUrls[0];
 
-    userHandler("profilePictureUrl", imageUrl);
+    userHandler('profilePictureUrl', imageUrl);
 
     dispatch(
       loadProfileAction({
@@ -212,7 +212,7 @@ const ProfileComponent = () => {
     );
     setShowUploader(!showUploader);
     closeEditMode();
-    showToast("Imagen de perfil actualizada correctamente");
+    showToast('Imagen de perfil actualizada correctamente');
   };
 
   useEffect(() => {
@@ -226,7 +226,7 @@ const ProfileComponent = () => {
         );
         await loadProductsUser();
       } catch (error) {
-        showToast("Error al inicilizar el componente", "error");
+        showToast('Error al inicilizar el componente', 'error');
         console.log(error.message);
       }
     };
@@ -301,14 +301,14 @@ const ProfileComponent = () => {
                   <input
                     type="text"
                     className={`${
-                      editMode ? "textInput" : "hidden-textInput"
+                      editMode ? 'textInput' : 'hidden-textInput'
                     } name-user_`}
                     value={
                       editMode
-                        ? newUser?.firstName || ""
+                        ? newUser?.firstName || ''
                         : dataProfile.firstName
                     }
-                    onChange={(e) => userHandler("firstName", e.target.value)}
+                    onChange={(e) => userHandler('firstName', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -318,12 +318,12 @@ const ProfileComponent = () => {
                   <input
                     type="text"
                     className={`${
-                      editMode ? "textInput" : "hidden-textInput"
+                      editMode ? 'textInput' : 'hidden-textInput'
                     } lastname-user`}
                     value={
-                      editMode ? newUser?.lastName || "" : dataProfile.lastName
+                      editMode ? newUser?.lastName || '' : dataProfile.lastName
                     }
-                    onChange={(e) => userHandler("lastName", e.target.value)}
+                    onChange={(e) => userHandler('lastName', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -333,15 +333,15 @@ const ProfileComponent = () => {
                   <input
                     type="date"
                     className={`${
-                      editMode ? "textInput" : "hidden-textInput"
+                      editMode ? 'textInput' : 'hidden-textInput'
                     } lastname-user`}
                     value={
                       editMode
                         ? getFormattedDate(newUser?.birthDate, false, true) ||
-                          ""
+                          ''
                         : getFormattedDate(dataProfile.birthDate, false, true)
                     }
-                    onChange={(e) => userHandler("birthDate", e.target.value)}
+                    onChange={(e) => userHandler('birthDate', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -349,10 +349,10 @@ const ProfileComponent = () => {
                   <input
                     type="text"
                     className={`${
-                      editMode ? "textInput" : "hidden-textInput"
+                      editMode ? 'textInput' : 'hidden-textInput'
                     } lastname-user`}
-                    value={editMode ? newUser?.phone || "" : dataProfile.phone}
-                    onChange={(e) => userHandler("phone", e.target.value)}
+                    value={editMode ? newUser?.phone || '' : dataProfile.phone}
+                    onChange={(e) => userHandler('phone', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -360,10 +360,10 @@ const ProfileComponent = () => {
                   <input
                     type="text"
                     className={`${
-                      editMode ? "textInput" : "hidden-textInput"
+                      editMode ? 'textInput' : 'hidden-textInput'
                     } lastname-user`}
-                    value={editMode ? newUser?.dni || "" : dataProfile.dni}
-                    onChange={(e) => userHandler("dni", e.target.value)}
+                    value={editMode ? newUser?.dni || '' : dataProfile.dni}
+                    onChange={(e) => userHandler('dni', e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -373,10 +373,10 @@ const ProfileComponent = () => {
                   <input
                     type="text"
                     className={`${
-                      editMode ? "textInput" : "hidden-textInput"
+                      editMode ? 'textInput' : 'hidden-textInput'
                     } email-user`}
-                    value={editMode ? newUser?.email || "" : dataProfile.email}
-                    onChange={(e) => userHandler("email", e.target.value)}
+                    value={editMode ? newUser?.email || '' : dataProfile.email}
+                    onChange={(e) => userHandler('email', e.target.value)}
                   />
                 </div>
               </div>
@@ -438,7 +438,7 @@ const ProfileComponent = () => {
                 <div className="owner-products-list">
                   {dataProductsUser?.length > 0 ? (
                     dataProductsUser.map((product) => (
-                      <ProductComponent
+                      <ProductComponentCard
                         key={product._id}
                         productInfo={product}
                         isOwner
@@ -456,7 +456,7 @@ const ProfileComponent = () => {
                 <div className="favorite-products-list">
                   {dataFavoritesProductsUser?.length > 0 ? (
                     dataFavoritesProductsUser.map((product) => (
-                      <ProductComponent
+                      <ProductComponentCard
                         key={product._id}
                         productInfo={product}
                         isFavorite={isProductFavorite(product._id)}
@@ -476,7 +476,7 @@ const ProfileComponent = () => {
             isOpen={modalOpen}
             onConfirm={handleModalConfirm}
             onCancel={handleModalCancel}
-            message={"¿Está seguro de que desea eliminar la cuenta?"}
+            message={'¿Está seguro de que desea eliminar la cuenta?'}
           />
           <div className="toast-message" id="toastMessage"></div>
         </>

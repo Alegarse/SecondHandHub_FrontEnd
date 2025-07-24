@@ -1,34 +1,45 @@
 import { Provider } from 'react-redux';
 import './css/App.css';
 import store from './core/redux/store/store';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import HomePageComponent from './components/HomePageComponent/HomePageComponent';
 import NotFoundPage from './pages/NotFound/NotFoundPage';
 import DashboardPage from './pages/Dashboard/DashBoardPage';
 import BackgroundComponent from './components/BackgroundComponent/BackgroundComponent';
 import PrivateRouteComponent from './components/PrivateRouteComponent/PrivateRouteComponent';
 import ProfilePage from './pages/Profile/ProfilePage';
-import UploadPage from './pages/Upload/UploadPage';
+import ProductPage from './pages/Product/ProductPage';
 import MessagesPage from './pages/Messages/MessagesPage';
 import SessionInitiate from './components/SessionInitiate/SessionInitiate';
 
 function App() {
-
-
   return (
     <Provider store={store}>
       <Router>
-        <SessionInitiate/>
+        <SessionInitiate />
         <BackgroundComponent />
         <Routes>
           <Route path="/" element={<HomePageComponent />} />
           <Route path="/404-Notfound" element={<NotFoundPage />} />
-          <Route path="/*" element={<Navigate to="/404-Notfound" replace/>} />
+          <Route path="/*" element={<Navigate to="/404-Notfound" replace />} />
           <Route
             path="/dashboard/products"
             element={
               <PrivateRouteComponent>
                 <DashboardPage />
+              </PrivateRouteComponent>
+            }
+          />
+          <Route
+            path="/dashboard/products/new"
+            element={
+              <PrivateRouteComponent>
+                <ProductPage />
               </PrivateRouteComponent>
             }
           />
@@ -49,10 +60,10 @@ function App() {
             }
           />
           <Route
-            path="/dashboard/upload"
+            path="/dashboard/product"
             element={
               <PrivateRouteComponent>
-                <UploadPage />
+                <ProductPage />
               </PrivateRouteComponent>
             }
           />

@@ -9,54 +9,96 @@ const validateEmail = (email) => {
   return utilsData.regex_mail.test(email);
 };
 
-export const validateFields = (data, inReg = false, inProfile = false) => {
+export const validateFields = (
+  data,
+  inReg = false,
+  inProfile = false,
+  inUploadProduct = false
+) => {
   let isError = false;
   let countErrors = 0;
   let errorMessage = '';
-  if (!data.email || data.email === '') {
-    errorMessage += 'Email';
-    countErrors++;
-    isError = true;
+  if (!inUploadProduct) {
+    if (!data.email || data.email === '') {
+      errorMessage += 'Email';
+      countErrors++;
+      isError = true;
+    }
+    if (!inProfile) {
+      if (!data.password || data.password === '') {
+        errorMessage === ''
+          ? (errorMessage += 'Contraseña')
+          : (errorMessage += ', contraseña');
+        countErrors++;
+        isError = true;
+      }
+    }
+    if (inReg) {
+      if (!data.firstName || data.firstName === '') {
+        errorMessage === ''
+          ? (errorMessage += 'Nombre')
+          : (errorMessage += ', nombre');
+        countErrors++;
+        isError = true;
+      }
+      if (!data.lastName || data.lastName === '') {
+        errorMessage === ''
+          ? (errorMessage += 'Apellidos')
+          : (errorMessage += ', apellidos');
+        countErrors++;
+        isError = true;
+      }
+      if (!data.birthDate || data.birthDate === '') {
+        errorMessage === ''
+          ? (errorMessage += 'Fecha de nacimiento')
+          : (errorMessage += ', fecha de nacimiento');
+        countErrors++;
+        isError = true;
+      }
+    }
+  } else {
+    if (!data.title || data.title === '') {
+      errorMessage += 'Título';
+      countErrors++;
+      isError = true;
+    }
+    if (!data.description || data.description === '') {
+        errorMessage === ''
+          ? (errorMessage += 'Descripción')
+          : (errorMessage += ', descripción');
+        countErrors++;
+        isError = true;
+      }
+    if (!data.price || data.price === '' || data.price === 0) {
+        errorMessage === ''
+          ? (errorMessage += 'Precio')
+          : (errorMessage += ', precio');
+        countErrors++;
+        isError = true;
+      }
+    if (!data.category || data.category === '') {
+        errorMessage === ''
+          ? (errorMessage += 'Categoría')
+          : (errorMessage += ', categoría');
+        countErrors++;
+        isError = true;
+      }
+    if (!data.condition || data.condition === '') {
+        errorMessage === ''
+          ? (errorMessage += 'Estado')
+          : (errorMessage += ', estado');
+        countErrors++;
+        isError = true;
+      }
   }
-  if (!inProfile) {
-    if (!data.password || data.password === '') {
-      errorMessage === ''
-        ? (errorMessage += 'Contraseña')
-        : (errorMessage += ', contraseña');
-      countErrors++;
-      isError = true;
-    }
-  }
-  if (inReg) {
-    if (!data.firstName || data.firstName === '') {
-      errorMessage === ''
-        ? (errorMessage += 'Nombre')
-        : (errorMessage += ', nombre');
-      countErrors++;
-      isError = true;
-    }
-    if (!data.lastName || data.lastName === '') {
-      errorMessage === ''
-        ? (errorMessage += 'Apellidos')
-        : (errorMessage += ', apellidos');
-      countErrors++;
-      isError = true;
-    }
-    if (!data.birthDate || data.birthDate === '') {
-      errorMessage === ''
-        ? (errorMessage += 'Fecha de nacimiento')
-        : (errorMessage += ', fecha de nacimiento');
-      countErrors++;
-      isError = true;
-    }
-  }
+
   if (isError) {
     countErrors > 1
       ? (errorMessage += ' deben contener información')
       : (errorMessage += ' debe contener información');
     showToast(errorMessage, 'error');
   } else {
-    if (!validateEmail(data.email)) {
+    if (!validateEmail(data.email) && !inUploadProduct) {
       errorMessage = 'Fórmato inválido de email';
       showToast(errorMessage, 'error');
     } else {

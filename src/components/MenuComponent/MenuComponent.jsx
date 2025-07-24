@@ -15,6 +15,7 @@ import {
 import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
 import { delay, showToast } from '../../utils/utils';
 import { checkIntoDashboardAction } from './MenuComponentActions';
+import { createProductAction } from '../ProductComponent/ProductComponentActions';
 
 const MenuComponent = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,12 @@ const MenuComponent = () => {
     } else {
       switch (option) {
         case MENU_VIEW.UPLOAD:
-          navigate('/dashboard/upload');
+          dispatch(
+            createProductAction({
+              createModeProduct: true,
+            })
+          );
+          navigate('/dashboard/products/new');
           break;
         case MENU_VIEW.MESSAGES:
           navigate('/dashboard/messages');
@@ -119,7 +125,9 @@ const MenuComponent = () => {
             }
             onClick={() => handlerMenuOption(MENU_VIEW.UPLOAD)}
           >
-            <img src={intoDashboard === MENU_VIEW.UPLOAD ? to_dashboard : upload} />
+            <img
+              src={intoDashboard === MENU_VIEW.UPLOAD ? to_dashboard : upload}
+            />
           </button>
         </div>
         <div>
@@ -132,7 +140,11 @@ const MenuComponent = () => {
             }
             onClick={() => handlerMenuOption(MENU_VIEW.MESSAGES)}
           >
-            <img src={intoDashboard === MENU_VIEW.MESSAGES ? to_dashboard : messages} />
+            <img
+              src={
+                intoDashboard === MENU_VIEW.MESSAGES ? to_dashboard : messages
+              }
+            />
           </button>
         </div>
         <div>
@@ -147,7 +159,9 @@ const MenuComponent = () => {
               handlerMenuOption(MENU_VIEW.PROFILE);
             }}
           >
-            <img src={intoDashboard === MENU_VIEW.PROFILE ? to_dashboard : profile} />
+            <img
+              src={intoDashboard === MENU_VIEW.PROFILE ? to_dashboard : profile}
+            />
           </button>
         </div>
         <div>

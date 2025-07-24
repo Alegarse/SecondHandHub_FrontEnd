@@ -18,16 +18,23 @@
 
 .remove-btn {
   position: absolute;
-  top: -5px;
-  right: -5px;
+  top: -10px;
+  right: 25px;
   background: red;
   color: white;
+  text-align: center;
   border: none;
   border-radius: 50%;
   width: 20px;
   height: 20px;
   font-weight: bold;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 14px;
   line-height: 1;
 }
 

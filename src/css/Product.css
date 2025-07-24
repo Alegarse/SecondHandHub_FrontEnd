@@ -1,0 +1,124 @@
+.product-principal-container {
+  background-color: #f8ac1a;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.card-product-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+  border-radius: 0.625rem;
+  font-size: 1.125rem;
+  background-color: #f8ac1ab2;
+}
+
+.new-product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  border-radius: 0.625rem;
+  font-size: 1.125rem;
+  gap: 30px;
+  color: #242424;
+}
+
+.form-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.create-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.images-np-upload {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: #242424;
+  font-weight: 500;
+  background-color: #f8ba48;
+  border-radius: 15px;
+
+  & label {
+    font-size: larger;
+  }
+}
+
+.image-uploader-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+}
+
+.inputs-np-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: inline-start;
+  background-color: #f8ba48;
+  border-radius: 15px;
+  padding: 15px;
+}
+
+.input-load {
+  display: flex;
+  justify-content: space-be;
+  gap: 15px;
+  color: #242424;
+
+  & label {
+    width: 20%;
+    text-align: start;
+    font-weight: 600;
+  }
+
+  & input {
+    background-color: transparent;
+    border-radius: 5px;
+    border: 2px solid #242424;
+    color: #242424;
+  }
+
+  & textarea {
+    width: 75%;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid #242424;
+    height: 140px;
+    color: #242424;
+    padding: 5px;
+  }
+
+  & select {
+    background-color: transparent;
+    border-radius: 5px;
+    color: #242424;
+    border: 2px solid #242424;
+
+    & option {
+      background-color: #f8ac1a;
+      color: #242424;
+    }
+  }
+}
+
+.btn-np-upload {
+  background-color: green;
+  justify-content: center;
+  align-items: center;
+}
+
+.red {
+  color: red;
+}

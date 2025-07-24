@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProductsAction } from './DashboardComponentActions';
 import { getAllProducts } from '../../core/services/productFetch';
-import ProductComponent from '../ProductComponent/ProductComponent';
+import ProductComponentCard from '../ProductComponentCard/ProductComponentCard';
 import './../../css/DashBoard.css';
 import {
   addToFavorite,
@@ -91,7 +91,7 @@ const DashboardComponent = () => {
       <div className="dashboard-list-products-container">
         {visibleProducts.length > 0 ? (
           visibleProducts.map((product) => (
-            <ProductComponent
+            <ProductComponentCard
               key={product._id}
               productInfo={product}
               isFavorite={isProductFavorite(product._id)}
