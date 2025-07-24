@@ -1,46 +1,104 @@
-import React, { useEffect, useState } from 'react';
-import empty_photo from '/src/assets/empty-photo-profile.png';
-import './../../css/Profile.css';
+import React, { useEffect, useState } from "react";
+import empty_photo from "/src/assets/empty-photo-profile.png";
+import "./../../css/Profile.css";
 import {
   editProfileAction,
+  loadFavoritesProductsUserAction,
+  loadProductsUserAction,
   loadProfileAction,
-} from './ProfileComponentActions';
-import { useDispatch, useSelector } from 'react-redux';
+} from "./ProfileComponentActions";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  addToFavorite,
   deleteUserProfile,
   getUserProfile,
+  removeFromFavorite,
   updateUserProfile,
-} from '../../core/services/userFetch';
+} from "../../core/services/userFetch";
 import {
   delay,
   generateMapIframe,
   getFormattedDate,
   showToast,
   validateFields,
-} from '../../utils/utils';
-import edit from './../../assets/edit.png';
-import back from './../../assets/back.png';
-import save from './../../assets/save.png';
-import ModalComponent from '../ModalComponent/ModalComponent';
-import { changeMenuOptionActions } from '../MenuComponent/MenuComponentActions';
-import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
+} from "../../utils/utils";
+import edit from "./../../assets/edit.png";
+import back from "./../../assets/back.png";
+import save from "./../../assets/save.png";
+import ModalComponent from "../ModalComponent/ModalComponent";
+import { changeMenuOptionActions } from "../MenuComponent/MenuComponentActions";
+import { isAuthenticatedAction } from "../DashboardComponent/DashboardComponentActions";
 import {
   changeHomeViewAction,
   changeUserLoggedStateActions,
-} from '../HomePageComponent/HomePageComponentActions';
-import { useNavigate } from 'react-router-dom';
-import ImageUploader from '../ImageUploader/ImageUploaderComponent';
+} from "../HomePageComponent/HomePageComponentActions";
+import { useNavigate } from "react-router-dom";
+import ImageUploader from "../ImageUploader/ImageUploaderComponent";
+import { getAllProducts } from "../../core/services/productFetch";
+import ProductComponent from "../ProductComponent/ProductComponent";
 
 const ProfileComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [newUser, setNewUser] = useState({});
+  const [editMode, setEditMode] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [showUploader, setShowUploader] = useState(false);
 
-  const { dataProfile, editMode } = useSelector(
+  const { dataProfile } = useSelector((state) => state.profileComponentReducer);
+
+  const { dataProductsUser, dataFavoritesProductsUser } = useSelector(
     (state) => state.profileComponentReducer
   );
+
+  const isProductFavorite = (productId) => {
+    return dataProfile?.favorites?.includes(productId);
+  };
+
+  const handleToggleFavorite = async (productId) => {
+    try {
+      const alreadyFavorite = isProductFavorite(productId);
+
+      if (alreadyFavorite) {
+        await removeFromFavorite(productId);
+      } else {
+        await addToFavorite(productId);
+      }
+
+      const updatedProfile = await getUserProfile();
+      dispatch(loadProfileAction({ dataProfile: updatedProfile }));
+
+      await loadProductsUser();
+    } catch (error) {
+      console.error(error.message);
+      showToast("Error al cambiar el estado del favorito", "error");
+    }
+  };
+
+  const loadProductsUser = async () => {
+    try {
+      const productsAvailables = await getAllProducts();
+      const favoriteProductIds = dataProfile.favorites;
+      const allFavoritesProductsUser = productsAvailables.filter((product) =>
+        favoriteProductIds.includes(product._id)
+      );
+      const allUserProducts = productsAvailables.filter(
+        (product) => dataProfile._id === product.owner
+      );
+      dispatch(
+        loadProductsUserAction({
+          dataProductsUser: allUserProducts,
+        })
+      );
+      dispatch(
+        loadFavoritesProductsUserAction({
+          dataFavoritesProductsUser: allFavoritesProductsUser,
+        })
+      );
+    } catch (error) {
+      console.error("Error loading products user data:", error);
+    }
+  };
 
   const handleModalConfirm = () => {
     setModalOpen(false);
@@ -58,29 +116,29 @@ const ProfileComponent = () => {
     });
   };
 
-  const setEditMode = () => {
-    dispatch(
-      editProfileAction({
-        editMode: !editMode,
-      })
-    );
+  const enterEditMode = () => {
+    setEditMode(true);
+    setNewUser({ ...dataProfile });
+  };
+
+  const closeEditMode = () => {
+    setEditMode(false);
     setNewUser({ ...dataProfile });
   };
 
   const saveChanges = async () => {
     if (validateFields(newUser, false, true)) {
       const responseUpdate = await updateUserProfile(newUser);
-      if (responseUpdate.status === 'Success') {
+      if (responseUpdate.status === "Success") {
         showToast(responseUpdate.message);
         dispatch(
           loadProfileAction({
             dataProfile: { ...newUser },
           })
         );
-        await delay(2000);
-        setEditMode();
+        closeEditMode();
       } else {
-        showToast(responseUpdate.message, 'error');
+        showToast(responseUpdate.message, "error");
       }
     }
   };
@@ -93,17 +151,18 @@ const ProfileComponent = () => {
           dataProfile: dataProfileFetch,
         })
       );
+      return dataProfileFetch;
     } catch (error) {
-      console.error('Error loading profile data:', error);
+      console.error("Error loading profile data:", error);
     }
   };
 
   const deleteAccount = async () => {
     try {
       const responseDeleteUser = await deleteUserProfile();
-      if (responseDeleteUser.status === 'Success') {
+      if (responseDeleteUser.status === "Success") {
         localStorage.clear();
-        showToast('Usuario eliminado correctamente\nCerrando sesión...');
+        showToast("Usuario eliminado correctamente\nCerrando sesión...");
         await delay(2500);
         dispatch(
           changeMenuOptionActions({
@@ -126,39 +185,49 @@ const ProfileComponent = () => {
             viewTypeHome: undefined,
           })
         );
-        navigate('/');
+        navigate("/");
       } else {
-        showToast(responseDeleteUser.message, 'error');
+        showToast(responseDeleteUser.message, "error");
       }
     } catch (error) {
-      console.error('Error deleting account:', error);
+      console.error("Error deleting account:", error);
     }
   };
 
   const uploadImage = async (imageUrls) => {
     const imageUrl = imageUrls[0];
 
-    userHandler('profilePictureUrl', imageUrl);
+    userHandler("profilePictureUrl", imageUrl);
 
     dispatch(
       loadProfileAction({
-        dataProfile: { 
-          ...dataProfile, 
+        dataProfile: {
+          ...dataProfile,
           profilePictureUrl: imageUrl,
         },
       })
     );
-    setShowUploader(!showUploader)
+    setShowUploader(!showUploader);
+    saveChanges()
   };
 
   useEffect(() => {
-    loadProfile();
-    dispatch(
-      editProfileAction({
-        editMode: false,
-      })
-    );
-  }, []);
+    const loadInitialData = async () => {
+      try {
+        await loadProfile();
+        dispatch(
+          editProfileAction({
+            editMode: false,
+          })
+        );
+        await loadProductsUser();
+      } catch (error) {
+        showToast("Error al inicilizar el componente", "error");
+        console.log(error.message);
+      }
+    };
+    loadInitialData();
+  }, [dataProductsUser, dataFavoritesProductsUser]);
   return (
     <>
       {!dataProfile || !dataProfile.firstName ? (
@@ -222,13 +291,15 @@ const ProfileComponent = () => {
                   </label>
                   <input
                     type="text"
-                    className={editMode ? 'textInput' : 'hidden-textInput'}
+                    className={`${
+                      editMode ? "textInput" : "hidden-textInput"
+                    } name-user_`}
                     value={
                       editMode
-                        ? newUser?.firstName || ''
+                        ? newUser?.firstName || ""
                         : dataProfile.firstName
                     }
-                    onChange={(e) => userHandler('firstName', e.target.value)}
+                    onChange={(e) => userHandler("firstName", e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -237,11 +308,13 @@ const ProfileComponent = () => {
                   </label>
                   <input
                     type="text"
-                    className={editMode ? 'textInput' : 'hidden-textInput'}
+                    className={`${
+                      editMode ? "textInput" : "hidden-textInput"
+                    } lastname-user`}
                     value={
-                      editMode ? newUser?.lastName || '' : dataProfile.lastName
+                      editMode ? newUser?.lastName || "" : dataProfile.lastName
                     }
-                    onChange={(e) => userHandler('lastName', e.target.value)}
+                    onChange={(e) => userHandler("lastName", e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -250,32 +323,38 @@ const ProfileComponent = () => {
                   </span>
                   <input
                     type="date"
-                    className={editMode ? 'textInput' : 'hidden-textInput'}
+                    className={`${
+                      editMode ? "textInput" : "hidden-textInput"
+                    } lastname-user`}
                     value={
                       editMode
                         ? getFormattedDate(newUser?.birthDate, false, true) ||
-                          ''
+                          ""
                         : getFormattedDate(dataProfile.birthDate, false, true)
                     }
-                    onChange={(e) => userHandler('birthDate', e.target.value)}
+                    onChange={(e) => userHandler("birthDate", e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
                   <label className="user-phone-label">Teléfono:</label>
                   <input
                     type="text"
-                    className={editMode ? 'textInput' : 'hidden-textInput'}
-                    value={editMode ? newUser?.phone || '' : dataProfile.phone}
-                    onChange={(e) => userHandler('phone', e.target.value)}
+                    className={`${
+                      editMode ? "textInput" : "hidden-textInput"
+                    } lastname-user`}
+                    value={editMode ? newUser?.phone || "" : dataProfile.phone}
+                    onChange={(e) => userHandler("phone", e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
                   <label className="user-email-label">Dni:</label>
                   <input
                     type="text"
-                    className={editMode ? 'textInput' : 'hidden-textInput'}
-                    value={editMode ? newUser?.dni || '' : dataProfile.dni}
-                    onChange={(e) => userHandler('dni', e.target.value)}
+                    className={`${
+                      editMode ? "textInput" : "hidden-textInput"
+                    } lastname-user`}
+                    value={editMode ? newUser?.dni || "" : dataProfile.dni}
+                    onChange={(e) => userHandler("dni", e.target.value)}
                   />
                 </div>
                 <div className="data-user-container">
@@ -284,9 +363,11 @@ const ProfileComponent = () => {
                   </label>
                   <input
                     type="text"
-                    className={editMode ? 'textInput' : 'hidden-textInput'}
-                    value={editMode ? newUser?.email || '' : dataProfile.email}
-                    onChange={(e) => userHandler('email', e.target.value)}
+                    className={`${
+                      editMode ? "textInput" : "hidden-textInput"
+                    } email-user`}
+                    value={editMode ? newUser?.email || "" : dataProfile.email}
+                    onChange={(e) => userHandler("email", e.target.value)}
                   />
                 </div>
               </div>
@@ -295,7 +376,7 @@ const ProfileComponent = () => {
                   {!editMode ? (
                     <button
                       className="btn-change-password-user"
-                      onClick={setEditMode}
+                      onClick={enterEditMode}
                     >
                       <img
                         src={edit}
@@ -317,7 +398,7 @@ const ProfileComponent = () => {
                       </button>
                       <button
                         className="btn-back-to-info-user"
-                        onClick={setEditMode}
+                        onClick={() => setEditMode(false)}
                       >
                         <img
                           src={back}
@@ -342,15 +423,51 @@ const ProfileComponent = () => {
                 </div>
               </div>
             </div>
-            <div className="favourites-container">
-              <h2>No dispone de ningún producto marcado como favorito</h2>
+            <div className="products-user-container">
+              <div className="owner-products">
+                <h2>Productos publicados</h2>
+                <div className="owner-products-list">
+                  {dataProductsUser?.length > 0 ? (
+                    dataProductsUser.map((product) => (
+                      <ProductComponent
+                        key={product._id}
+                        productInfo={product}
+                        isOwner
+                      />
+                    ))
+                  ) : (
+                    <div className="products-list-empty">
+                      <h3>No hay productos disponibles</h3>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="favorite-products">
+                <h2>Productos favoritos</h2>
+                <div className="favorite-products-list">
+                  {dataFavoritesProductsUser?.length > 0 ? (
+                    dataFavoritesProductsUser.map((product) => (
+                      <ProductComponent
+                        key={product._id}
+                        productInfo={product}
+                        isFavorite={isProductFavorite(product._id)}
+                        onToggleFavorite={handleToggleFavorite}
+                      />
+                    ))
+                  ) : (
+                    <div className="products-list-empty">
+                      <h3>No ha marcado ningún producto como favorito</h3>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
           <ModalComponent
             isOpen={modalOpen}
             onConfirm={handleModalConfirm}
             onCancel={handleModalCancel}
-            message={'¿Está seguro de que desea eliminar la cuenta?'}
+            message={"¿Está seguro de que desea eliminar la cuenta?"}
           />
           <div className="toast-message" id="toastMessage"></div>
         </>

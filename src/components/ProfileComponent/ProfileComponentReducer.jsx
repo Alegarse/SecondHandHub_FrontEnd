@@ -1,15 +1,19 @@
 import {
   EDIT_PROFILE,
   IMG_PROFILE,
+  LOAD_FAVORITES_PRODUCTS_USER,
+  LOAD_PRODUCTS_USER,
   LOAD_PROFILE,
   SELECT_ID_PROFILE,
-} from './ProfileComponentActions';
+} from "./ProfileComponentActions";
 
 const initialState = {
   dataProfile: null,
   editMode: false,
   profileId: undefined,
-  profileImg: '',
+  profileImg: "",
+  dataProductsUser: null,
+  dataFavoritesProductsUser: null,
 };
 
 const profileComponentReducer = (state = initialState, action) => {
@@ -35,6 +39,16 @@ const profileComponentReducer = (state = initialState, action) => {
       return {
         ...state,
         profileImg: payload.profileImg,
+      };
+    case LOAD_PRODUCTS_USER:
+      return {
+        ...state,
+        dataProductsUser: payload.dataProductsUser,
+      };
+    case LOAD_FAVORITES_PRODUCTS_USER:
+      return {
+        ...state,
+        dataFavoritesProductsUser: payload.dataFavoritesProductsUser,
       };
     default:
       return state;

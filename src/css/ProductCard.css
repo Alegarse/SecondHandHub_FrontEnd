@@ -5,6 +5,7 @@
   transition: 0.2s ease;
   text-align: center;
   height: fit-content;
+  max-width: 170px;
 }
 
 .product-image {
@@ -46,7 +47,8 @@
   justify-content: space-between;
 }
 
-.favourite-select {
+.favourite-select,
+.owner-product-select {
   width: 20px;
 }
 
