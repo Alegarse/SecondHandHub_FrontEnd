@@ -49,8 +49,13 @@ const NewProductComponent = () => {
       owner: userId,
     };
 
-    if (!validateFields(productToUpload,false,false,true)) {
-        return;
+    if (productToUpload.images?.length === 0) {
+      showToast('Mínimo debe agregar al menos una imágen', 'error');
+      return;
+    }
+
+    if (!validateFields(productToUpload, false, false, true)) {
+      return;
     }
 
     const returnToDashboard = () => {
@@ -66,11 +71,6 @@ const NewProductComponent = () => {
       );
       navigate('/dashboard/products');
     };
-
-    if (productToUpload.images?.length === 0) {
-      showToast('Mínimo debe agregar al menos una imágen', 'error');
-      return;
-    }
 
     try {
       const response = await uploadNewProductFetch(productToUpload);

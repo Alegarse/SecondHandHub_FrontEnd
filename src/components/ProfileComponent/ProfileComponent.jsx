@@ -419,6 +419,9 @@ const ProfileComponent = () => {
                   )}
                 </div>
                 <div className="map-container">
+                  {editMode &&(
+                    <div className='forbidden-edit'>Ubicación no modificable!</div>
+                  )}
                   {dataProfile.location && (
                     <>
                       {dataProfile.location &&

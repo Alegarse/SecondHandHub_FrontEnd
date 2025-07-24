@@ -235,3 +235,10 @@
   gap: 15px;
   justify-items: center;
 }
+
+.forbidden-edit {
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+  font-size: small;
+}
