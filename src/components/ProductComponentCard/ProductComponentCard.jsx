@@ -4,6 +4,7 @@ import { getValidImg, showToast } from '../../utils/utils';
 import favtrue from '../../assets/favtrue.png';
 import favfalse from '../../assets/favfalse.png';
 import edit from '../../assets/edit.png';
+import trash from './../../assets/trash.png';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
@@ -23,6 +24,10 @@ const ProductComponentCard = ({
     event.stopPropagation();
     if (typeof onToggleFavorite === 'function')
       onToggleFavorite(productInfo._id);
+  };
+
+  const removeProduct = (productId) => {
+    showToast(`A ekiminar el producto ${productId}`);
   };
 
   const goToProduct = (productId, isEdit = false) => {
@@ -76,12 +81,20 @@ const ProductComponentCard = ({
             />
           )}
           {isOwner && (
-            <img
-              className="owner-product-select"
-              src={edit}
-              title="Editar producto"
-              onClick={() => goToProduct(productInfo._id, true)}
-            />
+            <div className="buttons-product-actions">
+              <img
+                className="owner-product-select"
+                src={trash}
+                title="Editar producto"
+                onClick={() => removeProduct(productInfo._id)}
+              />
+              <img
+                className="owner-product-select"
+                src={edit}
+                title="Editar producto"
+                onClick={() => goToProduct(productInfo._id, true)}
+              />
+            </div>
           )}
         </div>
         <p>{productInfo.title}</p>
