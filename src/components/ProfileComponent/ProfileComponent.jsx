@@ -26,7 +26,10 @@ import edit from "./../../assets/edit.png";
 import back from "./../../assets/back.png";
 import save from "./../../assets/save.png";
 import ModalComponent from "../ModalComponent/ModalComponent";
-import { changeMenuOptionActions } from "../MenuComponent/MenuComponentActions";
+import {
+  changeMenuOptionActions,
+  checkIntoDashboardAction,
+} from "../MenuComponent/MenuComponentActions";
 import { isAuthenticatedAction } from "../DashboardComponent/DashboardComponentActions";
 import {
   changeHomeViewAction,
@@ -208,8 +211,8 @@ const ProfileComponent = () => {
       })
     );
     setShowUploader(!showUploader);
-    closeEditMode()
-    showToast("Imagen de perfil actualizada correctamente")
+    closeEditMode();
+    showToast("Imagen de perfil actualizada correctamente");
   };
 
   useEffect(() => {
@@ -228,6 +231,11 @@ const ProfileComponent = () => {
       }
     };
     loadInitialData();
+    dispatch(
+      checkIntoDashboardAction({
+        intoDashboard: 3,
+      })
+    );
   }, [dataProductsUser, dataFavoritesProductsUser]);
   return (
     <>
