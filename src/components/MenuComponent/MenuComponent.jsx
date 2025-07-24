@@ -71,6 +71,11 @@ const MenuComponent = () => {
         })
       );
     } else {
+      dispatch(
+        createProductAction({
+          createModeProduct: false,
+        })
+      );
       switch (option) {
         case MENU_VIEW.UPLOAD:
           dispatch(
