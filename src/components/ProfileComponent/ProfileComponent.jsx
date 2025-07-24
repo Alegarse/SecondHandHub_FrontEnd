@@ -208,7 +208,8 @@ const ProfileComponent = () => {
       })
     );
     setShowUploader(!showUploader);
-    saveChanges()
+    closeEditMode()
+    showToast("Imagen de perfil actualizada correctamente")
   };
 
   useEffect(() => {
