@@ -51,9 +51,12 @@ const DashboardComponent = () => {
   const loadAvailableProducts = async () => {
     try {
       const productsAvailables = await getAllProducts();
+      const productsAvailablesNoOwner = productsAvailables.filter(
+        (product) => userData._id !== product.owner
+      );
       dispatch(
         loadProductsAction({
-          productsList: productsAvailables,
+          productsList: productsAvailablesNoOwner,
         })
       );
     } catch (error) {
