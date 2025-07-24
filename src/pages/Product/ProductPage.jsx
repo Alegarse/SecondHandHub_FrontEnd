@@ -3,7 +3,7 @@ import MenuComponent from '../../components/MenuComponent/MenuComponent';
 import FooterComponent from '../../components/FooterComponent/FooterComponent';
 import ProductComponent from '../../components/ProductComponent/ProductComponent';
 import { useDispatch } from 'react-redux';
-import { createProductAction } from '../../components/ProductComponent/ProductComponentActions';
+import { createProductAction, editProductAction, loadProductAction } from '../../components/ProductComponent/ProductComponentActions';
 import { useLocation } from 'react-router-dom';
 
 const ProductPage = () => {
@@ -18,6 +18,30 @@ const ProductPage = () => {
             createModeProduct: true,
           })
         );
+        break;
+        case '/dashboard/products/details':
+        dispatch(
+          loadProductAction({
+            createModeProduct: false,
+          })
+        );
+        dispatch(
+          editProductAction({
+            editModeProduct: false
+          })
+        )
+        break;
+        case '/dashboard/products/edit':
+        dispatch(
+          loadProductAction({
+            createModeProduct: false,
+          })
+        );
+        dispatch(
+          editProductAction({
+            editModeProduct: true
+          })
+        )
         break;
       default:
         dispatch(
