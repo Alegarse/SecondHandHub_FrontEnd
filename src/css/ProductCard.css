@@ -50,6 +50,12 @@
 .favourite-select,
 .owner-product-select {
   width: 20px;
+  height: 20px;
+}
+
+.buttons-product-actions {
+  display: flex;
+  gap: 5px;
 }
 
 @media (max-width: 768px) {

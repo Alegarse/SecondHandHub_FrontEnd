@@ -4,6 +4,13 @@ import { getValidImg, showToast } from '../../utils/utils';
 import favtrue from '../../assets/favtrue.png';
 import favfalse from '../../assets/favfalse.png';
 import edit from '../../assets/edit.png';
+import trash from './../../assets/trash.png';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {
+  editProductAction,
+  loadProductAction,
+} from '../ProductComponent/ProductComponentActions';
 
 const ProductComponentCard = ({
   productInfo,
@@ -11,14 +18,45 @@ const ProductComponentCard = ({
   onToggleFavorite = null,
   isOwner = null,
 }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const changeFavState = (event) => {
     event.stopPropagation();
     if (typeof onToggleFavorite === 'function')
       onToggleFavorite(productInfo._id);
   };
 
-  const goToEditProduct = (productId) => {
-    showToast(`A editar producto ${productId}`);
+  const removeProduct = (productId) => {
+    showToast(`A ekiminar el producto ${productId}`);
+  };
+
+  const goToProduct = (productId, isEdit = false) => {
+    showToast(`A ${isEdit ? 'editar' : 'visualizar'} producto ${productId}`);
+    if (isEdit) {
+      dispatch(
+        loadProductAction({
+          createModeProduct: false,
+        })
+      );
+      dispatch(
+        editProductAction({
+          editModeProduct: true,
+        })
+      );
+      navigate('/dashboard/products/edit');
+    } else {
+      dispatch(
+        loadProductAction({
+          createModeProduct: false,
+        })
+      );
+      dispatch(
+        editProductAction({
+          editModeProduct: false,
+        })
+      );
+      navigate('/dashboard/products/details');
+    }
   };
 
   return (
@@ -27,6 +65,7 @@ const ProductComponentCard = ({
         className="product-image"
         src={getValidImg(productInfo.images?.[0])}
         alt={productInfo.title || 'Image no available'}
+        onClick={() => goToProduct(productInfo._id)}
       />
       <div className="product-info">
         <div className="product-price-fav">
@@ -42,12 +81,20 @@ const ProductComponentCard = ({
             />
           )}
           {isOwner && (
-            <img
-              className="owner-product-select"
-              src={edit}
-              title="Editar producto"
-              onClick={() => goToEditProduct(productInfo._id)}
-            />
+            <div className="buttons-product-actions">
+              <img
+                className="owner-product-select"
+                src={trash}
+                title="Editar producto"
+                onClick={() => removeProduct(productInfo._id)}
+              />
+              <img
+                className="owner-product-select"
+                src={edit}
+                title="Editar producto"
+                onClick={() => goToProduct(productInfo._id, true)}
+              />
+            </div>
           )}
         </div>
         <p>{productInfo.title}</p>

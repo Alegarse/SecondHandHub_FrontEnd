@@ -44,6 +44,22 @@ function App() {
             }
           />
           <Route
+            path="/dashboard/products/details"
+            element={
+              <PrivateRouteComponent>
+                <ProductPage />
+              </PrivateRouteComponent>
+            }
+          />
+          <Route
+            path="/dashboard/products/edit"
+            element={
+              <PrivateRouteComponent>
+                <ProductPage />
+              </PrivateRouteComponent>
+            }
+          />
+          <Route
             path="/dashboard/profile"
             element={
               <PrivateRouteComponent>
