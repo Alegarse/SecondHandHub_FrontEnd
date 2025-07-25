@@ -57,6 +57,8 @@
   flex-wrap: wrap;
   gap: 15px;
   position: relative;
+  border-radius: 15px;
+  margin-bottom: 15px;
 }
 
 .load-more-wrapper {

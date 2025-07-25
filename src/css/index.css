@@ -45,6 +45,6 @@ button:focus-visible {
   background-size: cover;
   background-repeat: round;
   background-position: center;
-  opacity: 0.2;
+  filter: brightness(0.4);
   z-index: -1;
 }
