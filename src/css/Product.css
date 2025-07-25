@@ -48,6 +48,7 @@
   font-weight: 500;
   background-color: #f8ba48;
   border-radius: 15px;
+  border: 2px dotted #242424;
 
   & label {
     font-size: larger;
@@ -69,6 +70,7 @@
   background-color: #f8ba48;
   border-radius: 15px;
   padding: 15px;
+  border: 2px dotted #242424;
 }
 
 .input-load {

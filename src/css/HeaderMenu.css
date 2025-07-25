@@ -8,6 +8,8 @@
   justify-content: space-between;
   padding-inline-start: 10px;
   padding-inline-end: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   align-items: center;
   background-color: #242424;
   position: relative;
