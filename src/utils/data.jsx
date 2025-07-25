@@ -21,3 +21,14 @@ export const conditions = {
   'Acceptable': 'Aceptable',
   'Well used': 'Muy usado',
 };
+
+export const sort_options = {
+  'createdAt_desc': 'Fecha (recientes)',
+  'createdAt_asc': 'Fecha (antiguos)',
+  'title_asc': 'Título (A-Z)',
+  'title_desc': 'Título (Z-A)',
+  'category_asc': 'Categoría (A-Z)',
+  'category_desc': 'Categoría (Z-A)',
+  'price_asc': 'Precio(Ascendente)',
+  'price_desc': 'Precio (Descendente)', 
+}

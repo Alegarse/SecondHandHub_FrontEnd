@@ -2,6 +2,51 @@
   min-height: 100vh;
   margin: 0 auto;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-sort-search-list-products {
+  padding: 10px;
+  padding-inline: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+
+  & .search-bytitle-input {
+    background-color: #f8ac1a;
+    border-radius: 5px;
+    padding: 5px;
+  }
+}
+
+.search-bytitle-input {
+  color: #242424;
+  width:20vw;
+
+  &::placeholder {
+    color: #242424;
+  }
+}
+
+.select-sort-order {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  & label {
+    color: #f8ac1a;
+    font-weight: 600;
+  }
+
+  & select {
+    background-color: #f8ac1a;
+    color: #242424;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: 500;
+  }
 }
 
 .dashboard-list-products-container {
@@ -39,6 +84,10 @@
       background-color: #8d6314;
     }
   }
+}
+
+.products-list-empty {
+  color: #242424;
 }
 
 @media (max-width: 768px) {
