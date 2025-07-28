@@ -5,7 +5,9 @@
   flex-direction: column;
   gap: 15px;
 }
-.card-product-container {
+.card-product-container,
+.edit-product-container,
+.details-product-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

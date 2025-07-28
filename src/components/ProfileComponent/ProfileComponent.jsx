@@ -445,6 +445,7 @@ const ProfileComponent = () => {
                         key={product._id}
                         productInfo={product}
                         isOwner
+                        removeProduct={deleteProduct}
                       />
                     ))
                   ) : (

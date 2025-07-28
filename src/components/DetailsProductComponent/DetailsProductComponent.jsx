@@ -10,7 +10,7 @@ const DetailsProductComponent = () => {
   const { dataProfile } = useSelector((state) => state.profileComponentReducer);
   const userId = dataProfile._id;
   return (
-    <div>DetailsProductComponent</div>
+    <div className='details-product-container'>DetailsProductComponent</div>
   )
 }
 
