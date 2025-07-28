@@ -17,6 +17,7 @@ const ProductComponentCard = ({
   isFavorite = null,
   onToggleFavorite = null,
   isOwner = null,
+  removeProduct,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,10 +25,6 @@ const ProductComponentCard = ({
     event.stopPropagation();
     if (typeof onToggleFavorite === 'function')
       onToggleFavorite(productInfo._id);
-  };
-
-  const removeProduct = (productId) => {
-    showToast(`A ekiminar el producto ${productId}`);
   };
 
   const goToProduct = (productId, isEdit = false) => {
@@ -85,7 +82,7 @@ const ProductComponentCard = ({
               <img
                 className="owner-product-select"
                 src={trash}
-                title="Editar producto"
+                title="Eliminar producto"
                 onClick={() => removeProduct(productInfo._id)}
               />
               <img

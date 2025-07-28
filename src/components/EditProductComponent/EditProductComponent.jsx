@@ -10,7 +10,7 @@ const EditProductComponent = () => {
   const { dataProfile } = useSelector((state) => state.profileComponentReducer);
   const userId = dataProfile._id;
   return (
-    <div>EditProductComponent</div>
+    <div className='edit-product-container'>EditProductComponent</div>
   )
 }
 
