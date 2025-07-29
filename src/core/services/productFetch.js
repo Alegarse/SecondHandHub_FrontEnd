@@ -11,3 +11,8 @@ export async function uploadNewProductFetch(productData) {
   const response = await callApi('POST', apiConfig.URL_ADD_GET_PRODUCT, productData);
   return response;
 }
+
+export async function deleteProductFetch(productId) {
+  const response = await callApi('DELETE', `${apiConfig.URL_DELETE_PRODUCT}${productId}`);
+  return response;
+}
