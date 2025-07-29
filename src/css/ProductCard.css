@@ -15,11 +15,11 @@
   border-radius: 10px;
 }
 
-.product-info {
+.product-info-card {
   padding: 10px;
 }
 
-.product-info h3 {
+.product-info-card h3 {
   font-size: 1.2rem;
   text-align: start;
   color: #242424;
@@ -32,7 +32,7 @@
   margin-top: 8px;
 }
 
-.product-info p {
+.product-info-card p {
   font-size: 0.9rem;
   text-align: start;
   color: #242424;
@@ -63,7 +63,7 @@
     height: 140px;
   }
 
-  .product-info h3 {
+  .product-info-card h3 {
     font-size: 1rem;
   }
 

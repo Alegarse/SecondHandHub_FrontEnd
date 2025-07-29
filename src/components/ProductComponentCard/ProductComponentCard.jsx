@@ -11,6 +11,7 @@ import {
   editProductAction,
   loadProductAction,
 } from '../ProductComponent/ProductComponentActions';
+import { setStateEditProductLayoutAction } from '../ProductComponentLayout/ProductComponentLayoutActions';
 
 const ProductComponentCard = ({
   productInfo,
@@ -28,7 +29,6 @@ const ProductComponentCard = ({
   };
 
   const goToProduct = (productId, isEdit = false) => {
-    showToast(`A ${isEdit ? 'editar' : 'visualizar'} producto ${productId}`);
     if (isEdit) {
       dispatch(
         loadProductAction({
@@ -40,7 +40,12 @@ const ProductComponentCard = ({
           editModeProduct: true,
         })
       );
-      navigate('/dashboard/products/edit');
+      dispatch(
+        setStateEditProductLayoutAction({
+          stateEditLayout: true,
+        })
+      );
+      navigate(`/dashboard/products/edit/${productId}`);
     } else {
       dispatch(
         loadProductAction({
@@ -52,7 +57,12 @@ const ProductComponentCard = ({
           editModeProduct: false,
         })
       );
-      navigate('/dashboard/products/details');
+      dispatch(
+        setStateEditProductLayoutAction({
+          stateEditLayout: false,
+        })
+      );
+      navigate(`/dashboard/products/details/${productId}`);
     }
   };
 
@@ -64,7 +74,7 @@ const ProductComponentCard = ({
         alt={productInfo.title || 'Image no available'}
         onClick={() => goToProduct(productInfo._id)}
       />
-      <div className="product-info">
+      <div className="product-info-card">
         <div className="product-price-fav">
           <h3>{`${productInfo.price}€`}</h3>
           {onToggleFavorite && (

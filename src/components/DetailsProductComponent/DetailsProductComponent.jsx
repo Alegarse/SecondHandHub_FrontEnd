@@ -1,17 +1,46 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import ProductComponentLayout from '../ProductComponentLayout/ProductComponentLayout';
+import { useParams } from 'react-router-dom';
+import { getProductByIdFetch } from '../../core/services/productFetch';
+import { showToast } from '../../utils/utils';
+import { loadProductAction } from '../ProductComponent/ProductComponentActions';
 
 const DetailsProductComponent = () => {
+  const { productId } = useParams();
+  const dispatch = useDispatch();
 
-    const { dataProduct } = useSelector(
-    (state) => state.productComponentReducer
-  );
+  const { dataProduct } = useSelector((state) => state.productComponentReducer);
 
-  const { dataProfile } = useSelector((state) => state.profileComponentReducer);
-  const userId = dataProfile._id;
+  useEffect(() => {
+    const loadInitialData = async () => {
+      try {
+        const productInfo = await getProductByIdFetch(productId);
+        dispatch(
+          loadProductAction({
+            dataProduct: productInfo,
+          })
+        );
+      } catch (error) {
+        showToast('Error al cargar detalles del producto', 'error');
+        console.log(error.message);
+      }
+    };
+    loadInitialData();
+  }, [productId]);
+
   return (
-    <div className='details-product-container'>DetailsProductComponent</div>
-  )
-}
+    <>
+      <div className="details-product-container">
+        {!dataProduct ? (
+          <div>Cargando producto...</div>
+        ) : (
+          <ProductComponentLayout product={dataProduct} />
+        )}
+      </div>
+      <div className="toast-message" id="toastMessage"></div>
+    </>
+  );
+};
 
-export default DetailsProductComponent
+export default DetailsProductComponent;

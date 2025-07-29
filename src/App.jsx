@@ -44,7 +44,7 @@ function App() {
             }
           />
           <Route
-            path="/dashboard/products/details"
+            path="/dashboard/products/details/:productId"
             element={
               <PrivateRouteComponent>
                 <ProductPage />
@@ -52,7 +52,7 @@ function App() {
             }
           />
           <Route
-            path="/dashboard/products/edit"
+            path="/dashboard/products/edit/:productId"
             element={
               <PrivateRouteComponent>
                 <ProductPage />
