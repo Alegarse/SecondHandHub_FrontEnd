@@ -71,7 +71,7 @@ const ProfileComponent = () => {
       const updatedProfile = await getUserProfile();
       dispatch(loadProfileAction({ dataProfile: updatedProfile }));
 
-      await loadProductsUser();
+      await loadFavoritesUser(updatedProfile);
     } catch (error) {
       console.error(error.message);
       showToast('Error al cambiar el estado del favorito', 'error');
@@ -81,10 +81,6 @@ const ProfileComponent = () => {
   const loadProductsUser = async () => {
     try {
       const productsAvailables = await getAllProducts();
-      const favoriteProductIds = dataProfile.favorites;
-      const allFavoritesProductsUser = productsAvailables.filter((product) =>
-        favoriteProductIds.includes(product._id)
-      );
       const allUserProducts = productsAvailables.filter(
         (product) => dataProfile._id === product.owner
       );
@@ -93,15 +89,28 @@ const ProfileComponent = () => {
           dataProductsUser: allUserProducts,
         })
       );
+    } catch (error) {
+      console.error('Error loading products user data:', error);
+    }
+  };
+
+  const loadFavoritesUser = async (profileData = dataProfile) => {
+    try {
+      const productsAvailables = await getAllProducts();
+      const favoriteProductIds = profileData.favorites;
+      const allFavoritesProductsUser = productsAvailables.filter((product) =>
+        favoriteProductIds.includes(product._id)
+      );
       dispatch(
         loadFavoritesProductsUserAction({
           dataFavoritesProductsUser: allFavoritesProductsUser,
         })
       );
     } catch (error) {
-      console.error('Error loading products user data:', error);
+      console.error('Error loading favorites products user data:', error);
     }
-  };
+
+  }
 
   const handleModalConfirm = () => {
     setModalOpen(false);
@@ -215,6 +224,10 @@ const ProfileComponent = () => {
     showToast('Imagen de perfil actualizada correctamente');
   };
 
+  const deleteProduct = (productId) => {
+    console.log(productId )
+  }
+
   useEffect(() => {
     const loadInitialData = async () => {
       try {
@@ -225,6 +238,7 @@ const ProfileComponent = () => {
           })
         );
         await loadProductsUser();
+        await loadFavoritesUser();
       } catch (error) {
         showToast('Error al inicilizar el componente', 'error');
         console.log(error.message);
@@ -236,7 +250,7 @@ const ProfileComponent = () => {
         intoDashboard: 3,
       })
     );
-  }, [dataProductsUser, dataFavoritesProductsUser]);
+  }, []);
   return (
     <>
       {!dataProfile || !dataProfile.firstName ? (
@@ -294,6 +308,7 @@ const ProfileComponent = () => {
                 )}
               </div>
               <div className="info-container">
+                                <h2>Mi perfil</h2>
                 <div className="data-user-container">
                   <label className="user-name-label">
                     Nombre:<span className="red-span">*</span>
@@ -437,7 +452,7 @@ const ProfileComponent = () => {
             </div>
             <div className="products-user-container">
               <div className="owner-products">
-                <h2>Productos publicados</h2>
+                <h2>Mis productos</h2>
                 <div className="owner-products-list">
                   {dataProductsUser?.length > 0 ? (
                     dataProductsUser.map((product) => (
@@ -456,7 +471,7 @@ const ProfileComponent = () => {
                 </div>
               </div>
               <div className="favorite-products">
-                <h2>Productos favoritos</h2>
+                <h2>Mis favoritos</h2>
                 <div className="favorite-products-list">
                   {dataFavoritesProductsUser?.length > 0 ? (
                     dataFavoritesProductsUser.map((product) => (

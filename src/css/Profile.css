@@ -82,8 +82,10 @@
 .info-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   gap: 15px;
+  color: #242424;
+  font-style: italic;
 }
 
 .data-user-container {
