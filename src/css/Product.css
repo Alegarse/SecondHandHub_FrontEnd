@@ -230,10 +230,10 @@
   overflow-x: auto;
   gap: 10px;
   padding: 1rem;
-  background-color: transparent;
-  background-color: rgba(255, 255, 255, 0.63);
-  margin: 25px;
+  background-color: #f8ba48;
   border-radius: 15px;
+  border: 2px dotted #242424;
+  margin: 25px;
 
   & label {
     color: #242424;
@@ -251,8 +251,9 @@
   min-width: 60%;
   padding: 30px;
   gap: 20px;
-  background-color: rgba(255, 255, 255, 0.63);
+  background-color: #f8ba48;
   border-radius: 15px;
+  border: 2px dotted #242424;
 
   & .first-data-product-container,
   .second-data-product-container {
