@@ -16,6 +16,8 @@ import {
 import { showToast } from "../../utils/utils";
 import { loadProfileAction } from "../ProfileComponent/ProfileComponentActions";
 import { sort_options } from "../../utils/data";
+import { origins } from "../ProductComponentLayout/ProductComponentLayoutReducer";
+import { setOriginToBackProductLayoutAction } from "../ProductComponentLayout/ProductComponentLayoutActions";
 
 const PRODUCTS_LOAD = 20;
 
@@ -138,6 +140,11 @@ const DashboardComponent = () => {
       }
     };
     loadInitialData();
+    dispatch(
+      setOriginToBackProductLayoutAction({
+        originToBack: origins.DASHBOARD
+      })
+    )
   }, []);
 
   return (

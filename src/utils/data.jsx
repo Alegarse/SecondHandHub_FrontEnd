@@ -1,3 +1,7 @@
+export const configGeneral = {
+  MAX_IMAGES: 6,
+}
+
 export const categories = {
   'Vehicle': 'Vehiculo',
   'Vehicle accessories': 'Accesorios de vehículos',
@@ -31,4 +35,11 @@ export const sort_options = {
   'category_desc': 'Categoría (Z-A)',
   'price_asc': 'Precio(Ascendente)',
   'price_desc': 'Precio (Descendente)', 
+}
+
+export const situations = {
+  'active': 'Activo', 
+  'inactive': 'Deshabilitado', 
+  'reserved': 'Reservado', 
+  'sold': 'Vendido'
 }

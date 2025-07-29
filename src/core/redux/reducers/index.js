@@ -4,6 +4,7 @@ import dashboardComponentReducer from "../../../components/DashboardComponent/Da
 import menuComponentReducer from "../../../components/MenuComponent/MenuComponentReducer";
 import profileComponentReducer from "../../../components/ProfileComponent/ProfileComponentReducer";
 import productComponentReducer from "../../../components/ProductComponent/ProductComponentReducer";
+import productComponentLayoutReducer from "../../../components/ProductComponentLayout/ProductComponentLayoutReducer";
 
 
 const reducer = combineReducers({
@@ -12,6 +13,7 @@ const reducer = combineReducers({
     menuComponentReducer,
     profileComponentReducer,
     productComponentReducer,
+    productComponentLayoutReducer,
 })
 
 export default reducer
