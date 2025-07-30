@@ -98,6 +98,10 @@ const ProductComponentLayout = ({ product }) => {
     }
   };
 
+  const sendMessage = () => {
+    const sender = userId;
+  }
+
   useEffect(() => {
     const reloadData = async () => {
       const productDataReload = await getProductByIdFetch(product._id);
@@ -146,6 +150,10 @@ const ProductComponentLayout = ({ product }) => {
 
               <div className="product-description">
                 <p>{product.description}</p>
+              </div>
+
+              <div className='contact-button'>
+                <button onClick={sendMessage}>Contactar con el vendedor</button>
               </div>
 
               <div className="product-date">

@@ -6,15 +6,15 @@ import EditProductComponent from '../EditProductComponent/EditProductComponent';
 import DetailsProductComponent from '../DetailsProductComponent/DetailsProductComponent';
 
 const ProductComponent = () => {
-  const { createModeProduct, editModeProduct } = useSelector(
+  const { createModeProduct, editModeProduct, onProductInfo } = useSelector(
     (state) => state.productComponentReducer
   );
 
   return (
     <div className="product-principal-container">
       {createModeProduct && <NewProductComponent />}
-      {editModeProduct && <EditProductComponent />}
-      {!createModeProduct && !editModeProduct && <DetailsProductComponent />}
+      {editModeProduct && onProductInfo && <EditProductComponent />}
+      {!createModeProduct && !editModeProduct && onProductInfo && <DetailsProductComponent />}
     </div>
   );
 };

@@ -15,7 +15,10 @@ import {
 import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
 import { delay, showToast } from '../../utils/utils';
 import { checkIntoDashboardAction } from './MenuComponentActions';
-import { createProductAction } from '../ProductComponent/ProductComponentActions';
+import {
+  createProductAction,
+  infoProductAction,
+} from '../ProductComponent/ProductComponentActions';
 
 const MenuComponent = () => {
   const dispatch = useDispatch();
@@ -72,8 +75,8 @@ const MenuComponent = () => {
       );
     } else {
       dispatch(
-        createProductAction({
-          createModeProduct: false,
+        infoProductAction({
+          onProductInfo: false,
         })
       );
       switch (option) {
@@ -95,6 +98,11 @@ const MenuComponent = () => {
           navigate('/dashboard/products');
           break;
       }
+      dispatch(
+        createProductAction({
+          createModeProduct: false,
+        })
+      );
       dispatch(
         checkIntoDashboardAction({
           intoDashboard: option,

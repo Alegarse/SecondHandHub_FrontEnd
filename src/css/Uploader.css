@@ -1,32 +1,35 @@
 .image-uploader-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
 .uploaded-image {
   position: relative;
+  flex: 0 1 calc(25% - 12px);
+  max-width: 120px;
 }
 
 .uploaded-image img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 8px;
   border: 2px solid #ccc;
+  display: block;
 }
 
 .remove-btn {
   position: absolute;
-  top: -10px;
-  right: 25px;
+  top: -8px;
+  right: -8px;
   background: red;
   color: white;
   text-align: center;
   border: none;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   font-weight: bold;
   cursor: pointer;
 
@@ -39,8 +42,9 @@
 }
 
 .upload-slot {
-  width: 100px;
-  height: 100px;
+  flex: 0 1 calc(25% - 12px);
+  max-width: 120px;
+  aspect-ratio: 1 / 1 ;
   background-color: #6a6161;
   border-radius: 8px;
   display: flex;
@@ -57,4 +61,24 @@
 
 .hidden-input {
   display: none;
+}
+
+@media (max-width: 768px) {
+  .uploaded-image,
+  .upload-slot {
+    flex: 0 1 calc(33.333% - 12px);
+  }
+}
+
+
+@media (max-width: 480px) {
+  .uploaded-image,
+  .upload-slot {
+    flex: 0 1 calc(50% - 12px);
+    max-width: 90px;
+  }
+
+  .uploaded-image img {
+    max-width: 90px;
+  }
 }

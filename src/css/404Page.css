@@ -1,33 +1,53 @@
 .body-404-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  padding: 15px;
 }
+
 .page-404-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-inline-start: 100px;
-  margin-inline-end: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
   align-items: center;
-  padding: 10px;
   border: 1px solid grey;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.658);
-  max-width: 1280px;
   color: #242424;
 }
 
+.page-404-container img {
+  width: 80%;
+  max-width: 350px;
+}
+
 .info-404-container {
-  max-width: 80%;
+  max-width: 100%;
+  padding: 0 10px;
 }
 
 .title-error-404 {
-    color: brown;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+  color: brown;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin-bottom: 1rem;
 }
 
 .btn-to-home {
-    background-color: red;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-to-home:hover {
+  background-color: darkred;
 }
