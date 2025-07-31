@@ -254,6 +254,7 @@ const ProfileComponent = () => {
         showToast('Producto eliminado correctamente.');
         setProductToDelete(null);
         await loadProductsUser();
+        setModalUseType(MODAL_TYPES.USER)
       } else {
         showToast(responseDeleteProduct.message, 'error');
       }
