@@ -275,7 +275,7 @@ const ProfileComponent = () => {
         await loadFavoritesUser();
       } catch (error) {
         showToast('Error al inicilizar el componente', 'error');
-        console.log(error.message);
+        console.error(error.message);
       }
     };
     loadInitialData();

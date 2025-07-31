@@ -38,7 +38,7 @@ async function makeAuthorizedRequest(method, url, data = null, upload) {
   });
 
   if (!response.ok) {
-    console.log('Error en la petición');
+    console.error('Error en la petición');
     const error = new Error('Error en la petición');
     error.status = response.status;
     throw error;

@@ -64,7 +64,6 @@ const NewProductComponent = () => {
           createModeProduct: false,
         })
       );
-      localStorage.setItem('createMode', false)
       dispatch(
         checkIntoDashboardAction({
           intoDashboard: 0,

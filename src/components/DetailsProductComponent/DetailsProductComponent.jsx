@@ -23,7 +23,7 @@ const DetailsProductComponent = () => {
         );
       } catch (error) {
         showToast('Error al cargar detalles del producto', 'error');
-        console.log(error.message);
+        console.error(error.message);
       }
     };
     loadInitialData();

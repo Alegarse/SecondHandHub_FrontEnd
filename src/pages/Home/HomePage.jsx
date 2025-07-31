@@ -4,7 +4,6 @@ import LoginComponent from '../../components/LoginComponent/LoginComponent';
 import RegisterComponent from '../../components/RegisterComponent/RegisterComponent';
 import { changeHomeViewAction } from '../../components/HomePageComponent/HomePageComponentActions';
 import logo from '../../assets/logo.png';
-import SessionInitiate from '../../components/SessionInitiate/SessionInitiate';
 
 const HomePage = () => {
   const dispatch = useDispatch();

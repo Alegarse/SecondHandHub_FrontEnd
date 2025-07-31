@@ -79,7 +79,6 @@ const MenuComponent = () => {
           onProductInfo: false,
         })
       );
-      localStorage.setItem('onProductInfo', false)
       switch (option) {
         case MENU_VIEW.UPLOAD:
           dispatch(
@@ -87,7 +86,6 @@ const MenuComponent = () => {
               createModeProduct: true,
             })
           );
-          localStorage.setItem('createMode', true)
           navigate('/dashboard/products/new');
           break;
         case MENU_VIEW.MESSAGES:
@@ -140,7 +138,7 @@ const MenuComponent = () => {
             />
           </button>
         </div>
-        <div>
+        <div className='chat-functionallity'>
           <button
             className="btn-chat"
             title={

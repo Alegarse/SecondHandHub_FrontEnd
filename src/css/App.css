@@ -31,3 +31,7 @@ button {
   outline: none;
   box-shadow: none;
 }
+
+.chat-functionallity { 
+  display: none;
+}

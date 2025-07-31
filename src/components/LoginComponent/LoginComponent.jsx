@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { changeHomeViewAction } from '../HomePageComponent/HomePageComponentActions';
 import { doLoginFetch } from '../../core/services/api';
 import {
-  dataUserLoggedAction,
   isAuthenticatedAction,
 } from '../DashboardComponent/DashboardComponentActions';
 import './../../css/Login.css';

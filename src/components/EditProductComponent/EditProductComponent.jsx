@@ -23,19 +23,9 @@ const EditProductComponent = () => {
         );
       } catch (error) {
         showToast("Error al cargar detalles del producto", "error");
-        console.log(error.message);
+        console.error(error.message);
       }
     };
-    dispatch(
-            editProductAction({
-              editModeProduct: localStorage.getItem("editMode"),
-            })
-          );
-          dispatch(
-                  infoProductAction({
-                    onProductInfo: localStorage.getItem("onProductInfo")
-                  })
-                )
     loadInitialData();
   }, [productId]);
   return (

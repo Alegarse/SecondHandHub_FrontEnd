@@ -9,24 +9,6 @@ import { useLocation } from 'react-router-dom';
 const ProductPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  
-    useEffect(() => {
-      dispatch(
-        editProductAction({
-          editModeProduct: localStorage.getItem("editMode"),
-        })
-      );
-      dispatch(
-        createProductAction({
-          createModeProduct: localStorage.getItem("createMode"),
-        })
-      );
-      dispatch(
-        infoProductAction({
-          onProductInfo: localStorage.getItem("onProductInfo")
-        })
-      )
-    }, []);
 
   useEffect(() => {
     switch (location.pathname) {
@@ -36,7 +18,6 @@ const ProductPage = () => {
             createModeProduct: true,
           })
         );
-        localStorage.setItem('createMode', true)
         break;
         case '/dashboard/products/details':
         dispatch(
@@ -44,13 +25,11 @@ const ProductPage = () => {
             createModeProduct: false,
           })
         );
-        localStorage.setItem('createMode', false)
         dispatch(
           editProductAction({
             editModeProduct: false
           })
         )
-        localStorage.setItem('editMode', false)
         break;
         case '/dashboard/products/edit':
         dispatch(
@@ -58,13 +37,11 @@ const ProductPage = () => {
             createModeProduct: false,
           })
         );
-        localStorage.setItem('createMode', false)
         dispatch(
           editProductAction({
             editModeProduct: true
           })
         )
-        localStorage.setItem('editMode', true)
         break;
       default:
         dispatch(
@@ -72,7 +49,6 @@ const ProductPage = () => {
             createModeProduct: false,
           })
         );
-        localStorage.setItem('createMode', false)
         break;
     }
   }, [location.pathname, dispatch]);

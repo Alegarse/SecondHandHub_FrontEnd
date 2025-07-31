@@ -1,6 +1,6 @@
 import React from 'react';
 import './../../css/ProductCard.css';
-import { getValidImg, showToast } from '../../utils/utils';
+import { getValidImg} from '../../utils/utils';
 import favtrue from '../../assets/favtrue.png';
 import favfalse from '../../assets/favfalse.png';
 import edit from '../../assets/edit.png';
@@ -29,7 +29,6 @@ const ProductComponentCard = ({
     if (typeof onToggleFavorite === 'function')
       onToggleFavorite(productInfo._id);
   };
-  console.log(productInfo)
 
   const goToProduct = (productId, isEdit = false) => {
     if (isEdit) {
@@ -38,19 +37,16 @@ const ProductComponentCard = ({
           onProductInfo: true,
         })
       );
-      localStorage.setItem('onProductInfo', true)
       dispatch(
         loadProductAction({
           createModeProduct: false,
         })
       );
-      localStorage.setItem('createMode', false)
       dispatch(
         editProductAction({
           editModeProduct: true,
         })
       );
-      localStorage.setItem('editMode', true)
       dispatch(
         setStateEditProductLayoutAction({
           stateEditLayout: true,
@@ -63,19 +59,16 @@ const ProductComponentCard = ({
           onProductInfo: true,
         })
       );
-      localStorage.setItem('onProductInfo', true)
       dispatch(
         loadProductAction({
           createModeProduct: false,
         })
       );
-      localStorage.setItem('createMode', false)
       dispatch(
         editProductAction({
           editModeProduct: false,
         })
       );
-      localStorage.setItem('editMode', false)
       dispatch(
         setStateEditProductLayoutAction({
           stateEditLayout: false,
