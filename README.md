@@ -49,6 +49,12 @@ Este poryecto es una **plataforma web de productos de segunda mano**, desarrolla
 
 ---
 
+## 📝 Flowchart
+<p align="center">
+  <img src="imgs/Flow_chart_PF_Bootcamp.png" alt="Visualización en navegador del proyecto" width="775">
+</p>
+
+
 ## 📁 Estructura del proyecto
 
 ### 🚀 FrontEnd(`/frontend`)
