@@ -3,10 +3,11 @@
   justify-content: center;
   align-items: center;
 }
+
 .register-container {
   background-color: rgba(255, 255, 255, 0.486);
   padding-inline: 2rem;
-  border-radius: 15px;
+  border-radius: 0.9375rem;
   width: 21.875rem;
   display: flex;
   flex-direction: column;
@@ -31,7 +32,7 @@
 
   & .buttons-register-container {
     display: flex;
-    gap: 25px;
+    gap: 1.5625rem;
     justify-content: center;
     margin-bottom: 0.5rem;
 

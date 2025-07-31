@@ -496,13 +496,15 @@ const ProfileComponent = () => {
                 <h2>Mis productos</h2>
                 <div className="owner-products-list">
                   {dataProductsUser?.length > 0 ? (
-                    dataProductsUser.map((product) => (
-                      <ProductComponentCard
-                        key={product._id}
-                        productInfo={product}
-                        isOwner
-                        removeProduct={preDeleteProduct}
-                      />
+                    dataProductsUser.map((product,idx) => (
+                      <div key={idx} className='product-card-profile'>
+                        <ProductComponentCard
+                          key={product._id}
+                          productInfo={product}
+                          isOwner
+                          removeProduct={preDeleteProduct}
+                        />
+                      </div>
                     ))
                   ) : (
                     <div className="products-list-empty">
@@ -515,13 +517,15 @@ const ProfileComponent = () => {
                 <h2>Mis favoritos</h2>
                 <div className="favorite-products-list">
                   {dataFavoritesProductsUser?.length > 0 ? (
-                    dataFavoritesProductsUser.map((product) => (
+                    dataFavoritesProductsUser.map((product,idx) => (
+                      <div key={idx} className='product-card-profile'>
                       <ProductComponentCard
                         key={product._id}
                         productInfo={product}
                         isFavorite={() => isProductFavorite(product._id)}
                         onToggleFavorite={handleToggleFavorite}
                       />
+                      </div>
                     ))
                   ) : (
                     <div className="products-list-empty">

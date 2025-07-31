@@ -1,43 +1,40 @@
 .body-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  padding: 0.9375rem;
 }
 .home-container {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  margin-inline-start: 100px;
-  margin-inline-end: 100px;
-  align-items: center;
-  padding: 10px;
-  border: 1px solid grey;
-  border-radius: 15px;
+  margin: 0 auto;
+  padding: 0.625rem;
+  width: 100%;
+  border: 0.0625rem solid grey;
+  border-radius: 0.9375rem;
   background-color: rgba(255, 255, 255, 0.658);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
-  max-width: 1280px;
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.8);
+  max-width: 80rem;
+  gap: 1.25rem;
   color: #242424;
 
-  .info-home-container {
+  & .info-home-container {
     max-width: 80%;
   }
-}
-
-.info-home-container {
-  padding-inline-start: 100px;
 }
 
 .info-logreg-background {
   background-image: url('/src/assets/back_logreg.webp');
   background-position: center;
   background-size: cover;
-  height: 100%;
-  width: 100%;
-  border-radius: 15px;
+  width: 80%;
+  height: 80%;
+  border-radius: 0.9375rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0.9375rem;
 }
 
 .info-links-log-reg-container {
@@ -45,31 +42,37 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 1.25rem;
+  width: 100%;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 0.9375rem;
   color: white;
   z-index: 0;
 
   & .info-links-buttons-container {
+    width: 100%;
+    max-width: 25rem;
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    font-size: x-large;
+    align-content: center;
+    justify-content: center;
 
     & .btn-to-login {
+      padding: 0.75rem;
+      font-size: 1rem;
       background-color: green;
       &:hover {
-            background-color: rgb(128, 190, 34);
-        }
+        background-color: rgb(128, 190, 34);
+      }
     }
 
     & .btn-to-register {
       background-color: orange;
       &:hover {
-            background-color: rgb(245, 184, 72);
-        }
+        background-color: rgb(245, 184, 72);
+      }
     }
   }
 }
@@ -81,19 +84,66 @@
 }
 
 .logo-home {
-  border-radius: 15px;
+  border-radius: 0.9375rem;
 }
 
 /* Responsive styles */
-@media (max-width: 1080px) {
+@media (max-width: 29.9375rem) {
   .home-container {
-    display: flex;
+    display:flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    padding: 0.625rem;
   }
 
   .info-home-container {
-    padding-inline: 20px;
+    padding: 0;
+  }
+
+  .info-logreg-background {
+    width: 100%;
+  }
+
+  .logo-home {
+    max-width: 9.375rem;
+  }
+
+  .toast-message {
+  font-size: 0.75rem;
+}
+}
+
+@media (min-width: 30rem) and (max-width: 768px) {
+  .home-container {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.625rem;
+  }
+
+  .info-home-container {
+    padding: 0;
+  }
+
+  .logo-home {
+    max-width: 9.375rem;
+  }
+
+  .toast-message {
+  font-size: 0.75rem;
+}
+}
+
+@media (min-width: 48.0625rem) and (max-width: 67.5rem) {
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .info-home-container {
+    padding-inline: 1.25rem;
     max-width: 100%;
   }
 
@@ -105,29 +155,34 @@
     font-size: 1rem;
   }
 
-  .info-links-buttons-container {
-    width: 50vw;
-    height: 30vh;
-    padding: 10% 30%;
+  .info-logreg-background {
+    width: 70%;
+    align-items: center;  
   }
 
   .btn-to-login,
   .btn-to-register {
-    width: 100%;
-    padding: 15px;
+    width: 50%;
     font-size: 1rem;
   }
 
   .logo-home {
-    max-width: 200px;
+    max-width: 12.5rem;
   }
 
   .info-links-buttons-container p {
-    margin: 10px 0;
+    margin: 0.625rem 0;
   }
 
   img {
     max-width: 100%;
     height: auto;
   }
+}
+
+@media (min-width: 67.5625rem) {
+  .info-logreg-background {
+    height: 100%;
+  }
+
 }

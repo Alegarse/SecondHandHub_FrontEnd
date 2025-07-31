@@ -1,7 +1,8 @@
-import { CREATE_PRODUCT, EDIT_PRODUCT, LOAD_PRODUCT } from "./ProductComponentActions";
+import { CREATE_PRODUCT, EDIT_PRODUCT, INFO_PRODUCT, LOAD_PRODUCT } from "./ProductComponentActions";
 
 const initialState = {
   dataProduct: null,
+  onProductInfo: false,
   editModeProduct: false,
   createModeProduct: false,
 };
@@ -24,6 +25,11 @@ const productComponentReducer = (state = initialState, action) => {
       return {
         ...state,
         createModeProduct: payload.createModeProduct,
+      };
+      case INFO_PRODUCT:
+      return {
+        ...state,
+        onProductInfo: payload.onProductInfo,
       };
     default:
       return state;

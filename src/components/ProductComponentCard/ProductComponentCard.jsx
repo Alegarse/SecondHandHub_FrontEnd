@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
   editProductAction,
+  infoProductAction,
   loadProductAction,
 } from '../ProductComponent/ProductComponentActions';
 import { setStateEditProductLayoutAction } from '../ProductComponentLayout/ProductComponentLayoutActions';
@@ -31,6 +32,11 @@ const ProductComponentCard = ({
   const goToProduct = (productId, isEdit = false) => {
     if (isEdit) {
       dispatch(
+        infoProductAction({
+          onProductInfo: true,
+        })
+      );
+      dispatch(
         loadProductAction({
           createModeProduct: false,
         })
@@ -47,6 +53,11 @@ const ProductComponentCard = ({
       );
       navigate(`/dashboard/products/edit/${productId}`);
     } else {
+      dispatch(
+        infoProductAction({
+          onProductInfo: true,
+        })
+      );
       dispatch(
         loadProductAction({
           createModeProduct: false,

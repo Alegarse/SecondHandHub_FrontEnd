@@ -98,6 +98,10 @@ const ProductComponentLayout = ({ product }) => {
     }
   };
 
+  const sendMessage = () => {
+    const sender = userId;
+  }
+
   useEffect(() => {
     const reloadData = async () => {
       const productDataReload = await getProductByIdFetch(product._id);
@@ -148,6 +152,10 @@ const ProductComponentLayout = ({ product }) => {
                 <p>{product.description}</p>
               </div>
 
+              <div className='contact-button'>
+                <button onClick={sendMessage}>Contactar con el vendedor</button>
+              </div>
+
               <div className="product-date">
                 Última activación: {getFormattedDate(product.lastActivatedAt)}
               </div>
@@ -155,7 +163,8 @@ const ProductComponentLayout = ({ product }) => {
           </>
         ) : (
           <>
-            <div className="product-gallery-edit">
+          <div className='layout-product-container-int'>
+<div className="product-gallery-edit">
               <label>Imágenes (máx. {configGeneral.MAX_IMAGES} PNG)</label>
               <ImageUploader
                 maxImages={configGeneral.MAX_IMAGES}
@@ -285,6 +294,7 @@ const ProductComponentLayout = ({ product }) => {
                 </div>
               </div>
             </div>
+          </div>
             <div className="buttons-ep-container">
               <button className="btn-np-upload" onClick={updateProduct}>
                 Actualizar producto
