@@ -496,8 +496,8 @@ const ProfileComponent = () => {
                 <h2>Mis productos</h2>
                 <div className="owner-products-list">
                   {dataProductsUser?.length > 0 ? (
-                    dataProductsUser.map((product) => (
-                      <div className='product-card-profile'>
+                    dataProductsUser.map((product,idx) => (
+                      <div key={idx} className='product-card-profile'>
                         <ProductComponentCard
                           key={product._id}
                           productInfo={product}
@@ -517,8 +517,8 @@ const ProfileComponent = () => {
                 <h2>Mis favoritos</h2>
                 <div className="favorite-products-list">
                   {dataFavoritesProductsUser?.length > 0 ? (
-                    dataFavoritesProductsUser.map((product) => (
-                      <div className='product-card-profile'>
+                    dataFavoritesProductsUser.map((product,idx) => (
+                      <div key={idx} className='product-card-profile'>
                       <ProductComponentCard
                         key={product._id}
                         productInfo={product}

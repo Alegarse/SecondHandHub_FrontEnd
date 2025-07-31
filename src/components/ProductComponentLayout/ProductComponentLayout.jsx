@@ -163,7 +163,8 @@ const ProductComponentLayout = ({ product }) => {
           </>
         ) : (
           <>
-            <div className="product-gallery-edit">
+          <div className='layout-product-container-int'>
+<div className="product-gallery-edit">
               <label>Imágenes (máx. {configGeneral.MAX_IMAGES} PNG)</label>
               <ImageUploader
                 maxImages={configGeneral.MAX_IMAGES}
@@ -293,6 +294,7 @@ const ProductComponentLayout = ({ product }) => {
                 </div>
               </div>
             </div>
+          </div>
             <div className="buttons-ep-container">
               <button className="btn-np-upload" onClick={updateProduct}>
                 Actualizar producto
