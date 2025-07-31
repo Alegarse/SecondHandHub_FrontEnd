@@ -18,6 +18,7 @@ const ProductPage = () => {
             createModeProduct: true,
           })
         );
+        localStorage.setItem('createMode', true)
         break;
         case '/dashboard/products/details':
         dispatch(
@@ -25,11 +26,13 @@ const ProductPage = () => {
             createModeProduct: false,
           })
         );
+        localStorage.setItem('createMode', false)
         dispatch(
           editProductAction({
             editModeProduct: false
           })
         )
+        localStorage.setItem('editMode', false)
         break;
         case '/dashboard/products/edit':
         dispatch(
@@ -37,11 +40,13 @@ const ProductPage = () => {
             createModeProduct: false,
           })
         );
+        localStorage.setItem('createMode', false)
         dispatch(
           editProductAction({
             editModeProduct: true
           })
         )
+        localStorage.setItem('editMode', true)
         break;
       default:
         dispatch(
@@ -49,6 +54,7 @@ const ProductPage = () => {
             createModeProduct: false,
           })
         );
+        localStorage.setItem('createMode', false)
         break;
     }
   }, [location.pathname, dispatch]);

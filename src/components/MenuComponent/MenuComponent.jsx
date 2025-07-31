@@ -79,6 +79,7 @@ const MenuComponent = () => {
           onProductInfo: false,
         })
       );
+      localStorage.setItem('onProductInfo', false)
       switch (option) {
         case MENU_VIEW.UPLOAD:
           dispatch(
@@ -86,6 +87,7 @@ const MenuComponent = () => {
               createModeProduct: true,
             })
           );
+          localStorage.setItem('createMode', true)
           navigate('/dashboard/products/new');
           break;
         case MENU_VIEW.MESSAGES:
@@ -98,11 +100,6 @@ const MenuComponent = () => {
           navigate('/dashboard/products');
           break;
       }
-      dispatch(
-        createProductAction({
-          createModeProduct: false,
-        })
-      );
       dispatch(
         checkIntoDashboardAction({
           intoDashboard: option,

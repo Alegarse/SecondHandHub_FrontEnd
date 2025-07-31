@@ -31,7 +31,7 @@ const EditProductComponent = () => {
   return (
     <>
       <div className="details-product-container">
-        {!dataProduct ? (
+        {!dataProduct && dataProduct?._id !== productId ? (
           <div>Cargando producto...</div>
         ) : (
           <ProductComponentLayout product={dataProduct} />

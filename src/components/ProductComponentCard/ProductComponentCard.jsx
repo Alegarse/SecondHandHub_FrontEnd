@@ -36,16 +36,19 @@ const ProductComponentCard = ({
           onProductInfo: true,
         })
       );
+      localStorage.setItem('onProductInfo', true)
       dispatch(
         loadProductAction({
           createModeProduct: false,
         })
       );
+      localStorage.setItem('createMode', false)
       dispatch(
         editProductAction({
           editModeProduct: true,
         })
       );
+      localStorage.setItem('editMode', true)
       dispatch(
         setStateEditProductLayoutAction({
           stateEditLayout: true,
@@ -58,16 +61,19 @@ const ProductComponentCard = ({
           onProductInfo: true,
         })
       );
+      localStorage.setItem('onProductInfo', true)
       dispatch(
         loadProductAction({
           createModeProduct: false,
         })
       );
+      localStorage.setItem('createMode', false)
       dispatch(
         editProductAction({
           editModeProduct: false,
         })
       );
+      localStorage.setItem('editMode', false)
       dispatch(
         setStateEditProductLayoutAction({
           stateEditLayout: false,
