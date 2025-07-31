@@ -1,6 +1,6 @@
 # 🛍️ MarketPlace SecondHand Hub
 
-Este poryecto es una **plataforma web de productos de segunda mano**, desarrollada con técnologías modernas tanto en el frontend como en el backend. Permite a los usuarios registrase, publicar productos, gestionar favoritos, editar el perfil y más.
+Este proyecto es una **plataforma web de productos de segunda mano**, desarrollada con técnologías modernas tanto en el frontend como en el backend. Permite a los usuarios registrase, publicar productos, gestionar favoritos, editar el perfil y más.
 
 ---
 
