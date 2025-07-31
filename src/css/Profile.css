@@ -248,6 +248,10 @@
   scrollbar-color: #c1c1c1 transparent;
 }
 
+.centered {
+  justify-content: center;
+}
+
 .product-card-profile {
   flex: 0 0 auto;
   width: 11.25rem;
@@ -266,6 +270,10 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+  }
+
+  .products-list-empty h3 {
+    font-size: small;
   }
 
   .info-container {
@@ -302,7 +310,12 @@
   .profile-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
+  }
+
+    .products-list-empty h3 {
+    font-size: small;
   }
 
   .owner-products-list,

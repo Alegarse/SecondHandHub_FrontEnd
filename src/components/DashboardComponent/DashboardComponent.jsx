@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   loadProductsAction,
   searchByTitleAction,
   setSortOrderOptionAction,
-} from "./DashboardComponentActions";
-import { getAllProducts } from "../../core/services/productFetch";
-import ProductComponentCard from "../ProductComponentCard/ProductComponentCard";
-import "./../../css/DashBoard.css";
+} from './DashboardComponentActions';
+import { getAllProducts } from '../../core/services/productFetch';
+import ProductComponentCard from '../ProductComponentCard/ProductComponentCard';
+import './../../css/DashBoard.css';
 import {
   addToFavorite,
   getUserProfile,
   removeFromFavorite,
-} from "../../core/services/userFetch";
-import { showToast } from "../../utils/utils";
-import { loadProfileAction } from "../ProfileComponent/ProfileComponentActions";
-import { sort_options } from "../../utils/data";
-import { origins } from "../ProductComponentLayout/ProductComponentLayoutReducer";
-import { setOriginToBackProductLayoutAction } from "../ProductComponentLayout/ProductComponentLayoutActions";
+} from '../../core/services/userFetch';
+import { showToast } from '../../utils/utils';
+import { loadProfileAction } from '../ProfileComponent/ProfileComponentActions';
+import { sort_options } from '../../utils/data';
+import { origins } from '../ProductComponentLayout/ProductComponentLayoutReducer';
+import { setOriginToBackProductLayoutAction } from '../ProductComponentLayout/ProductComponentLayoutActions';
 
 const PRODUCTS_LOAD = 20;
 
@@ -53,7 +53,7 @@ const DashboardComponent = () => {
       dispatch(loadProfileAction({ dataProfile: updatedProfile }));
     } catch (error) {
       console.error(error.message);
-      showToast("Error al cambiar el estado del favorito", "error");
+      showToast('Error al cambiar el estado del favorito', 'error');
     }
   };
 
@@ -74,24 +74,24 @@ const DashboardComponent = () => {
   };
 
   const sortProductsList = (productsList, option) => {
-    const [selectedOption, direction] = option.split("_");
+    const [selectedOption, direction] = option.split('_');
 
     const sortedProductList = [...productsList].sort((product_a, product_b) => {
-      if (selectedOption === "createdAt") {
+      if (selectedOption === 'createdAt') {
         const dateA = new Date(product_a.createdAt);
         const dateB = new Date(product_b.createdAt);
-        return direction === "asc" ? dateA - dateB : dateB - dateA;
+        return direction === 'asc' ? dateA - dateB : dateB - dateA;
       } else {
         let valueA, valueB;
-        if (selectedOption === "price") {
+        if (selectedOption === 'price') {
           valueA = product_a[selectedOption] || 0;
           valueB = product_b[selectedOption] || 0;
         } else {
-          valueA = (product_a[selectedOption] || "").toLowerCase();
-          valueB = (product_b[selectedOption] || "").toLowerCase();
+          valueA = (product_a[selectedOption] || '').toLowerCase();
+          valueB = (product_b[selectedOption] || '').toLowerCase();
         }
-        if (valueA < valueB) return direction === "asc" ? -1 : 1;
-        if (valueB < valueA) return direction === "asc" ? 1 : -1;
+        if (valueA < valueB) return direction === 'asc' ? -1 : 1;
+        if (valueB < valueA) return direction === 'asc' ? 1 : -1;
         return 0;
       }
     });
@@ -110,7 +110,7 @@ const DashboardComponent = () => {
         })
       );
     } catch (error) {
-      console.error("Error loading products:", error);
+      console.error('Error loading products:', error);
     }
   };
 
@@ -118,7 +118,10 @@ const DashboardComponent = () => {
     setVisibleCount((prevCount) => prevCount + PRODUCTS_LOAD);
   };
 
-  const filteredByTitleProductsList = (availableProductsList || []).filter ((product) => product.title.toLowerCase().includes(searchByTitle.toLowerCase()))
+  const filteredByTitleProductsList = (availableProductsList || []).filter(
+    (product) =>
+      product.title.toLowerCase().includes(searchByTitle.toLowerCase())
+  );
 
   const sortedProductsList = sortProductsList(
     filteredByTitleProductsList,
@@ -135,16 +138,16 @@ const DashboardComponent = () => {
         const profile = await getUserProfile();
         dispatch(loadProfileAction({ dataProfile: profile }));
       } catch (error) {
-        showToast("Error al inicilizar el componente", "error");
+        showToast('Error al inicilizar el componente', 'error');
         console.log(error.message);
       }
     };
     loadInitialData();
     dispatch(
       setOriginToBackProductLayoutAction({
-        originToBack: origins.DASHBOARD
+        originToBack: origins.DASHBOARD,
       })
-    )
+    );
   }, []);
 
   return (
@@ -152,7 +155,7 @@ const DashboardComponent = () => {
       <div className="dashboard-sort-search-list-products">
         <div>
           <input
-          className="search-bytitle-input"
+            className="search-bytitle-input"
             type="text"
             placeholder="Búsqueda por título..."
             value={searchByTitle}
@@ -176,14 +179,17 @@ const DashboardComponent = () => {
       </div>
       <div className="dashboard-list-products-container">
         {visibleProducts.length > 0 ? (
-          visibleProducts.map((product) => (
-            <ProductComponentCard
-              key={product._id}
-              productInfo={product}
-              isFavorite={isProductFavorite(product._id)}
-              onToggleFavorite={handleToggleFavorite}
-            />
-          ))
+          visibleProducts.map(
+            (product) =>
+              product.status !== 'inactive' && product.status !== 'sold' && (
+                <ProductComponentCard
+                  key={product._id}
+                  productInfo={product}
+                  isFavorite={isProductFavorite(product._id)}
+                  onToggleFavorite={handleToggleFavorite}
+                />
+              )
+          )
         ) : (
           <div className="products-list-empty">
             <h1>No hay productos disponibles</h1>

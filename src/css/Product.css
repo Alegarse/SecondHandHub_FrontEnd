@@ -130,7 +130,7 @@
 .layout-product-container {
   margin: auto;
   width: 100%;
-  background: transparent;
+  background: rgb(219, 203, 158);
   border-radius: 1rem;
   box-shadow: 0 .375rem 1.25rem rgba(0, 0, 0, 0.4);
   overflow: hidden;

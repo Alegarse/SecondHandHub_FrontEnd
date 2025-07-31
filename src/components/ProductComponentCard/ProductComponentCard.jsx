@@ -5,6 +5,7 @@ import favtrue from '../../assets/favtrue.png';
 import favfalse from '../../assets/favfalse.png';
 import edit from '../../assets/edit.png';
 import trash from './../../assets/trash.png';
+import reserved from './../../assets/reserved.png'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
@@ -28,6 +29,7 @@ const ProductComponentCard = ({
     if (typeof onToggleFavorite === 'function')
       onToggleFavorite(productInfo._id);
   };
+  console.log(productInfo)
 
   const goToProduct = (productId, isEdit = false) => {
     if (isEdit) {
@@ -90,7 +92,11 @@ const ProductComponentCard = ({
         src={getValidImg(productInfo.images?.[0])}
         alt={productInfo.title || 'Image no available'}
         onClick={() => goToProduct(productInfo._id)}
-      />
+      />{
+        productInfo.status === 'reserved' && (
+          <img src={reserved} alt="Label reserved" className='overlay-reserved-image show' />
+        )
+      }
       <div className="product-info-card">
         <div className="product-price-fav">
           <h3>{`${productInfo.price}€`}</h3>

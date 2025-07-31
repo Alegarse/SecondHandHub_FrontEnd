@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProductByIdFetch } from "../../core/services/productFetch";
-import { loadProductAction } from "../ProductComponent/ProductComponentActions";
+import { editProductAction, infoProductAction, loadProductAction } from "../ProductComponent/ProductComponentActions";
 import { showToast } from "../../utils/utils";
 import ProductComponentLayout from "../ProductComponentLayout/ProductComponentLayout";
 
@@ -26,6 +26,16 @@ const EditProductComponent = () => {
         console.log(error.message);
       }
     };
+    dispatch(
+            editProductAction({
+              editModeProduct: localStorage.getItem("editMode"),
+            })
+          );
+          dispatch(
+                  infoProductAction({
+                    onProductInfo: localStorage.getItem("onProductInfo")
+                  })
+                )
     loadInitialData();
   }, [productId]);
   return (

@@ -494,7 +494,7 @@ const ProfileComponent = () => {
             <div className="products-user-container">
               <div className="owner-products">
                 <h2>Mis productos</h2>
-                <div className="owner-products-list">
+                <div className={`owner-products-list ${dataProductsUser?.length <= 0 ? ' centered' : ''}`}>
                   {dataProductsUser?.length > 0 ? (
                     dataProductsUser.map((product,idx) => (
                       <div key={idx} className='product-card-profile'>
@@ -515,7 +515,7 @@ const ProfileComponent = () => {
               </div>
               <div className="favorite-products">
                 <h2>Mis favoritos</h2>
-                <div className="favorite-products-list">
+                <div className={`favorite-products-list ${dataFavoritesProductsUser?.length <= 0 ? ' centered' : ''}`}>
                   {dataFavoritesProductsUser?.length > 0 ? (
                     dataFavoritesProductsUser.map((product,idx) => (
                       <div key={idx} className='product-card-profile'>

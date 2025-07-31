@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  delay,
   getFormattedDate,
   showToast,
   validateFields,
@@ -98,10 +97,6 @@ const ProductComponentLayout = ({ product }) => {
     }
   };
 
-  const sendMessage = () => {
-    const sender = userId;
-  }
-
   useEffect(() => {
     const reloadData = async () => {
       const productDataReload = await getProductByIdFetch(product._id);
@@ -128,7 +123,7 @@ const ProductComponentLayout = ({ product }) => {
         {!stateEditLayout ? (
           <>
             <div className="product-gallery">
-              {product.images.map((img, idx) => (
+              {product.images?.map((img, idx) => (
                 <img
                   key={idx}
                   src={img}
@@ -150,10 +145,6 @@ const ProductComponentLayout = ({ product }) => {
 
               <div className="product-description">
                 <p>{product.description}</p>
-              </div>
-
-              <div className='contact-button'>
-                <button onClick={sendMessage}>Contactar con el vendedor</button>
               </div>
 
               <div className="product-date">
