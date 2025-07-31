@@ -94,6 +94,11 @@ Este proyecto es una **plataforma web de productos de segunda mano**, desarrolla
 
 ## 🧪 Instalación y ejecución
 
+
+### ⭐Pre-requisitos
+- NodeJS instalado en el sistema e incorporado al PATH
+- MongoDB instalado en el sistema
+
 ### 🚀 FrontEnd
 
 Introduce los siguientes comandos:
