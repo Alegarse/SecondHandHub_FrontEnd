@@ -2,21 +2,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-inline-start: 20px;
-  padding-inline-end: 20px;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   background-color: #242424;
-  height: 100px;
+  height: 6.25rem;
 }
 
 .footer-container button {
   border: none;
-  border-radius: 6px;
+  border-radius: .375rem;
   background-color: transparent;
 }
 
 .footer-container img {
-  max-height: 35px;
-  border-radius: 10px;
+  max-height: 2.1875rem;
+  border-radius: .625rem;
 }
 
 .footer-container img:hover {
@@ -24,18 +24,18 @@
 }
 
 .logo-author {
-  width: 25px;
+  width: 1.5625rem;
 }
 
 .logo-menu {
-  max-height: 50px;
-  border-radius: 10px;
+  max-height: 3.125rem;
+  border-radius: .625rem;
 }
 
 .info-author {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: .9375rem;
 }
 
 .info-author-text {
@@ -55,21 +55,21 @@
   display: flex;
 }
 
-@media (max-width: 490px) {
+@media (max-width: 30.625rem) {
 
   .info-author-text {
   display: flex;
   flex-direction: column;
-  font-size: 10px;
+  font-size: .625rem;
 }
 
 .info-author {
-  gap: 5px;
+  gap: .3125rem;
 }
 
 .footer-container img {
-  max-height: 25px;
-  border-radius: 10px;
+  max-height: 1.5625rem;
+  border-radius: .625rem;
 }
 
 .author-data {
@@ -80,7 +80,7 @@
 
 .footer-contact-btns button{
   display: flex;
-  padding: 5px;
+  padding: .3125rem;
   
 }
 }

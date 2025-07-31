@@ -2,23 +2,23 @@
   height: 100%;
   margin: 0 auto;
   text-align: center;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: .625rem .625rem .625rem .625rem;
 }
 
 .toast-message {
   position: fixed;
-  bottom: 30px;
+  bottom: 1.875rem;
   left: 50%;
   transform: translateX(-50%);
   background-color: #4caf50;
   color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: .75rem 1.5rem;
+  border-radius: .5rem;
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, 0.15);
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
   z-index: 1000;
-  font-size: 16px;
+  font-size: 1rem;
 }
 .toast-message.show {
   opacity: 1;
