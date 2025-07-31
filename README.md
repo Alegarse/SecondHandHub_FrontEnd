@@ -18,6 +18,7 @@ Este poryecto es una **plataforma web de productos de segunda mano**, desarrolla
 - NodeJs con express
 - MongoDB + Mongoose
 - JWT para autenticación
+- Nodemailer para envío de email
 - Bcrypt para hash de contraseñas
 - Cloudinary SDK (Para almacenamiento de imágenes)
 
@@ -29,6 +30,7 @@ Este poryecto es una **plataforma web de productos de segunda mano**, desarrolla
 - Registro y login con JWT
 - Edición de perfil (fotografía, dirección, teléfono, DNI, etc...)
 - Eliminación de cuenta
+- Reseteo de contraseña
 
 ### 🛒 Productos
 - Publicación de productos con hasta 6 imágenes
@@ -117,7 +119,9 @@ npm install
 npm run dev
 ```
 
-Tip: Para facilidad de manejo, en la conexión inicial del backend, se crean automaticamente usuarios y productos.
+Tip: Para facilidad de manejo, en la conexión inicial del backend, se crean automaticamente usuarios y productos.   
+<p style="color: red">¡¡¡Para el reseteo de contraseña de usuario, se debe usar un email válido!!!</p>   
+
 ```bash
 👥 Usuarios Mockeados:                         
 | User: user1@shhub.com | Pass: 1234   │

@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { changeHomeViewAction } from '../HomePageComponent/HomePageComponentActions';
-import { doLoginFetch } from '../../core/services/api';
 import {
-  isAuthenticatedAction,
-} from '../DashboardComponent/DashboardComponentActions';
+  checkEmailUser,
+  doLoginFetch,
+  requestResetPasswordFetch,
+} from '../../core/services/api';
+import { isAuthenticatedAction } from '../DashboardComponent/DashboardComponentActions';
 import './../../css/Login.css';
 import { delay, showToast, validateFields } from '../../utils/utils';
 import { loadProfileAction } from '../ProfileComponent/ProfileComponentActions';
@@ -28,6 +30,30 @@ const LoginComponent = () => {
         viewTypeHome: undefined,
       })
     );
+  };
+
+  const recover_pass = async () => {
+    if (!dataLogin.email) {
+      showToast('Introduzca su email de usuario', 'error');
+      return;
+    }
+
+    const verifyEmail = await checkEmailUser(dataLogin.email);
+
+    if (verifyEmail.status === 'Success') {
+      try {
+        const reset = await requestResetPasswordFetch(dataLogin.email);
+        if (reset.status === 'Success') {
+          showToast('Email de reseteo de contraseña enviado');
+        } else {
+          showToast('No se ha podido resetear la contraseña. ', 'error');
+        }
+      } catch (error) {
+        showToast(`${error.message}`, 'error');
+      }
+    } else {
+      showToast('No se ha encontrado ningun usuario con ese email. ', 'error');
+    }
   };
 
   const doLogin = async () => {
@@ -72,6 +98,9 @@ const LoginComponent = () => {
             type="password"
             onChange={(e) => inputLoginHandler('password', e.target.value)}
           />
+          <a className="password-forgotten" onClick={recover_pass}>
+            ¿Contraseña olvidada?
+          </a>
           <div className="buttons-login-container">
             <button className="btn-do-login" onClick={doLogin}>
               Entrar

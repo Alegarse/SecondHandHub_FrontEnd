@@ -119,3 +119,31 @@ export const checkUserToken = async () => {
   const response = await callApi('GET', apiConfig.URL_VER_TOKEN);
   return response;
 };
+
+export const checkEmailUser = async (mail) => {
+  const object = { email: mail };
+  const response = await fetch(apiConfig.URL_VER_MAIL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(object),
+  });
+
+  const responseData = await response.json();
+  return responseData;
+};
+
+export const requestResetPasswordFetch = async (mail) => {
+  const object = { email: mail };
+  const response = await fetch(apiConfig.URL_RST_PASS, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(object),
+  });
+
+  const responseData = await response.json();
+  return responseData;
+}

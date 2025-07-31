@@ -6,6 +6,8 @@ const apiConfig = {
   URL_REGISTER: `${BASE_API_URL}/auth/signup`,
   URL_REF_TOKEN: `${BASE_API_URL}/auth/refresh_token`,
   URL_VER_TOKEN: `${BASE_API_URL}/auth/verify_token`,
+  URL_VER_MAIL: `${BASE_API_URL}/auth/verify_email`,
+  URL_RST_PASS: `${BASE_API_URL}/auth/request-reset`,
   //USER URL ENDPOINTS
   URL_GET_USR_PROFILEF: `${BASE_API_URL}/user/profile`,
   URL_UPL_USR_PHOTO: `${BASE_API_URL}/user/profile/img`,
