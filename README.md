@@ -51,7 +51,7 @@ Este poryecto es una **plataforma web de productos de segunda mano**, desarrolla
 
 ## 📁 Estructura del proyecto
 
-### FrontEnd(`/frontend`)
+### 🚀 FrontEnd(`/frontend`)
 ```bash  
 - src/
   - assets/
@@ -72,7 +72,7 @@ Este poryecto es una **plataforma web de productos de segunda mano**, desarrolla
 ```
 
 
-### Backend (`/backend`)
+### 🛠 Backend (`/backend`)
 ```bash  
 - controllers/
 - core/
@@ -131,15 +131,18 @@ Tip: Para facilidad de manejo, en la conexión inicial del backend, se crean aut
 | User: user5@shhub.com | Pass: 1234   │
 ``` 
 
-### Ejecución y uso
+### 🚀 Ejecución y uso
 Abre [http://localhost:5173](http://localhost:5173) en tu navegador
 
 ---   
+
+### 🧩 Próximas funcionalidades   
+Por motivos de tiempo y desarrollo, áun no se han implementado, pero si ideado el poder mandar mensajes entre usuarios y dar puntuacione y validaciones o reports en las transacciones.   
 
 
 ## 📝 Autor   
 **Alejandro García Serrano**
 
 
-## Licencia
+## 📝 Licencia
 Archivo LICENSE en el raiz del repositorio
