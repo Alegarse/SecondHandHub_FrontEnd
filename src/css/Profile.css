@@ -1,0 +1,364 @@
+.principal-profile-container {
+  background-color: transparent;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: .9375rem;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  box-shadow: 0 .625rem 1.25rem rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  font-size: 18px;
+  background-color: #f8ac1a;
+}
+
+.photo-container {
+  display: grid;
+  grid-template-rows: 6fr 3fr 2fr;
+  justify-content: center;
+  font-size: 13px;
+  font-style: italic;
+  width: 176px;
+}
+
+.photo-profile {
+  width: 9.375rem;
+  height: 9.375rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: .1875rem solid #3498db;
+  transition: transform 0.3s ease;
+}
+
+.photo-and-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.upload-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #242424;
+}
+
+.button-close {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+  width: 100%;
+
+  & img {
+    width: 1.5625rem;
+    margin-top: .625rem;
+  }
+}
+
+.lastaccess-container {
+  height: fit-content;
+
+  & .user-lastaccess-label {
+    font-weight: 500;
+    text-align: start;
+    height: 10px;
+    color: #0f4317;
+  }
+
+  & .user-lastaccess {
+    margin-top: -5px;
+    text-align: end;
+    height: 10px;
+    color: #0f4317;
+  }
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 95%;
+  gap: .625rem;
+  color: #242424;
+  font-style: italic;
+}
+
+.data-user-container {
+  display: flex;
+  justify-content: space-between;
+  color: #242424;
+
+  & .user-name-label,
+  .user-lastname-label,
+  .user-address-label,
+  .user-phone-label,
+  .user-birthdate-label,
+  .user-email-label,
+  .user-password-label {
+    font-weight: 500;
+    margin-inline-end: 10px;
+    width: fit-content;
+
+    font-style: italic;
+  }
+
+  & .name-user_,
+  .lastname-user,
+  .address-user,
+  .phone-user,
+  .birthdate-user,
+  .email-user {
+    font-weight: 600;
+  }
+}
+
+.map-container {
+  color: #242424;
+  & p {
+    font-weight: 600;
+  }
+}
+
+.hidden-textInput {
+  background-color: transparent;
+  height: fit-content;
+  border: none;
+  font-size: 18px;
+  color: #242424;
+  font-weight: 700;
+  text-align: start;
+  pointer-events: none;
+  text-align: end;
+}
+
+.container-aux-media {
+  display: flex;
+}
+
+.hidden-textInput[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.hidden-textInput[type='date'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.textInput {
+  height: fit-content;
+  font-size: 18px;
+  background-color: transparent;
+  color: #242424;
+  font-weight: 500;
+  text-align: start;
+  border-radius: .3125rem;
+  text-align: end;
+}
+
+.change-password-user {
+  background-color: #242424cc;
+  &:hover {
+    background-color: #575656cc;
+  }
+}
+
+.profile-options-container {
+  display: flex;
+  justify-content: end;
+  margin-bottom: .3125rem;
+  gap: .9375rem;
+}
+
+.btn-change-password-user,
+.btn-back-to-info-user,
+.btn-save-changes {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
+
+  & img {
+    width: 1.875rem;
+    aspect-ratio: 1;
+  }
+}
+
+.delete-account-user {
+  background-color: transparent;
+  border: none;
+  color: red;
+}
+
+.red-span {
+  color: red;
+}
+
+.data-user-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+}
+
+.products-user-container {
+  display: flex;
+  flex-direction: column; /* o row, si quieres uno al lado del otro */
+  gap: .9375rem;
+  padding: 10px;
+  gap: 15px;
+  box-shadow: 0 .625rem 1.25rem rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  margin: 5px;
+  font-size: 18px;
+  background-color: #f8ac1ab2;
+  color: #242424;
+
+  & h2 {
+    font-style: italic;
+  }
+}
+
+.owner-products,
+.favorite-products {
+  background-color: #ffbc40;
+  border: .0625rem dotted #242424;
+  border-radius: .625rem;
+}
+
+.owner-products-list,
+.favorite-products-list {
+  display: flex;
+  flex-direction: row;
+  gap: .625rem;
+  padding: .3125rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+   scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 transparent;
+}
+
+.centered {
+  justify-content: center;
+}
+
+.product-card-profile {
+  flex: 0 0 auto;
+  width: 11.25rem;
+}
+
+.forbidden-edit {
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+  font-size: small;
+}
+
+@media (max-width: 30rem) {
+  .profile-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .products-list-empty h3 {
+    font-size: small;
+  }
+
+  .info-container {
+    margin: 0;
+    margin-bottom: .625rem;
+  }
+  .data-user-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .owner-products-list,
+  .favorite-products-list {
+    display: flex;
+    flex-direction: row;
+    gap: .625rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .product-card-profile {
+    flex: 0 0 auto;
+    width: 12.5rem; /* NO permitir que se encojan */
+  }
+}
+
+@media (max-width: 48rem) {
+  .info-container {
+    margin: 0;
+    margin-bottom: .625rem;
+  }
+
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+    .products-list-empty h3 {
+    font-size: small;
+  }
+
+  .owner-products-list,
+  .favorite-products-list {
+    display: flex;
+    flex-direction: row;
+    gap: .625rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .product-card-profile {
+    flex: 0 0 auto;
+    width: 10rem; /* NO permitir que se encojan */
+  }
+}
+
+@media (min-width: 48.0625rem) {
+  .info-container {
+    margin: 0;
+    margin-bottom: .625rem;
+    max-width: 100%;
+    margin: .3125rem;
+  }
+
+  .profile-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+  }
+
+  .owner-products-list,
+  .favorite-products-list {
+    display: flex;
+    flex-direction: row;
+    gap: .625rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+
+  .product-card-profile {
+    flex: 0 0 auto;
+    min-width: 10rem; /* NO permitir que se encojan */
+  }
+}

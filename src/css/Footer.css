@@ -1,0 +1,86 @@
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
+  background-color: #242424;
+  height: 6.25rem;
+}
+
+.footer-container button {
+  border: none;
+  border-radius: .375rem;
+  background-color: transparent;
+}
+
+.footer-container img {
+  max-height: 2.1875rem;
+  border-radius: .625rem;
+}
+
+.footer-container img:hover {
+  cursor: pointer;
+}
+
+.logo-author {
+  width: 1.5625rem;
+}
+
+.logo-menu {
+  max-height: 3.125rem;
+  border-radius: .625rem;
+}
+
+.info-author {
+  display: flex;
+  align-items: center;
+  gap: .9375rem;
+}
+
+.info-author-text {
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+  font-style: italic;
+}
+
+.author-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-contact-btns {
+  display: flex;
+}
+
+@media (max-width: 30.625rem) {
+
+  .info-author-text {
+  display: flex;
+  flex-direction: column;
+  font-size: .625rem;
+}
+
+.info-author {
+  gap: .3125rem;
+}
+
+.footer-container img {
+  max-height: 1.5625rem;
+  border-radius: .625rem;
+}
+
+.author-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-contact-btns button{
+  display: flex;
+  padding: .3125rem;
+  
+}
+}

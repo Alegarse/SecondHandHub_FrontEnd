@@ -1,0 +1,113 @@
+.dashboard-container {
+  min-height: 100vh;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 0 .75rem;
+}
+
+.dashboard-sort-search-list-products {
+  display: flex;
+  gap: .75rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: .625rem 0;
+}
+
+.search-bytitle-input {
+  background-color: #f8ac1a;
+  color: #242424;
+  border: none;
+  border-radius: .375rem;
+  padding: .625rem .75rem;
+  width: 100%;
+  max-width: 100%;
+  outline: none;
+}
+
+.select-sort-order {
+  display: flex;
+  gap: .625rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.select-sort-order label {
+  color: #f8ac1a;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.select-sort-order select {
+  background-color: #f8ac1a;
+  color: #242424;
+  border-radius: .375rem;
+  border: none;
+  padding: .5rem .625rem;
+  font-weight: 500;
+  outline: none;
+}
+
+.dashboard-list-products-container {
+  background-color: #f8ac1a;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: .9375rem;
+  border-radius: .9375rem;
+  margin-bottom: .9375rem;
+}
+
+.load-more-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem 0 2rem;
+}
+
+.load-more-wrapper button {
+  padding: .6rem 1.6rem;
+  font-size: 1rem;
+  background-color: #5e410d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: .5rem;
+}
+
+.load-more-wrapper button:hover {
+  background-color: #8d6314;
+}
+
+.products-list-empty {
+  color: #242424;
+}
+
+@media (max-width: 30rem) {
+  .dashboard-list-products-container {
+    grid-template-columns: repeat(auto-fit, minmax(9.375rem, 1fr));
+  }
+}
+
+@media (min-width: 30.0625rem) and (max-width: 48rem) {
+  .dashboard-container {
+    padding: 0 1.25rem;
+  }
+
+  .select-sort-order {
+    width: auto;
+    margin-left: auto;
+    justify-content: flex-end;
+  }
+
+  .dashboard-list-products-container {
+    grid-template-columns: repeat(auto-fit, minmax(10.625rem, 1fr));
+  }
+}
+
+@media (min-width: 48.0625rem) and (max-width: 48rem) {
+  .dashboard-list-products-container {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+}

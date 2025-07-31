@@ -1,0 +1,53 @@
+.body-404-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: .9375rem;
+}
+
+.page-404-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+  align-items: center;
+  border: .0625rem solid grey;
+  border-radius: .9375rem;
+  background-color: rgba(255, 255, 255, 0.658);
+  color: #242424;
+}
+
+.page-404-container img {
+  width: 80%;
+  max-width: 21.875rem;
+}
+
+.info-404-container {
+  max-width: 100%;
+  padding: 0 .625rem;
+}
+
+.title-error-404 {
+  color: brown;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin-bottom: 1rem;
+}
+
+.btn-to-home {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: .75rem 1.25rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-to-home:hover {
+  background-color: darkred;
+}

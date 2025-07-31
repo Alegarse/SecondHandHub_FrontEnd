@@ -1,0 +1,461 @@
+.product-principal-container {
+  background-color: transparent;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: .9375rem;
+}
+
+.card-product-container,
+.details-product-container,
+.edit-product-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  box-shadow: 0 .625rem 1.25rem rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  font-size: 18px;
+  background-color: #f8ac1a;
+}
+
+.new-product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 18px;
+  gap: 1.875rem;
+  color: #242424;
+}
+
+.form-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.875rem;
+}
+
+.create-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+}
+
+.images-np-upload {
+  padding: .9375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  color: #242424;
+  font-weight: 500;
+  background-color: #f8ba48;
+  border-radius: .9375rem;
+  border: .125rem dotted #242424;
+}
+
+.images-np-upload label {
+  font-weight: 600;
+}
+
+.image-uploader-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.875rem, 1fr));
+  gap: .625rem;
+  width: 100%;
+}
+
+.inputs-np-container {
+  display: flex;
+  flex-direction: column;
+  gap: .9375rem;
+  justify-content: center;
+  align-items: inline-start;
+  background-color: #f8ba48;
+  border-radius: .9375rem;
+  padding: .9375rem;
+  border: .125rem dotted #242424;
+}
+
+.input-load {
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+  color: #242424;
+}
+
+.input-load label {
+  width: fit-content;
+  text-align: start;
+  font-weight: 600;
+}
+
+.input-load input,
+.input-load textarea,
+.input-load select {
+  background-color: transparent;
+  border-radius: .3125rem;
+  border: .125rem solid #242424;
+  color: #242424;
+  padding: .3125rem;
+}
+
+.input-load textarea {
+  height: 8.75rem;
+}
+
+.input-load select option {
+  background-color: #f8ac1a;
+  color: #242424;
+}
+
+.btn-np-upload {
+  background-color: green;
+  color: white;
+  padding: .75rem;
+  text-align: center;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.btn-np-upload:hover {
+  background-color: darkgreen;
+}
+
+.red {
+  color: red;
+}
+
+/*LAYOUT*/
+.layout-product-container {
+  margin: auto;
+  width: 100%;
+  background: rgb(219, 203, 158);
+  border-radius: 1rem;
+  box-shadow: 0 .375rem 1.25rem rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-gallery {
+  display: flex;
+  overflow-x: auto;
+  justify-content: center;
+  gap: .625rem;
+  padding: 16px;
+}
+
+.product-gallery img {
+  width: fit-content;
+  max-width: 11.25rem;
+  aspect-ratio: 1;
+  border-radius: .625rem;
+  object-fit: cover;
+}
+
+.product-details {
+  padding: 32px;
+}
+
+.product-title {
+  font-size: clamp(25.6px, 2vw, 35.2px);
+  margin-bottom: 8px;
+  color: #242424;
+}
+
+.product-price {
+  font-size: clamp(22.4px, 1.5vw, 27.2px);
+  font-weight: bold;
+  color: #00695c;
+  margin-bottom: 16px;
+}
+
+.product-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  color: #555;
+}
+
+.product-info span {
+  background-color: #e0f2f1;
+  padding: 6.4px 12.8px;
+  border-radius: 1.25rem;
+  border: .125rem solid #242424;
+  font-size: 14.4px;
+}
+
+.product-info span:hover {
+  background-color: #79c7c3;
+}
+
+.product-description {
+  line-height: 1.6;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #242424;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.product-date {
+  font-size: 14.4px;
+  color: grey;
+  border-top: .0625rem solid #eee;
+  padding-top: 16px;
+  font-style: italic;
+}
+
+.button-back-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-back-from-product {
+  width: 2.1875rem;
+  margin: .3125rem;
+}
+
+.buttons-ep-container {
+  margin: 1.5625rem;
+}
+
+.product-gallery-edit {
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+  padding: 16px;
+  background-color: #f8ba48;
+  border-radius: .9375rem;
+  border: .125rem dotted #242424;
+  margin: 1.5625rem;
+}
+
+.product-gallery-edit label {
+  color: #242424;
+  font-size: x-large;
+  font-weight: 500;
+}
+
+.product-details-edit {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5625rem;
+  padding: 1.875rem;
+  gap: 1.25rem;
+  background-color: #f8ba48;
+  border-radius: .9375rem;
+  border: .125rem dotted #242424;
+}
+
+.product-details-edit .first-data-product-container,
+.product-details-edit .second-data-product-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.input-edit {
+  display: flex;
+  gap: 1.875rem;
+  background-color: transparent;
+  color: #242424;
+}
+
+.input-edit label {
+  font-weight: 600;
+}
+
+.input-edit input,
+.input-edit textarea,
+.input-edit select {
+  background-color: transparent;
+  border-radius: .3125rem;
+  padding: .3125rem;
+  color: #242424;
+}
+
+.title-edit {
+  width: auto;
+}
+
+.first-selects-editp,
+.second-selects-editp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.contact-button {
+  margin: .625rem;
+}
+
+@media (max-width: 30rem) {
+  .image-uploader-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6.25rem, 1fr));
+    gap: .3125rem;
+  }
+
+   .product-gallery {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+  .product-gallery img {
+  width: fit-content;
+  max-width: 8.125rem;
+  aspect-ratio: 1;
+  border-radius: .625rem;
+  object-fit: cover;
+}
+
+  .product-gallery-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product-gallery-edit label {
+    font-size: large;
+    margin-bottom: .625rem;
+    text-align: start;
+  }
+
+  .input-edit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .input-edit input,
+  .input-edit textarea,
+  .input-edit select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 48rem) {
+  .form-data {
+    display: flex;
+    flex-direction: column;
+    gap: 1.875rem;
+  }
+
+  .product-gallery {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+  .product-details-edit .first-data-product-container,
+  .product-details-edit .second-data-product-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .first-selects-editp,
+  .second-selects-editp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+
+  .product-gallery-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-uploader-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6.25rem, 1fr));
+    gap: .3125rem;
+  }
+
+  .product-gallery-edit label {
+    font-size: large;
+    margin-bottom: .625rem;
+    text-align: start;
+  }
+
+  .input-edit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .input-edit input,
+  .input-edit textarea,
+  .input-edit select {
+    width: 100%;
+  }
+}
+
+@media (min-width: 48.0625rem) {
+  .form-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .product-gallery {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: .9375rem;
+}
+
+  .product-details-edit .first-data-product-container,
+  .product-details-edit .second-data-product-container {
+    flex-direction: row;
+  }
+
+  .product-gallery-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-gallery-edit label {
+    font-size: large;
+    margin-bottom: .625rem;
+    text-align: start;
+  }
+
+  .input-edit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .input-edit input,
+  .input-edit textarea,
+  .input-edit select {
+    width: 100%;
+  }
+
+  .image-uploader-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.375rem, 1fr));
+    gap: .625rem;
+    width: 100%;
+  }
+
+    .uploaded-image img {
+    width: 9.375rem;
+  }
+}
+
+@media (min-width: 67.5rem) {
+  .layout-product-container-int {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+}

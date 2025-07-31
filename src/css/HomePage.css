@@ -1,0 +1,188 @@
+.body-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.9375rem;
+}
+.home-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin: 0 auto;
+  padding: 0.625rem;
+  width: 100%;
+  border: 0.0625rem solid grey;
+  border-radius: 0.9375rem;
+  background-color: rgba(255, 255, 255, 0.658);
+  box-shadow: 0 0.625rem 1.25rem rgba(0, 0, 0, 0.8);
+  max-width: 80rem;
+  gap: 1.25rem;
+  color: #242424;
+
+  & .info-home-container {
+    max-width: 80%;
+  }
+}
+
+.info-logreg-background {
+  background-image: url('/src/assets/back_logreg.webp');
+  background-position: center;
+  background-size: cover;
+  width: 80%;
+  height: 80%;
+  border-radius: 0.9375rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.9375rem;
+}
+
+.info-links-log-reg-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.9375rem;
+  color: white;
+  z-index: 0;
+
+  & .info-links-buttons-container {
+    width: 100%;
+    max-width: 25rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    & .btn-to-login {
+      padding: 0.75rem;
+      font-size: 1rem;
+      background-color: green;
+      &:hover {
+        background-color: rgb(128, 190, 34);
+      }
+    }
+
+    & .btn-to-register {
+      background-color: orange;
+      &:hover {
+        background-color: rgb(245, 184, 72);
+      }
+    }
+  }
+}
+
+.error_message {
+  color: red;
+  font-style: italic;
+  font-size: small;
+}
+
+.logo-home {
+  border-radius: 0.9375rem;
+}
+
+/* Responsive styles */
+@media (max-width: 29.9375rem) {
+  .home-container {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.625rem;
+  }
+
+  .info-home-container {
+    padding: 0;
+  }
+
+  .info-logreg-background {
+    width: 100%;
+  }
+
+  .logo-home {
+    max-width: 9.375rem;
+  }
+
+  .toast-message {
+  font-size: 0.75rem;
+}
+}
+
+@media (min-width: 30rem) and (max-width: 48rem) {
+  .home-container {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.625rem;
+  }
+
+  .info-home-container {
+    padding: 0;
+  }
+
+  .logo-home {
+    max-width: 9.375rem;
+  }
+
+  .toast-message {
+  font-size: 0.75rem;
+}
+}
+
+@media (min-width: 48.0625rem) and (max-width: 67.5rem) {
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .info-home-container {
+    padding-inline: 1.25rem;
+    max-width: 100%;
+  }
+
+  .info-home-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .info-home-container p {
+    font-size: 1rem;
+  }
+
+  .info-logreg-background {
+    width: 70%;
+    align-items: center;  
+  }
+
+  .btn-to-login,
+  .btn-to-register {
+    width: 50%;
+    font-size: 1rem;
+  }
+
+  .logo-home {
+    max-width: 12.5rem;
+  }
+
+  .info-links-buttons-container p {
+    margin: 0.625rem 0;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (min-width: 67.5625rem) {
+  .info-logreg-background {
+    height: 100%;
+  }
+
+}
