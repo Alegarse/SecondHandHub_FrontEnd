@@ -1,11 +1,6 @@
 import React from 'react';
 import './../../css/ProductCard.css';
 import { getValidImg} from '../../utils/utils';
-import favtrue from '../../assets/favtrue.png';
-import favfalse from '../../assets/favfalse.png';
-import edit from '../../assets/edit.png';
-import trash from './../../assets/trash.png';
-import reserved from './../../assets/reserved.png'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
@@ -87,7 +82,7 @@ const ProductComponentCard = ({
         onClick={() => goToProduct(productInfo._id)}
       />{
         productInfo.status === 'reserved' && (
-          <img src={reserved} alt="Label reserved" className='overlay-reserved-image show' />
+          <img src="/reserved.png" alt="Label reserved" className='overlay-reserved-image show' />
         )
       }
       <div className="product-info-card">
@@ -96,7 +91,7 @@ const ProductComponentCard = ({
           {onToggleFavorite && (
             <img
               className="favourite-select"
-              src={isFavorite ? favtrue : favfalse}
+              src={isFavorite ? "/favtrue.png" : "/favfalse.png"}
               title={isFavorite ? 'Quitar de favoritos' : 'Agregar a favoritos'}
               onClick={(e) => {
                 changeFavState(e);
@@ -107,13 +102,13 @@ const ProductComponentCard = ({
             <div className="buttons-product-actions">
               <img
                 className="owner-product-select"
-                src={trash}
+                src="/trash.png"
                 title="Eliminar producto"
                 onClick={() => removeProduct(productInfo._id)}
               />
               <img
                 className="owner-product-select"
-                src={edit}
+                src="/edit.png"
                 title="Editar producto"
                 onClick={() => goToProduct(productInfo._id, true)}
               />

@@ -3,7 +3,6 @@ import '../../css/HomePage.css';
 import LoginComponent from '../../components/LoginComponent/LoginComponent';
 import RegisterComponent from '../../components/RegisterComponent/RegisterComponent';
 import { changeHomeViewAction } from '../../components/HomePageComponent/HomePageComponentActions';
-import logo from '../../assets/logo.png';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -25,7 +24,7 @@ const HomePage = () => {
       <div className="body-container">
         <div className="home-container">
           <div className="info-home-container">
-            <img className="logo-home" src={logo} alt="" />
+            <img className="logo-home" src="/logo.png" alt="" />
             <h2>Tu espacio para comprar y vender con confianza</h2>
             <p>
               Compra y vende productos de segunda mano con facilidad.

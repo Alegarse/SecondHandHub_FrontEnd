@@ -11,7 +11,6 @@ import {
   situations,
 } from '../../utils/data';
 import { useDispatch, useSelector } from 'react-redux';
-import back from '../../assets/back_grey.png';
 import { origins } from './ProductComponentLayoutReducer';
 import { useNavigate } from 'react-router-dom';
 import ImageUploader from '../ImageUploader/ImageUploaderComponent';
@@ -115,7 +114,7 @@ const ProductComponentLayout = ({ product }) => {
         <div className="button-back-container">
           <img
             className="btn-back-from-product"
-            src={back}
+            src="/back_grey.png"
             title="Volver atrás"
             onClick={goBack}
           />

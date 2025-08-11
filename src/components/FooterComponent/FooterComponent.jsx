@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../assets/logo.png';
 import '../../css/HeaderMenu.css';
-import linkedin from '../../assets/linkedin.png';
-import github from '../../assets/github.png';
-import portfolio from '../../assets/portfolio.png';
-import logoags from '../../assets/logo_ags.webp'
 import './../../css/Footer.css';
 
 const FooterComponent = () => {
@@ -13,7 +8,7 @@ const FooterComponent = () => {
       <div className="info-author">
         <img
           className="logo-menu"
-          src={logo}
+          src="/logo.png"
           alt="Logo de la empresa"
           title="SecondHand Hub. Donde todo tiene un nuevo hogar"
         />
@@ -21,7 +16,7 @@ const FooterComponent = () => {
           SecondHand Hub - Arenalsoft© Copyright 2025
           <div className='author-data'>
             <img
-              src={logoags}
+              src="/logo_ags.webp"
               alt="Logo diseñado del autor"
               className="logo-author"
             />
@@ -33,19 +28,19 @@ const FooterComponent = () => {
         <div>
           <button title="Pulse para visitar LinkedIn del autor">
             <a href="https://www.linkedin.com/in/alegarse/" target="_blank">
-          <img src={linkedin} /></a>
+          <img src="/linkedin.png" /></a>
           </button>
         </div>
         <div>
           <button title="Pulse para ver el github del autor">
             <a href="https://github.com/Alegarse" target="_blank">
-            <img src={github} /></a>
+            <img src="/github.png" /></a>
           </button>
         </div>
         <div>
           <button title="Pulse para ver el portfolio del autor">
             <a href="https://portfolioags.arenalsoft.es/" target="_blank">
-            <img src={portfolio} /></a>
+            <img src="/portfolio.png" /></a>
           </button>
         </div>
       </div>

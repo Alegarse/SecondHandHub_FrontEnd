@@ -1,6 +1,5 @@
 import React from 'react';
 import './../../css/404Page.css';
-import img404 from './../../assets/error-404.png';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { isAuthenticatedAction } from '../../components/DashboardComponent/DashboardComponentActions';
@@ -47,7 +46,7 @@ const NotFoundPage = () => {
     <>
       <div className="body-404-container">
         <div className="page-404-container">
-          <img className="" src={img404} alt="" />
+          <img className="" src="/error-404.png" alt="" />
           <div className="info-404-container">
             <h2 className="title-error-404">Error code: 404</h2>
             <h2>

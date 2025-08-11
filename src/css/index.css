@@ -41,7 +41,7 @@ button:focus-visible {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url('/src/assets/background.png');
+  background-image: url('/background.png');
   background-size: cover;
   background-repeat: round;
   background-position: center;

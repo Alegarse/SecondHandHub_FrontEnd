@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import empty_photo from '/src/assets/empty-photo-profile.png';
 import './../../css/Profile.css';
 import {
   editProfileAction,
@@ -22,9 +21,6 @@ import {
   showToast,
   validateFields,
 } from '../../utils/utils';
-import edit from './../../assets/edit.png';
-import back from './../../assets/back.png';
-import save from './../../assets/save.png';
 import ModalComponent from '../ModalComponent/ModalComponent';
 import {
   changeMenuOptionActions,
@@ -304,7 +300,7 @@ const ProfileComponent = () => {
                   {!showUploader && (
                     <img
                       className="photo-profile"
-                      src={dataProfile.profilePictureUrl || empty_photo}
+                      src={dataProfile.profilePictureUrl || "/empty-photo-profile.png"}
                       alt="Fotgrafia de perfil"
                       title="Haga click para editar la imagen de perfil"
                       onClick={() => {
@@ -322,7 +318,7 @@ const ProfileComponent = () => {
                       />
                       <div className="button-close">
                         <img
-                          src={back}
+                          src="/back.png"
                           title="Cancelar subida de imagen"
                           onClick={() => setShowUploader(!showUploader)}
                         />
@@ -443,7 +439,7 @@ const ProfileComponent = () => {
                       onClick={enterEditMode}
                     >
                       <img
-                        src={edit}
+                        src="/edit.png"
                         alt="Boton para entrar en modo edición de usuario"
                         title="Pulse para entrar en el modo de edición del usuario"
                       />
@@ -455,7 +451,7 @@ const ProfileComponent = () => {
                         onClick={saveChanges}
                       >
                         <img
-                          src={save}
+                          src="/save.png"
                           alt="Guardar cambios del usuario"
                           title="Pulse para guardar los cambios realizados"
                         />
@@ -465,7 +461,7 @@ const ProfileComponent = () => {
                         onClick={() => setEditMode(false)}
                       >
                         <img
-                          src={back}
+                          src="/back.png"
                           alt="Boton para volver a info de usuario"
                           title="Pulse para salir del modo de edición del usuario"
                         />

@@ -157,7 +157,7 @@ export const buildLocationObject = async () => {
 };
 
 export const getValidImg = (image) => {
-  return image && image.trim() !== undefined ? image : img_no_available;
+  return image && image.trim() !== undefined ? image : "/no_available_img.png";
 };
 
 export function getFormattedDate(

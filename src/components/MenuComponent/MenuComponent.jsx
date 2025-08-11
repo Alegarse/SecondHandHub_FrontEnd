@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import logo from '../../assets/logo.png';
 import '../../css/HeaderMenu.css';
-import to_dashboard from '../../assets/to_dashboard.png';
-import upload from '../../assets/upload.png';
-import profile from '../../assets/profile.png';
-import messages from '../../assets/messages.png';
-import logout from '../../assets/logout.png';
 import { useNavigate } from 'react-router-dom';
 import {
   changeHomeViewAction,
@@ -111,7 +105,7 @@ const MenuComponent = () => {
     <div className="menu-container">
       <img
         className="logo-menu"
-        src={logo}
+        src="/logo.png"
         alt="Logo de la empresa"
         title="SecondHand Hub. Donde todo tiene un nuevo hogar"
         onClick={() => handlerMenuOption(MENU_VIEW.DASHBOARD)}
@@ -134,7 +128,7 @@ const MenuComponent = () => {
             onClick={() => handlerMenuOption(MENU_VIEW.UPLOAD)}
           >
             <img
-              src={intoDashboard === MENU_VIEW.UPLOAD ? to_dashboard : upload}
+              src={intoDashboard === MENU_VIEW.UPLOAD ? "/to_dashboard.png" : "/upload.png"}
             />
           </button>
         </div>
@@ -150,7 +144,7 @@ const MenuComponent = () => {
           >
             <img
               src={
-                intoDashboard === MENU_VIEW.MESSAGES ? to_dashboard : messages
+                intoDashboard === MENU_VIEW.MESSAGES ? "/to_dashboard.png" : "/messages.png"
               }
             />
           </button>
@@ -168,7 +162,7 @@ const MenuComponent = () => {
             }}
           >
             <img
-              src={intoDashboard === MENU_VIEW.PROFILE ? to_dashboard : profile}
+              src={intoDashboard === MENU_VIEW.PROFILE ? "/to_dashboard.png" : "/profile.png"}
             />
           </button>
         </div>
@@ -178,7 +172,7 @@ const MenuComponent = () => {
             title="Pulse para cerrar su sesión"
             onClick={logoutUser}
           >
-            <img src={logout} />
+            <img src="/logout.png" />
           </button>
         </div>
       </div>
