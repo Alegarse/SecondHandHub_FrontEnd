@@ -1,4 +1,4 @@
-const BASE_API_URL = 'http://localhost:3000/api';
+const BASE_API_URL = 'https://secondhandhub-api.arenalsoft.es/api';
 
 const apiConfig = {
   //AUTH URL ENDPOINTS
